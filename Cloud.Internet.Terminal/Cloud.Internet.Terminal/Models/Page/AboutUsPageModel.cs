@@ -1,0 +1,21 @@
+﻿namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Models.Page
+{
+    public class AboutUsPageModel : XFToolKit.Mvvm.Models.Page.BasePageModel
+    {
+        private Xamarin.Forms.HtmlWebViewSource about;
+        private Xamarin.Forms.HtmlWebViewSource history;
+        private string contactPhoneNumber;
+        private string contactEmailAddress;
+        private string contactPostalAddress;
+
+        public Xamarin.Forms.HtmlWebViewSource About { get => about; set => SetProperty(ref about, value); }
+
+        public Xamarin.Forms.HtmlWebViewSource History { get => history; set => SetProperty(ref history, value); }
+
+        public string ContactPhoneNumber { get => contactPhoneNumber; set => SetProperty(ref contactPhoneNumber, value); }
+
+        public string ContactEmailAddress { get => contactEmailAddress; set => SetProperty(ref contactEmailAddress, value); }
+
+        public string ContactPostalAddress { get => contactPostalAddress; set => SetProperty(ref contactPostalAddress, value); }
+    }
+}

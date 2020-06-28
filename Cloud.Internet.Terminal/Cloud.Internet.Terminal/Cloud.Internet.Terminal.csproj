@@ -1,0 +1,136 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\1.jpg" />
+    <None Remove="Assets\2.jpg" />
+    <None Remove="Assets\3.jpg" />
+    <None Remove="Assets\Images\Region-1.jpg" />
+    <None Remove="Assets\Images\Region-10.jpg" />
+    <None Remove="Assets\Images\Region-2.jpg" />
+    <None Remove="Assets\Images\Region-3.jpg" />
+    <None Remove="Assets\Images\Region-4.jpg" />
+    <None Remove="Assets\Images\Region-5.jpg" />
+    <None Remove="Assets\Images\Region-6.jpg" />
+    <None Remove="Assets\Images\Region-7.jpg" />
+    <None Remove="Assets\Images\Region-8.jpg" />
+    <None Remove="Assets\Images\Region-9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\Region-10.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Images\Office-1.jpg" />
+    <EmbeddedResource Include="Assets\Images\Office-2.jpg" />
+    <EmbeddedResource Include="Assets\Images\Office-3.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-1.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-3.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-4.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-5.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-6.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-7.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-8.jpg" />
+    <EmbeddedResource Include="Assets\Images\Region-9.jpg" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
+    <PackageReference Include="SAPRESSC.Middleware.Identity.Syncronization.Handling.Persistence.EF" Version="0.0.3-alpha" />
+    <PackageReference Include="SAPRESSC.Syncronization.Api.Connect.Reception" Version="0.0.2-alpha" />
+    <PackageReference Include="SAPRESSC.Syncronization.Persistence.EF" Version="0.0.6-alpha" />
+    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
+    <PackageReference Include="SSCXFToolKit.Mvvm" Version="0.4.0-alpha" />
+    <PackageReference Include="SSCXFToolKit.Presentation" Version="0.4.5-alpha" />
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.34" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cloud.Common\Cloud.Common.csproj" />
+    <ProjectReference Include="..\..\Cloud.Internet.Api.Connect\Cloud.Internet.Api.Connect.csproj" />
+    <ProjectReference Include="..\..\Cloud.Internet.Persistence.EF\Cloud.Internet.Persistence.EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="LocalizationResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LocalizationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\SessionConfigurationPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>SessionConfigurationPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="LocalizationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\AboutUsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\AudioVisualsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\BillboardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\CloseSessionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\MasterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\NewsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PostDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\PresentationDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SessionProfileEditPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SessionProfileOverviewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ShowDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ShowsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\SupportPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+</Project>

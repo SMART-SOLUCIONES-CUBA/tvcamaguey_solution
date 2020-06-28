@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Api.Connect</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Api.Connect</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SAPRESSC.Core.Api.Connect" Version="2.0.2-apha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Internet.Api.Common\Cloud.Internet.Api.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,74 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Models.View.ProductionTeamMembersViewModel
+
+@{
+    ViewData["Title"] = GlobalViewLocalizationHelper.Localize("ProductionTeam", ViewLocalizer) + " (" + GlobalViewLocalizationHelper.Localize("Members", ViewLocalizer) + ")";
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("ProductionTeams", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+<div class="card bg-light" style="margin-bottom: 20px;">
+    <div class="card-body">
+        <h5 class="card-title">Datos del @GlobalViewLocalizationHelper.Localize("ProductionTeam", ViewLocalizer)</h5>
+        <dl>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Name", ViewLocalizer)</dt>
+            <dd>@Model.ProductionTeam.Name</dd>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Description", ViewLocalizer)</dt>
+            <dd>@Model.ProductionTeam.Description</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="page-header">
+    <h3>@GlobalViewLocalizationHelper.Localize("Members", ViewLocalizer)</h3>
+</div>
+
+<div style="border: 1px solid #DDD; border-radius: 4px; margin-bottom: 20px;">
+    <table class="table" style="margin: 0;">
+        <thead>
+            <tr>
+                <th>@GlobalViewLocalizationHelper.Localize("Name")</th>
+                <th>@GlobalViewLocalizationHelper.Localize("LastName")</th>
+                <th>@GlobalViewLocalizationHelper.Localize("ProductionRole")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Members.Count > 0)
+            {
+                @foreach (var item in Model.Members)
+                {
+                    <tr>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("Name")">@item.Employ.Name</td>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("LastName")">@item.Employ.LastName</td>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("LastName")">@GlobalViewLocalizationHelper.Localize(item.ProductionRole.ToString(), ViewLocalizer)</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

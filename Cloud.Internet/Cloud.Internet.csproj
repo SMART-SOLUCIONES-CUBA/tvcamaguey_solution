@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dpkeys\**" />
+    <Compile Remove="logs\**" />
+    <Content Remove="dpkeys\**" />
+    <Content Remove="logs\**" />
+    <EmbeddedResource Remove="dpkeys\**" />
+    <EmbeddedResource Remove="logs\**" />
+    <None Remove="dpkeys\**" />
+    <None Remove="logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="SAPRESSC.Core.Web.Api" Version="2.1.4-alpha" />
+    <PackageReference Include="SAPRESSC.Core.Web.SecurityLocal" Version="2.4.14-alpha" />
+    <PackageReference Include="SAPRESSC.Middleware.Identity.Syncronization.Handling.Reception.EF" Version="0.0.4-alpha" />
+    <PackageReference Include="SAPRESSC.Middleware.Identity.Web.Common" Version="2.1.5-alpha" />
+    <PackageReference Include="SAPRESSC.Middleware.Media.Web.Frontend" Version="2.0.8-alpha" />
+    <PackageReference Include="SAPRESSC.Syncronization.Web.Api.Reception" Version="0.0.11-alpha" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
+    <PackageReference Include="Slugify.Core" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Common\Cloud.Common.csproj" />
+    <ProjectReference Include="..\Cloud.Internet.Api.Common\Cloud.Internet.Api.Common.csproj" />
+    <ProjectReference Include="..\Cloud.Internet.Persistence.EF\Cloud.Internet.Persistence.EF.csproj" />
+    <ProjectReference Include="..\Cloud.Persistence.EF\Cloud.Persistence.EF.csproj" />
+    <ProjectReference Include="..\Cloud.Syncronization.Handling.Common\Cloud.Syncronization.Handling.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="libman.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

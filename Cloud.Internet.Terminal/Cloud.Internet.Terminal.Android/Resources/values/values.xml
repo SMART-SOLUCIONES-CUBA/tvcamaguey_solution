@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <integer name="fluid_container_width">320</integer>
+  <integer name="overview_profile_image_size">72</integer>
+  <integer name="form_group_request_width">296</integer>
+  <integer name="form_group_request_height">60</integer>
+  <integer name="billboard_list_view_row_height">216</integer>
+  <integer name="billboard_list_view_item_at_hour_font_size">72</integer>
+  <integer name="billboard_list_view_item_at_others_font_size">21</integer>
+  <integer name="post_list_view_item_textonly_template_height">144</integer>
+  <integer name="post_list_view_item_horizontal_template_height">240</integer>
+  <integer name="post_list_view_item_vertical_template_height">216</integer>
+</resources>

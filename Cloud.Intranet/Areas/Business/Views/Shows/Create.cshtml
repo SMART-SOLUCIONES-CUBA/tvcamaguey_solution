@@ -1,0 +1,121 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.ShowInputViewModel
+
+@{
+    ViewData["Title"] = "Agregar " + GlobalViewLocalizationHelper.Localize("Show", ViewLocalizer);
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Shows", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+@section styles {
+    <style type="text/css">
+        input[type=file] {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $(document).on("change", "#LogoFile", function () {
+                var files = !!this.files ? this.files : [];
+
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test(files[0].type)) {
+                    var reader = new FileReader();
+
+                    reader.readAsDataURL(files[0]);
+
+                    reader.onloadend = function () {
+                        $('#LogoFilePreview').attr('src', this.result);
+                    }
+                }
+            });
+
+            $(document).on("change", "#PosterFile", function () {
+                var files = !!this.files ? this.files : [];
+
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test(files[0].type)) {
+                    var reader = new FileReader();
+
+                    reader.readAsDataURL(files[0]);
+
+                    reader.onloadend = function () {
+                        $('#PosterFilePreview').attr('src', this.result);
+                    }
+                }
+            });
+        });
+    </script>
+}
+
+@using (Html.BeginForm("create", "shows", new { Area = "business" }, FormMethod.Post, true, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header"><h4>@ViewData["Title"]</h4></div>
+
+        <div class="card-body">
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-12" style="margin-bottom: 20px;">
+                    <div>@Html.LabelFor(model => model.LogoFile, new { @class = "control-label" })</div>
+                    <div><img src="~/img/default-event.png" class="img-thumbnail" id="LogoFilePreview" style="margin-bottom: 10px;" /></div>
+                    <label class="btn btn-light">
+                        @GlobalViewLocalizationHelper.Localize("Upload", ViewLocalizer) ...
+                        @Html.EditorFor(model => model.LogoFile)
+                    </label>
+                    <div>@Html.ValidationMessageFor(model => model.LogoFile, null, new { @class = "text-danger" })</div>
+                </div>
+                <div class="col-lg-9 col-md-12" style="margin-bottom: 20px;">
+                    <div>@Html.LabelFor(model => model.PosterFile, new { @class = "control-label" })</div>
+                    <div><img src="~/img/default-event.png" class="img-thumbnail" id="PosterFilePreview" style="margin-bottom: 10px;" /></div>
+                    <label class="btn btn-light">
+                        @GlobalViewLocalizationHelper.Localize("Upload", ViewLocalizer) ...
+                        @Html.EditorFor(model => model.PosterFile)
+                    </label>
+                    <div>@Html.ValidationMessageFor(model => model.PosterFile, null, new { @class = "text-danger" })</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.About, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.About, 4, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.About, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
+        </div>
+    </div>
+}

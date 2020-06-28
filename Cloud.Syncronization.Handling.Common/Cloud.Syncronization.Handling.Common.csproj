@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Syncronization.Handling.Common</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Syncronization.Handling.Common</RootNamespace>
+    <Version>0.0.1</Version>
+    <PackageId>TVCamaguey.Cloud.Syncronization.Handling.Common</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SAPRESSC.Syncronization.Handling.Common" Version="0.0.2-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Persistence\Cloud.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

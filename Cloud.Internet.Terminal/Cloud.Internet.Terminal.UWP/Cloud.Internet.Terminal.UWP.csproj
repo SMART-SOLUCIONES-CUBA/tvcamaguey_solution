@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{9957F5E1-5040-44F8-B55A-5213D52AFB2B}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.UWP</RootNamespace>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.UWP</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Cloud.Internet.Terminal.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SizeCalculationHelper.cs" />
+    <Compile Include="Helpers\SkiaSharpHelper.cs" />
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ConstantProvider.cs" />
+    <Compile Include="Providers\FilePathProvider.cs" />
+    <Compile Include="Views\Renderer\FontStrechLabelRenderer.cs" />
+    <Compile Include="Views\Renderer\NotSelectableCellFlowListViewRenderer.cs" />
+    <Compile Include="Views\Renderer\NativeVideoPlayerViewRenderer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Images\AppLogo.scale-100.png" />
+    <Content Include="Assets\Images\AppLogo.scale-125.png" />
+    <Content Include="Assets\Images\AppLogo.scale-150.png" />
+    <Content Include="Assets\Images\AppLogo.scale-200.png" />
+    <Content Include="Assets\Images\AppLogo.scale-400.png" />
+    <Content Include="Assets\Images\LargeTile.scale-100.png" />
+    <Content Include="Assets\Images\LargeTile.scale-125.png" />
+    <Content Include="Assets\Images\LargeTile.scale-150.png" />
+    <Content Include="Assets\Images\LargeTile.scale-200.png" />
+    <Content Include="Assets\Images\LargeTile.scale-400.png" />
+    <Content Include="Assets\Images\SmallTile.scale-100.png" />
+    <Content Include="Assets\Images\SmallTile.scale-125.png" />
+    <Content Include="Assets\Images\SmallTile.scale-150.png" />
+    <Content Include="Assets\Images\SmallTile.scale-200.png" />
+    <Content Include="Assets\Images\SmallTile.scale-400.png" />
+    <Content Include="Assets\Images\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Images\SplashScreen.scale-125.png" />
+    <Content Include="Assets\Images\SplashScreen.scale-150.png" />
+    <Content Include="Assets\Images\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Images\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Images\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Images\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Images\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Images\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Images\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Images\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Images\Square44x44Logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\Images\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Images\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Images\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Images\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Images\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Images\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Images\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Images\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Images\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Images\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Images\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Images\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Images\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\Images\StoreLogo.scale-100.png" />
+    <Content Include="Assets\Images\StoreLogo.scale-125.png" />
+    <Content Include="Assets\Images\StoreLogo.scale-150.png" />
+    <Content Include="Assets\Images\StoreLogo.scale-200.png" />
+    <Content Include="Assets\Images\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Images\VendorLogo.scale-100.png" />
+    <Content Include="Assets\Images\VendorLogo.scale-125.png" />
+    <Content Include="Assets\Images\VendorLogo.scale-150.png" />
+    <Content Include="Assets\Images\VendorLogo.scale-200.png" />
+    <Content Include="Assets\Images\VendorLogo.scale-400.png" />
+    <Content Include="Assets\Images\VendorTail.scale-100.png" />
+    <Content Include="Assets\Images\VendorTail.scale-125.png" />
+    <Content Include="Assets\Images\VendorTail.scale-150.png" />
+    <Content Include="Assets\Images\VendorTail.scale-200.png" />
+    <Content Include="Assets\Images\VendorTail.scale-400.png" />
+    <Content Include="Assets\Images\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Images\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Images\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Images\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Images\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\Videos\Home.mp4" />
+    <Content Include="Properties\Default.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Pages\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
+      <Version>2.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
+    <PackageReference Include="SAPRESSC.Middleware.Identity.Syncronization.Handling.Persistence.EF">
+      <Version>0.0.3-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="SAPRESSC.Syncronization.Api.Connect.Reception">
+      <Version>0.0.2-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="SAPRESSC.Syncronization.Persistence.EF">
+      <Version>0.0.6-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="SkiaSharp">
+      <Version>1.68.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="SSCXFToolKit.Mvvm">
+      <Version>0.4.0-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="SSCXFToolKit.Presentation">
+      <Version>0.4.5-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="VLC.MediaElement">
+      <Version>3.1.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
+      <Version>3.0.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>4.4.0.991265</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.1.34</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Internet.Terminal\Cloud.Internet.Terminal.csproj">
+      <Project>{6aaef26a-2a8b-4bf5-b31c-3a6397bd2f38}</Project>
+      <Name>Cloud.Internet.Terminal</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\materialdesignicons-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\HelveticaLTStd-UltraCompresed.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\HelveticaLTStd-Light.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\HelveticaLTStd-Compressed.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\HelveticaLTStd-BoldCond.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\HelveticaLTStd-Cond.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Souvenir-Medium.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\IconmonstrIconic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\SOUVNRD.ttf" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+</Project>

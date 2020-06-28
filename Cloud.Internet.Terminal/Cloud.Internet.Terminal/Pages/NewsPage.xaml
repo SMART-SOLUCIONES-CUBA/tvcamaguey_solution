@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dltoolkitforms="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:viewmodels="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Models.View"
+    xmlns:selectors="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Cell.Selector"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.NewsPage"
+    Title="Noticias">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+            <converters:DateTimeToInvarianCultureRelativeDateTimeStringConverter x:Key="DateTimeToInvarianCultureRelativeDateTimeString" />
+            <converters:PreserveImageAspectRatioConverter x:Key="PreserveImageAspectRatio" />
+            <sscxftoolkitpresentationconverters:BoolToStringConverter x:Key="BoolToString" FalseString="Sin elementos que mostrar" TrueString="" />
+
+            <DataTemplate x:Key="TextOnlyPostDataTemplate">
+                <x:Arguments>
+                    <Type TypeName="viewmodels:TextOnlyPostViewModel" />
+                </x:Arguments>
+                <StackLayout
+                    HeightRequest="208" 
+                    Margin="1"
+                    Padding="8" Spacing="8"
+                    BackgroundColor="White">
+                    <Label 
+                        Text="{Binding  Path=Post.Title}"
+                        TextColor="{StaticResource BrandPrimaryColor}"
+                        FontSize="Title"
+                        FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                        MaxLines="2"
+                        LineBreakMode="TailTruncation" />
+                    <Label
+                        VerticalOptions="StartAndExpand"
+                        Text="{Binding Path=Post.Summary}"
+                        TextColor="Black"
+                        FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                        MaxLines="5"
+                        LineBreakMode="TailTruncation" />
+                    <Label 
+                        Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
+                        TextColor="{StaticResource BrandSecoundaryColor}"
+                        FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="HasHorizontalPosterPostDataTemplate">
+                <x:Arguments>
+                    <Type TypeName="viewmodels:HorizontalPosterPostViewModel" />
+                </x:Arguments>
+                <Grid
+                    HeightRequest="208"
+                    Margin="1"
+                    Padding="8"
+                    BackgroundColor="White"
+                    ColumnSpacing="8" RowSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                        Text="{Binding Path=Post.Title}"
+                        TextColor="{StaticResource BrandPrimaryColor}"
+                        FontSize="Title"
+                        FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                        MaxLines="2"
+                        LineBreakMode="TailTruncation" />
+                    <ffimageloadingforms:CachedImage
+                        x:Name="HorizontalImage"
+                        Grid.Column="0" Grid.Row="1"
+                        Source="{Binding Path=Post.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                    <StackLayout
+                        Grid.Column="1" Grid.Row="1">
+                        <Label
+                            VerticalOptions="StartAndExpand"
+                            Text="{Binding Path=Post.Summary}"
+                            TextColor="Black"
+                            FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                            MaxLines="6"
+                            LineBreakMode="TailTruncation" />
+                        <Label 
+                            Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
+                            TextColor="{StaticResource BrandSecoundaryColor}"
+                            FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="HasVerticalPosterPostDataTemplate">
+                <x:Arguments>
+                    <Type TypeName="viewmodels:VerticalPosterPostViewModel" />
+                </x:Arguments>
+                <Grid
+                    HeightRequest="208"
+                    Margin="1"
+                    Padding="8"
+                    BackgroundColor="White"
+                    ColumnSpacing="8" RowSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingforms:CachedImage
+                        x:Name="VerticalImage"
+                        Grid.Column="0"
+                        Source="{Binding Path=Post.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                    <StackLayout Grid.Column="1">
+                        <Label 
+                            Text="{Binding Path=Post.Title}"
+                            TextColor="{StaticResource BrandPrimaryColor}"
+                            FontSize="Title"
+                            FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                            MaxLines="3"
+                            LineBreakMode="TailTruncation" />
+                        <Label
+                            VerticalOptions="StartAndExpand"
+                            Text="{Binding Path=Post.Summary}"
+                            TextColor="Black"
+                            FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                            MaxLines="4"
+                            LineBreakMode="TailTruncation" />
+                        <Label 
+                            Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
+                            TextColor="{StaticResource BrandSecoundaryColor}"
+                            FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+            <selectors:PostFlowDataTemplateSelector 
+                x:Key="PostFlowDataTemplateSelector"
+                TextOnlyDataTemplate="{StaticResource TextOnlyPostDataTemplate}" 
+                HorizontalPosterDataTemplate="{StaticResource HasHorizontalPosterPostDataTemplate}"
+                VerticalPosterDataTemplate="{StaticResource HasVerticalPosterPostDataTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="UpdateToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource IconFontFamily}" 
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            Padding="1"
+            BackgroundColor="#30D3D3D3">
+            <dltoolkitforms:FlowListView
+                x:Name="FlowListView"
+                ClassId="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=UnselectableRowFlowListViewStyleId}"
+                IsRefreshing="{Binding IsBusy}"
+                IsPullToRefreshEnabled="True"
+                Refreshing="ListView_Refreshing"
+                HasUnevenRows="True"
+                FlowIsLoadingInfiniteEnabled="True"
+                FlowIsLoadingInfinite="{Binding IsLoadingInfinite}"
+                FlowTotalRecords="{Binding Total}"
+                FlowColumnMinWidth="480"
+                FlowItemsSource="{Binding Posts}"        
+                FlowColumnTemplate="{StaticResource PostFlowDataTemplateSelector}">
+                <dltoolkitforms:FlowListView.FlowLoadingTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ActivityIndicator Margin="10" IsRunning="True" />
+                        </ViewCell>
+                    </DataTemplate>
+                </dltoolkitforms:FlowListView.FlowLoadingTemplate>
+                <dltoolkitforms:FlowListView.FlowEmptyTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Margin="10"
+                                TextColor="DarkGray"
+                                Text="{Binding IsLoadingInfinite, Converter={StaticResource BoolToString}}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </dltoolkitforms:FlowListView.FlowEmptyTemplate>
+            </dltoolkitforms:FlowListView>
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

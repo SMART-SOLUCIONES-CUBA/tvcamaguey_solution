@@ -1,0 +1,72 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Models.View.AwardAwardedsViewModel
+
+@{
+    ViewData["Title"] = GlobalViewLocalizationHelper.Localize("Award", ViewLocalizer) + " (" + GlobalViewLocalizationHelper.Localize("Awardeds", ViewLocalizer) + ")";
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Awards", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+<div class="card bg-light" style="margin-bottom: 20px;">
+    <div class="card-body">
+        <h5 class="card-title">Datos del Galardón</h5>
+        <dl>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Title", ViewLocalizer)</dt>
+            <dd>@Model.Award.Title</dd>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Edition", ViewLocalizer)</dt>
+            <dd>@Model.Award.Edition</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="page-header">
+    <h3>@GlobalViewLocalizationHelper.Localize("Awardeds", ViewLocalizer)</h3>
+</div>
+
+<div style="border: 1px solid #DDD; border-radius: 4px; margin-bottom: 20px;">
+    <table class="table" style="margin: 0;">
+        <thead>
+            <tr>
+                <th>@GlobalViewLocalizationHelper.Localize("Name")</th>
+                <th>@GlobalViewLocalizationHelper.Localize("LastName")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Awardeds.Count > 0)
+            {
+                @foreach (var item in Model.Awardeds)
+                {
+                    <tr>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("Name")">@item.Name</td>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("LastName")">@item.LastName</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

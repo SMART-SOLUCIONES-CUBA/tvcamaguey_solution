@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dltoolkitforms="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.ShowsPage"
+    Title="Programas">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+            <converters:PreserveWideScreenAspectRatioConverter x:Key="PreserveWideScreenAspectRatio" />
+            <sscxftoolkitpresentationconverters:BoolToStringConverter x:Key="BoolToString" FalseString="Sin elementos que mostrar" TrueString="" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="UpdateToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource IconFontFamily}" 
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>    
+    <ContentPage.Content>
+        <dltoolkitforms:FlowListView
+            x:Name="FlowListView"
+            ClassId="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=UnselectableRowFlowListViewStyleId}"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsBusy}"
+            Refreshing="ListView_Refreshing"
+            SeparatorVisibility="None"
+            RowHeight="{Binding Source={x:Reference FlowListView}, Path=Width, Converter={StaticResource PreserveWideScreenAspectRatio}, ConverterParameter={x:Reference FlowListView}}"
+            FlowColumnMinWidth="272"
+            FlowItemsSource="{Binding Shows}">
+            <dltoolkitforms:FlowListView.FlowEmptyTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Margin="10"
+                            TextColor="DarkGray"
+                            Text="{Binding IsBusy, Converter={StaticResource BoolToString}}" />
+                    </ViewCell>
+                </DataTemplate>
+            </dltoolkitforms:FlowListView.FlowEmptyTemplate>
+            <dltoolkitforms:FlowListView.FlowColumnTemplate>
+                <DataTemplate>
+                    <ffimageloadingforms:CachedImage 
+                        Aspect="AspectFill"
+                        Source="{Binding Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                </DataTemplate>
+            </dltoolkitforms:FlowListView.FlowColumnTemplate>
+        </dltoolkitforms:FlowListView>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

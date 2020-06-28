@@ -1,0 +1,80 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.PresentationInputViewModel
+
+@{
+    ViewData["Title"] = "Agregar " + GlobalViewLocalizationHelper.Localize("Presentation", ViewLocalizer);
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Presentations", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/gijgo/combined/css/gijgo.min.css" type="text/css" />
+}
+
+@section scripts {
+    <script src="~/lib/gijgo/combined/js/gijgo.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $('#At').datetimepicker({
+            uiLibrary: 'bootstrap4',
+            modal: true,
+            header: true,
+            footer: true,
+            format: 'dd/mm/yyyy HH:MM',
+            value: '@Model.At.ToString("dd/MM/yyyy HH:mm")'
+        });
+    </script>
+}
+
+@using (Html.BeginForm("create", "presentations", new { Area = "business" }, FormMethod.Post, true, null))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header"><h4>@ViewData["Title"]</h4></div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.At, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.At, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.At, null, new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.ShowId, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.ShowId, Model.AvailableShowSelectListItems, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ShowId, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.ProductionTeamId, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.ProductionTeamId, Model.AvailableProductionTeamSelectListItems, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProductionTeamId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
+        </div>
+    </div>
+}

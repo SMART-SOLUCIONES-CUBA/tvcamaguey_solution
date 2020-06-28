@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:jmci="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.SessionProfileOverviewPage"
+    x:Name="Page"
+    Title="Perfil de Usuario">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <sscxftoolkitpresentationconverters:IfNullOrEmptyToStringConverter x:Key="IfNullOrEmptyToString" StringReplacement="-" />
+            <sscxftoolkitpresentationconverters:FactorConverter x:Key="Factor" />
+            <sscxftoolkitpresentationconverters:DateTimeToStringConverter x:Key="DateTimeToString" IfDefautTextReplacement="-" />
+            <converters:UserImageIdToRegularImageSourceConverter x:Key="UserImageIdToRegularImageSource" />
+            <converters:PageWidthToUserProfileDisplayFormGroupSetHeightConverter x:Key="PageWidthToUserProfileDisplayFormGroupSetHeight" Page="{x:Reference Page}" />
+            <converters:PageWidthToUserProfileDisplayFormGroupHeightConverter x:Key="PageWidthToUserProfileDisplayFormGroupHeight" Page="{x:Reference Page}" />
+            <converters:PageWidthToNoFirstUserProfileFormGroupAlignSelfConverter x:Key="PageWidthToNoFirstUserProfileFormGroupAlignSelf" />
+            <converters:StringToLocalizeStringConverter x:Key="StringToLocalizeString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Editar"
+            Clicked="EditToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="{StaticResource IconFontFamily}"
+                    Glyph="&#xfda4;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout
+                    Margin="20">                    
+                    <FlexLayout
+                        Direction="Row"
+                        AlignItems="Center"
+                        Wrap="Wrap">
+                        <jmci:CircleImage
+                            BorderThickness="2"
+                            BorderColor="{StaticResource BrandPrimaryColor}"
+                            Margin="0,10,20,20"
+                            Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference Page}}"
+                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
+                        <FlexLayout
+                            Direction="Column"
+                            Wrap="Wrap"
+                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupSetHeight}, ConverterParameter=Name_LastName}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
+                            <StackLayout                                
+                                FlexLayout.AlignSelf="Start"
+                                Margin="0,0,20,20"
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=Name}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label 
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Nombre(s)" />
+                                <Label Text="{Binding Name}" />
+                            </StackLayout>
+                            <StackLayout
+                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
+                                Margin="0,0,20,20" 
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=LastName}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label  
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Apellidos" />
+                                <Label Text="{Binding LastName, Converter={StaticResource IfNullOrEmptyToString}}" />
+                            </StackLayout>
+                        </FlexLayout>
+                        <FlexLayout
+                            Direction="Column"
+                            Wrap="Wrap"
+                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupSetHeight}, ConverterParameter=BornDate_Alias}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
+                            <StackLayout                                
+                                FlexLayout.AlignSelf="Start"
+                                Margin="0,0,20,20"
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=BornDate}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label 
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Fecha de Nacimiento" />
+                                <Label Text="{Binding BornDate, Converter={StaticResource DateTimeToString}, ConverterParameter='dddd, MMMM dd, yyyy'}" />
+                            </StackLayout>
+                            <StackLayout                                
+                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
+                                Margin="0,0,20,20" 
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=Alias}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label  
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Alias" />
+                                <Label Text="{Binding Alias, Converter={StaticResource IfNullOrEmptyToString}}" />
+                            </StackLayout>
+                        </FlexLayout>
+                        <FlexLayout
+                            Direction="Column"
+                            Wrap="Wrap"
+                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupSetHeight}, ConverterParameter=Sex_CivilStatus}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
+                            <StackLayout                                
+                                FlexLayout.AlignSelf="Start"
+                                Margin="0,0,20,20"
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=Sex}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label 
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Sexo" />
+                                <Label Text="{Binding Sex, Converter={StaticResource StringToLocalizeString}}" />
+                            </StackLayout>
+                            <StackLayout                                
+                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
+                                Margin="0,0,20,20" 
+                                HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileDisplayFormGroupHeight}, ConverterParameter=CivilStatus}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
+                                <Label  
+                                    Style="{StaticResource FormLabel}"
+                                    Text="Estado Civil" />
+                                <Label Text="{Binding CivilStatus, Converter={StaticResource StringToLocalizeString}}" />
+                            </StackLayout>
+                        </FlexLayout>
+                        <StackLayout
+                            Margin="0,0,0,20"
+                            FlexLayout.Basis="100%">
+                            <Label  
+                                Style="{StaticResource FormLabel}"
+                                Text="Acerca de" />
+                            <Label Text="{Binding About, Converter={StaticResource IfNullOrEmptyToString}}" />
+                        </StackLayout>
+                    </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+            <sscxftoolkitpresentationviews:BusyView />
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

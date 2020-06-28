@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Persistence.EF</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Persistence.EF</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Internet.Persistence\Cloud.Internet.Persistence.csproj" />
+    <ProjectReference Include="..\Cloud.Persistence.EF\Cloud.Persistence.EF.csproj" />
+  </ItemGroup>
+
+</Project>

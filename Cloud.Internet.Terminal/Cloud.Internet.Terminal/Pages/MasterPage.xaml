@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:jmci="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:providers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.MasterPage"
+    Title="TuTV Camagüey"
+    x:Name="Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <sscxftoolkitpresentationconverters:FractionConverter x:Key="Fraction" />
+            <converters:UserImageIdToOverviewImageSourceConverter x:Key="UserImageIdToOverviewImageSource" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" />
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid
+            RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ListView 
+                Grid.RowSpan="2"
+                x:Name="NavigationListView"
+                Header="{Binding .}"
+                IsGroupingEnabled="True"
+                GroupDisplayBinding="{Binding Title}"
+                ItemsSource="{Binding NavigationSectionGroups}"
+                ItemSelected="NavigationListView_ItemSelected">
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label
+                                Text="{Binding Title}"
+                                Margin="10,20,0,0" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid
+                            Grid.Row="0"
+                            BackgroundColor="{StaticResource BrandPrimaryColor}"
+                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource Fraction}, ConverterParameter=1.5, Mode=OneWay}">
+                            <Image
+                                Opacity="0.20"
+                                Aspect="AspectFill"
+                                Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomRegionImageSource}" />
+                            <Grid Margin="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" VerticalOptions="Center">
+                                    <jmci:CircleImage
+                                        HorizontalOptions="Center"
+                                        BorderThickness="2"
+                                        BorderColor="WhiteSmoke"
+                                        Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToOverviewImageSource}, ConverterParameter={x:Reference Page}}"
+                                        HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}"
+                                        WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                    <Label 
+                                        Text="{Binding Path=SessionName}" 
+                                        TextColor="White"
+                                        FontSize="18"
+                                        VerticalTextAlignment="End" />
+                                    <Label 
+                                        Text="{Binding Path=SessionLogin}" 
+                                        TextColor="WhiteSmoke"
+                                        LineBreakMode="TailTruncation"
+                                        FontSize="15" />
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Margin="10">
+                                <Label 
+                                    Text="{Binding Glyph}"
+                                    TextColor="{StaticResource BrandPrimaryColor}"
+                                    VerticalOptions="CenterAndExpand"
+                                    FontFamily="{StaticResource IconFontFamily}"
+                                    FontSize="Medium"
+                                    Margin="0,0,4,0" />
+                                <Label 
+                                    Text="{Binding Title}" 
+                                    TextColor="{StaticResource BrandPrimaryColor}"
+                                    VerticalOptions="CenterAndExpand" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <Grid>
+                        <Image 
+                            VerticalOptions="End" HorizontalOptions="Start">
+                            <Image.Source>
+                                <OnPlatform Android="vendor_tail.png" UWP="Assets/Images/VendorTail.png" />
+                            </Image.Source>
+                        </Image>
+                        <StackLayout Spacing="0" Margin="10,40,10,80">
+                            <Label 
+                                FontSize="Small"
+                                HorizontalTextAlignment="Center"
+                                Text="Televisión Camagüey"
+                                TextColor="Black" />
+                            <Label 
+                                FontSize="Micro" 
+                                HorizontalTextAlignment="Center"
+                                Text="SMART SOLUCIONES CUBA (SSC)"
+                                TextColor="DimGray" />
+                            <Label 
+                                FontSize="Micro" 
+                                HorizontalTextAlignment="Center"
+                                Text="2020"
+                                TextColor="Gray" />
+                        </StackLayout>
+                    </Grid>
+                </ListView.Footer>
+            </ListView>            
+            <sscxftoolkitpresentationviews:BusyView 
+                Grid.RowSpan="2" />
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.App">
+
+    <Application.Resources>
+        <Color x:Key="BrandPrimaryColor">#800000</Color>
+        <Color x:Key="BrandPrimaryOpaqueColor">#88800000</Color>
+        <Color x:Key="BrandSecoundaryColor">#eea055</Color>
+        <Color x:Key="BrandSecoundaryOpaqueColor">#88eea055</Color>
+
+        <x:String x:Key="ProductConcept">Nuestra plataforma social creada para estar más cerca de ti.</x:String>
+        
+        <OnPlatform x:Key="HelveticaLTStdUltraCompFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="HelveticaLTStd-UltraCompresed" />
+            <On Platform="Android" Value="fonts/HelveticaLTStd-UltraCompresed.otf#HelveticaLTStd-UltraCompresed" />
+            <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-UltraCompresed.otf#Helvetica LT Std" />
+        </OnPlatform>
+        <OnPlatform x:Key="HelveticaLTStdCompFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="HelveticaLTStd-Compressed" />
+            <On Platform="Android" Value="fonts/HelveticaLTStd-Compressed.otf#HelveticaLTStd-Compressed" />
+            <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+        </OnPlatform>
+        <OnPlatform x:Key="HelveticaLTStdLightFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="HelveticaLTStd-Light" />
+            <On Platform="Android" Value="fonts/HelveticaLTStd-Light.otf#HelveticaLTStd-Light" />
+            <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Light.otf#Helvetica LT Std" />
+        </OnPlatform>
+        <OnPlatform x:Key="HelveticaLTStdCondFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="HelveticaLTStd-Cond" />
+            <On Platform="Android" Value="fonts/HelveticaLTStd-Cond.otf#HelveticaLTStd-Cond" />
+            <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+        </OnPlatform>
+        <OnPlatform x:Key="HelveticaLTStdBoldCondFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="HelveticaLTStd-BoldCond" />
+            <On Platform="Android" Value="fonts/HelveticaLTStd-BoldCond.otf#HelveticaLTStd-BoldCond" />
+            <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-BoldCond.otf#Helvetica LT Std" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="SouvenirMediumFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Souvenir-Medium" />
+            <On Platform="Android" Value="fonts/Souvenir-Medium.otf#Souvenir-Medium" />
+            <On Platform="UWP" Value="/Assets/Fonts/Souvenir-Medium.otf#ITC Souvenir" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="SouvenirLtBTBoldFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="SOUVNRD" />
+            <On Platform="Android" Value="fonts/SOUVNRD.ttf#SOUVNRD" />
+            <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="IconFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Design Icons" />
+            <On Platform="Android" Value="fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+        </OnPlatform>
+        
+        <Style x:Key="FormGroup" TargetType="StackLayout">
+            <Setter Property="WidthRequest" Value="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}" />
+        </Style>
+        <Style x:Key="FormLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource BrandPrimaryColor}" />
+            <Setter Property="FontSize" Value="Micro" />
+        </Style>
+    </Application.Resources>
+
+</Application>

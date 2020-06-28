@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sscxftoolkitmvvmpages:ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.CloseSessionPage"
+    Title="Cerrar Sesión">
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView>
+                <StackLayout 
+                    Padding="20" Spacing="20">
+                    <Label 
+                        Margin="0,20"
+                        HorizontalOptions="Center"
+                        Text="&#xf5fd;"
+                        FontFamily="{StaticResource IconFontFamily}"
+                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
+                    <Label
+                        Text="En esta sección podrá cerrar su sesión y con ella eliminar localmente los datos especificados en su perfil, configuraciones realizadas a la aplicación, las actualizaciones acumuladas, así como los comentarios, valoraciones, denuncias y otros cambios no sincronizados." />
+                    <Button
+                        Text="Cerrar Sesión"
+                        HorizontalOptions="Center"
+                        Clicked="CloseSessionButton_Clicked"/>
+                </StackLayout>
+            </ScrollView>
+            <sscxftoolkitpresentationviews:BusyView />
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

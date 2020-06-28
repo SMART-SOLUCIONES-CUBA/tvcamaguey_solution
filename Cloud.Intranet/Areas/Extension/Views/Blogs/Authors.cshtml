@@ -1,0 +1,84 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.BlogAutorsManageViewModel
+
+@{
+    ViewData["Title"] = "Modificar " + GlobalViewLocalizationHelper.Localize("Blog", ViewLocalizer) + " (" + GlobalViewLocalizationHelper.Localize("Authors", ViewLocalizer) + ")";
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Blogs", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+<div class="card bg-light" style="margin-bottom: 20px;">
+    <div class="card-body">
+        <h5 class="card-title">Datos del Blog</h5>
+        <dl>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Title", ViewLocalizer)</dt>
+            <dd>@Model.Blog.Title</dd>
+            <dt class="text-secondary">@GlobalViewLocalizationHelper.Localize("Url", ViewLocalizer)</dt>
+            <dd>@Model.Blog.Url</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="page-header">
+    <h3>@GlobalViewLocalizationHelper.Localize("Authors", ViewLocalizer)<a class="btn btn-primary btn-sm float-right" href="#" data-toggle="modal" data-target="#add-author">Agregar Autor</a></h3>
+</div>
+
+@await Html.PartialAsync("_AddAuthorPartial", new SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.BlogEmployBridgeInputViewModel
+{
+    BlogId = Model.Blog.Id,
+    AvailableEmploys = Model.AvailableEmploys
+})
+
+<div style="border: 1px solid #DDD; border-radius: 4px; margin-bottom: 20px;">
+    <table class="table" style="margin: 0;">
+        <thead>
+            <tr>
+                <th>@GlobalViewLocalizationHelper.Localize("Name")</th>
+                <th>@GlobalViewLocalizationHelper.Localize("LastName")</th>
+                <th style="width: 1px; white-space: nowrap;">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Authors.Count > 0)
+            {
+                @foreach (var item in Model.Authors)
+                {
+                    <tr>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("Name")">@item.Name</td>
+                        <td style="vertical-align: middle;" title="@GlobalViewLocalizationHelper.Localize("LastName")">@item.LastName</td>
+                        <td style="vertical-align: middle;">
+                            <a role="button" href="#" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-author-@Model.Blog.Id-@item.Id"><span class="fas fa-trash"></span> Eliminar</a>
+
+                            @await Html.PartialAsync("_DeleteAuthorPartial", new SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.BlogEmployBridgeDisplayViewModel { BlogId = Model.Blog.Id, Blog = Model.Blog, EmployId = item.Id, Employ = item })
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

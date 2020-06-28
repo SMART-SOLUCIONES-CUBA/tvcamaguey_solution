@@ -1,0 +1,45 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.PresentationDisplayViewModel
+
+@{
+    ViewData["Title"] = "Eliminar " + GlobalViewLocalizationHelper.Localize("Presentation", ViewLocalizer);
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = "/"
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Presentations", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
+
+    Layout = "_BackendLayout";
+}
+
+<h3>Esta seguro que desea eliminar la presentación detallada a continuación?</h3>
+
+<dl>
+    <dt>@GlobalViewLocalizationHelper.Localize("Show", ViewLocalizer)</dt>
+    <dd>@Html.DisplayFor(model => model.ShowName)</dd>
+    <dt>@GlobalViewLocalizationHelper.Localize("ProductionTeam", ViewLocalizer)</dt>
+    <dd>@Html.DisplayFor(model => model.ProductionTeamName)</dd>
+    <dt>@GlobalViewLocalizationHelper.Localize("DateTime", ViewLocalizer)</dt>
+    <dd>@Html.DisplayFor(model => model.At)</dd>
+</dl>
+@using (Html.BeginForm("delete", "presentations", new { Area = "business", key = string.Empty }, FormMethod.Post, true, null))
+{
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a class="btn btn-light" href="@Url.Action("billboard")">Cancelar</a>
+    </div>
+}
+

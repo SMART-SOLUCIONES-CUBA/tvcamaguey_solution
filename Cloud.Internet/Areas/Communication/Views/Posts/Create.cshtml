@@ -1,0 +1,159 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Models.View.PostInputViewModel
+
+@{
+    ViewData["Title"] = "Agregar " + GlobalViewLocalizationHelper.Localize("Post", ViewLocalizer);
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+{
+new BreadcrumbViewModel
+{
+    Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+    Url = "/"
+},
+new BreadcrumbViewModel
+{
+    Caption = GlobalViewLocalizationHelper.Localize("Posts", ViewLocalizer),
+    Url = Url.Action("index")
+},
+new BreadcrumbViewModel
+{
+    Caption = ViewData["Title"].ToString()
+}
+};
+
+    Layout = "_BackendLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/lib/gijgo/combined/css/gijgo.min.css" type="text/css" />
+
+    <style type="text/css">
+        #PosterFile {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+    </style>
+}
+
+@section scripts {
+    <script src="~/lib/gijgo/combined/js/gijgo.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/lib/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '.rich-textarea',
+            branding: false
+        });
+
+        $('#PostedAt').datetimepicker({
+            uiLibrary: 'bootstrap4',
+            modal: true,
+            header: true,
+            footer: true,
+            format: 'dd/mm/yyyy HH:MM',
+            value: '@Model.PostedAt.ToString("dd/MM/yyyy HH:mm")'
+        });
+
+        $(function () {
+            $(document).on("change", "#PosterFile", function () {
+                var files = !!this.files ? this.files : [];
+
+                if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+                if (/^image/.test(files[0].type)) {
+                    var reader = new FileReader();
+
+                    reader.readAsDataURL(files[0]);
+
+                    reader.onloadend = function () {
+                        $('#PosterFilePreview').attr('src', this.result);
+                    }
+                }
+
+            });
+        });
+    </script>
+}
+
+@using (Html.BeginForm("create", "posts", new { Area = "communication" }, FormMethod.Post, true, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <div class="card" style="margin-bottom: 20px;">
+        <div class="card-header"><h4>@ViewData["Title"]</h4></div>
+
+        <div class="card-body">
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.PostedAt, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.PostedAt, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.PostedAt, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.AuthorId, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.AuthorId, Model.AvailableEmploySelectListItems, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.AuthorId, null, new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6" style="margin-bottom: 20px;">
+                    @Html.LabelFor(model => model.CategoryId, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.CategoryId, Model.AvailableCategorySelectListItems, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <div>@Html.LabelFor(model => model.PosterFile, new { @class = "control-label" })</div>
+                <div><img src="~/img/default-event.png" class="img-thumbnail" id="PosterFilePreview" style="margin-bottom: 10px;" /></div>
+                <label class="btn btn-light">
+                    @GlobalViewLocalizationHelper.Localize("Upload", ViewLocalizer) ...
+                    @Html.EditorFor(model => model.PosterFile)
+                </label>
+                <div>@Html.ValidationMessageFor(model => model.PosterFile, null, new { @class = "text-danger" })</div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Summary, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Summary, 4, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Summary, null, new { @class = "text-danger" })
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                @Html.LabelFor(model => model.Content, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Content, 20, 0, new { @class = "form-control rich-textarea" })
+                @Html.ValidationMessageFor(model => model.Content, null, new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.SelectableTags)
+            @{
+                int count = Model.SelectableTags.Count;
+
+                if (count > 0)
+                {
+                    for (int i = 0; i < count; i += 2)
+                    {
+                        <div class="row">
+                            @Html.EditorFor(m => m.SelectableTags[i], "SelectionStringIDItemInputViewModel")
+
+                            @if (i + 1 < count)
+                            {
+                                @Html.EditorFor(subModel => subModel.SelectableTags[i + 1], "SelectionStringIDItemInputViewModel")
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>Sin elementos que mostrar.</div>
+                }
+            }
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Crear</button>
+            <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
+        </div>
+    </div>
+}

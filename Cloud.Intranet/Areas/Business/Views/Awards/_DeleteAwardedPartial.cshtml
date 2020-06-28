@@ -1,0 +1,29 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View.AwardEmployBridgeDisplayViewModel
+
+<div class="modal fade" id="delete-awarded-@Model.AwardId-@Model.EmployId" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-awarded-@Model.AwardId-@Model.EmployId-title">Eliminar Galardonado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("deleteawarded", "awards", null, FormMethod.Post, true, null))
+            {
+                @Html.HiddenFor(model => model.AwardId)
+
+                @Html.HiddenFor(model => model.EmployId)
+
+                <div class="modal-body">
+                    <p>Está seguro que desea eliminar el galardonado <b>@Model.Employ.Name @Model.Employ.LastName</b> del galardón <b>@Model.Award.Title</b>?</p>
+                </div>
+
+                <div class="modal-footer" style="margin-top: 0;">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
