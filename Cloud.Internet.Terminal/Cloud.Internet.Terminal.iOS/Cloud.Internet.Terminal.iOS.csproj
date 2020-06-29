@@ -170,7 +170,7 @@
       <Version>0.0.6-alpha</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.1.1</Version>
+      <Version>1.68.3</Version>
     </PackageReference>
     <PackageReference Include="SSCXFToolKit.Mvvm">
       <Version>0.4.0-alpha</Version>
@@ -185,10 +185,10 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.4.0.991265</Version>
+      <Version>4.7.0.968</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Plugin.FilePicker">
-      <Version>2.1.34</Version>
+      <Version>2.1.41</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
