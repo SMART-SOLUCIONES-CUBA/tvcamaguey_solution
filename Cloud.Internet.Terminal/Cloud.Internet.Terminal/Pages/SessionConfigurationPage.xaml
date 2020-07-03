@@ -33,48 +33,54 @@
                     Opacity="0.20"
                     Aspect="AspectFill"
                     Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomOfficeImageSource}" />
-                <StackLayout 
+                <ScrollView
                     Grid.Column="1"
-                    Margin="10"
-                    VerticalOptions="Center" HorizontalOptions="Center">
-                    <Image HorizontalOptions="Center">
-                        <Image.Source>
-                            <OnPlatform Android="app_logo.png" UWP="Assets/Images/AppLogo.png" />
-                        </Image.Source>
-                    </Image>
-                    <Label HorizontalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    Text="TuTV" 
-                                    TextColor="#c3c3c3"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
-                                    FontSize="Subtitle" />
-                                <Span 
-                                    Text="Camagüey"
-                                    TextColor="#f2f2f2"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
-                                    FontSize="Subtitle" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label
-                        Text="{StaticResource ProductConcept}"
-                        TextColor="WhiteSmoke"
-                        HorizontalTextAlignment="Center" />
-                    <Label
-                        Margin="0,0,0,20"
-                        Text="Bienvenido"
-                        TextColor="White"
-                        HorizontalTextAlignment="Center"
-                        FontFamily="{StaticResource SouvenirMediumFontFamily}"
-                        FontSize="Title" />
-                    <Button
-                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
-                        Text="Comenzar"
-                        TextColor="White"
-                        Clicked="BeginButton_Clicked" />
-                </StackLayout>
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    Margin="10">
+                    <StackLayout>
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="app_logo.png" />
+                                    <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                    <On Platform="iOS" Value="AppLogo" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Label HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        Text="TuTV" 
+                                        TextColor="#c3c3c3"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                    <Span 
+                                        Text="Camagüey"
+                                        TextColor="#f2f2f2"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label
+                            Text="{StaticResource ProductConcept}"
+                            TextColor="WhiteSmoke"
+                            HorizontalTextAlignment="Center" />
+                        <Label
+                            Margin="0,0,0,20"
+                            Text="Bienvenido"
+                            TextColor="White"
+                            HorizontalTextAlignment="Center"
+                            FontFamily="Souvenir Medium"
+                            FontSize="Title" />
+                        <Button
+                            BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                            Text="Comenzar"
+                            TextColor="White"
+                            Clicked="BeginButton_Clicked" />
+                    </StackLayout>
+                </ScrollView>                
             </Grid>
         </ContentPage.Content>
     </sscxftoolkitmvvmpages:ContentPage>
@@ -99,7 +105,11 @@
                     HorizontalOptions="CenterAndExpand">
                     <Image HorizontalOptions="Center">
                         <Image.Source>
-                            <OnPlatform Android="app_logo.png" UWP="Assets/Images/AppLogo.png" />
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android" Value="app_logo.png" />
+                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                <On Platform="iOS" Value="AppLogo" />
+                            </OnPlatform>
                         </Image.Source>
                     </Image>
                     <Label HorizontalTextAlignment="Center">
@@ -108,12 +118,12 @@
                                 <Span 
                                     Text="TuTV" 
                                     TextColor="#c3c3c3"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                                 <Span 
                                     Text="Camagüey"
                                     TextColor="#f2f2f2"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                             </FormattedString>
                         </Label.FormattedText>
@@ -125,7 +135,9 @@
                         Margin="0,20,0,0"
                         Text="{Binding Login}">
                         <Entry.TextColor>
-                            <OnPlatform Android="WhiteSmoke" />
+                            <OnPlatform x:TypeArguments="Color">
+                                <On Platform="Android" Value="WhiteSmoke" />
+                            </OnPlatform>
                         </Entry.TextColor>
                     </renderedviews:HighContrastEntry>
                     <Button
@@ -160,7 +172,11 @@
                     HorizontalOptions="CenterAndExpand">
                     <Image HorizontalOptions="Center">
                         <Image.Source>
-                            <OnPlatform Android="app_logo.png" UWP="Assets/Images/AppLogo.png" />
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android" Value="app_logo.png" />
+                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                <On Platform="iOS" Value="AppLogo" />
+                            </OnPlatform>
                         </Image.Source>
                     </Image>
                     <Label HorizontalTextAlignment="Center">
@@ -169,12 +185,12 @@
                                 <Span 
                                     Text="TuTV" 
                                     TextColor="#c3c3c3"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                                 <Span 
                                     Text="Camagüey"
                                     TextColor="#f2f2f2"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                             </FormattedString>
                         </Label.FormattedText>
@@ -195,7 +211,9 @@
                     <renderedviews:HighContrastEntry
                         Text="{Binding Token}">
                         <Entry.TextColor>
-                            <OnPlatform Android="WhiteSmoke" />
+                            <OnPlatform x:TypeArguments="Color">
+                                <On Platform="Android" Value="WhiteSmoke" />
+                            </OnPlatform>
                         </Entry.TextColor>
                     </renderedviews:HighContrastEntry>
                     <Button
@@ -229,7 +247,11 @@
                     HorizontalOptions="CenterAndExpand">
                     <Image HorizontalOptions="Center">
                         <Image.Source>
-                            <OnPlatform Android="app_logo.png" UWP="Assets/Images/AppLogo.png" />
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android" Value="app_logo.png" />
+                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                <On Platform="iOS" Value="AppLogo" />
+                            </OnPlatform>
                         </Image.Source>
                     </Image>
                     <Label HorizontalTextAlignment="Center">
@@ -238,12 +260,12 @@
                                 <Span 
                                     Text="TuTV" 
                                     TextColor="#c3c3c3"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                                 <Span 
                                     Text="Camagüey"
                                     TextColor="#f2f2f2"
-                                    FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                    FontFamily="Souvenir Lt BT Bold"
                                     FontSize="Subtitle" />
                             </FormattedString>
                         </Label.FormattedText>
@@ -266,7 +288,7 @@
                             HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                             WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
-                            FontFamily="{StaticResource IconFontFamily}"
+                            FontFamily="Material Design Icons"
                             Text="&#xf100;"
                             TextColor="White"
                             Clicked="PickImageButton_Clicked" />
@@ -276,7 +298,9 @@
                         Placeholder="Nombre(s)"
                         Text="{Binding Name}">
                         <Entry.TextColor>
-                            <OnPlatform Android="WhiteSmoke" />
+                            <OnPlatform x:TypeArguments="Color">
+                                <On Platform="Android" Value="WhiteSmoke" />
+                            </OnPlatform>
                         </Entry.TextColor>
                     </renderedviews:HighContrastEntry>
                     <Label

@@ -1,5 +1,8 @@
 ﻿using UIKit;
 
+[assembly: Foundation.Preserve(typeof(System.Linq.Queryable), AllMembers = true)]
+[assembly: Foundation.Preserve(typeof(System.DateTime), AllMembers = true)]
+
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS
 {
     public class Application

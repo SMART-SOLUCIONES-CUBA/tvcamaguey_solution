@@ -13,12 +13,8 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xf6ea;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                    </FontImageSource.Color>
-                </FontImageSource>
+                    FontFamily="Material Design Icons" 
+                    Glyph="&#xf6ea;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </TabbedPage.ToolbarItems>
@@ -26,12 +22,8 @@
         Title="Acerca de">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xf9f0;">
-                <FontImageSource.Color>
-                    <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                </FontImageSource.Color>
-            </FontImageSource>
+                FontFamily="Material Design Icons" 
+                Glyph="&#xf9f0;" />
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
@@ -44,12 +36,8 @@
         Title="Historia">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xfbaf;">
-                <FontImageSource.Color>
-                    <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                </FontImageSource.Color>
-            </FontImageSource>
+                FontFamily="Material Design Icons" 
+                Glyph="&#xfbaf;" />
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
@@ -62,12 +50,8 @@
         Title="Contacto">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xf780;">
-                <FontImageSource.Color>
-                    <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                </FontImageSource.Color>
-            </FontImageSource>
+                FontFamily="Material Design Icons" 
+                Glyph="&#xf780;" />
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
@@ -78,7 +62,11 @@
                             Spacing="30">
                             <Image HorizontalOptions="Center">
                                 <Image.Source>
-                                    <OnPlatform Android="vendor_logo.png" UWP="Assets/Images/VendorLogo.png" />
+                                    <OnPlatform x:TypeArguments="FileImageSource">
+                                        <On Platform="Android" Value="vendor_logo.png" />
+                                        <On Platform="UWP" Value="Assets/Images/VendorLogo.png" />
+                                        <On Platform="iOS" Value="ContractorLogo" />
+                                    </OnPlatform>
                                 </Image.Source>
                             </Image>
                             <FlexLayout Wrap="Wrap" JustifyContent="SpaceAround">
@@ -87,7 +75,7 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf1c3;"
                                         TextColor="Black"
-                                        FontFamily="{StaticResource IconFontFamily}"
+                                        FontFamily="Material Design Icons"
                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
                                     <Label
                                         HorizontalOptions="Center"
@@ -104,7 +92,7 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf1ee;"
                                         TextColor="Black"
-                                        FontFamily="{StaticResource IconFontFamily}"
+                                        FontFamily="Material Design Icons"
                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
                                     <Label
                                         HorizontalOptions="Center"
@@ -121,7 +109,7 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf352;"
                                         TextColor="Black"
-                                        FontFamily="{StaticResource IconFontFamily}"
+                                        FontFamily="Material Design Icons"
                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
                                     <Label
                                         HorizontalOptions="Center"
@@ -137,7 +125,11 @@
                         </StackLayout>
                         <Image VerticalOptions="EndAndExpand" HorizontalOptions="Start">
                             <Image.Source>
-                                <OnPlatform Android="vendor_tail.png" UWP="Assets/Images/VendorTail.png" />
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="vendor_tail.png" />
+                                    <On Platform="UWP" Value="Assets/Images/VendorTail.png" />
+                                    <On Platform="iOS" Value="VendorSignature" />
+                                </OnPlatform>
                             </Image.Source>
                         </Image>
                     </StackLayout>

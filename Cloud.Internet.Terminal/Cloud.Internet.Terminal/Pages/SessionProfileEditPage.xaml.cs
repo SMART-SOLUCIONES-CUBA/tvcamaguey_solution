@@ -50,7 +50,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     if (reference.ProfileImageId != newImageId && System.Guid.Empty != newImageId)
                     {
-                        System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(newImageId, (BindingContext as Models.Page.UserProfilePageModel).ProfileImageExtension));
+                        System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, (BindingContext as Models.Page.UserProfilePageModel).ProfileImageExtension));
                     }
 
                     if (alertTask.Result)
@@ -97,7 +97,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     var newImageId = System.Guid.NewGuid();
 
-                    using (var profileImageFileStream = System.IO.File.OpenWrite(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(newImageId, newImageExtension)))
+                    using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, newImageExtension)))
                     {
                         var pickImageFileStream = pickFileTask.Result.GetStream();
 
@@ -145,7 +145,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                         if (model.ProfileImageId != System.Guid.Empty && model.ProfileImageId != entityImageId)
                         {
-                            var fileInfo = new System.IO.FileInfo(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(model.ProfileImageId, model.ProfileImageExtension));
+                            var fileInfo = new System.IO.FileInfo(Helpers.LocalFileStorageHelper.GetImageFilePath(model.ProfileImageId, model.ProfileImageExtension));
 
                             entity.Image = new SAPRESSC.Middleware.Media.Persistence.Entities.Image
                             {
@@ -174,7 +174,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                         if (entityImageId != System.Guid.Empty && model.ProfileImageId != entityImageId)
                         {
-                            System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(entityImageId, oldImageExtension));
+                            System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(entityImageId, oldImageExtension));
                         }
                     }
 
@@ -210,7 +210,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     if (reference.ProfileImageId != newImageId && System.Guid.Empty != newImageId)
                     {
-                        System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(newImageId, (BindingContext as Models.Page.UserProfilePageModel).ProfileImageExtension));
+                        System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, (BindingContext as Models.Page.UserProfilePageModel).ProfileImageExtension));
                     }
 
                     if (alertTask.Result)

@@ -114,9 +114,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
 
                                     using (var memoryStream = new System.IO.MemoryStream())
                                     {
-                                        var filePathProvider = Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>();
-
-                                        var imageFilePath = filePathProvider.GetImageFilePath(imageSyncModel.Id, imageSyncModel.ContentType.ContentTypeToExtension());
+                                        var imageFilePath = Helpers.LocalFileStorageHelper.GetImageFilePath(imageSyncModel.Id, imageSyncModel.ContentType.ContentTypeToExtension());
 
                                         using (var imageFileStream = new System.IO.FileStream(imageFilePath, System.IO.FileMode.Open))
                                         {

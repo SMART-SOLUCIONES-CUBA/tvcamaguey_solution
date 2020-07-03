@@ -1,4 +1,4 @@
-﻿    using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Common.Extensions;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
 using SmartSolucionesCuba.XFToolKit.Mvvm.Extensions;
@@ -145,7 +145,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                         {
                             SAPRESSC.Middleware.Media.Persistence.Entities.Image oldImage = entity.Image;
 
-                            var fileInfo = new System.IO.FileInfo(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(userEssentialProfileEditionPageModel.ProfileImageId, userEssentialProfileEditionPageModel.ProfileImageExtension));
+                            var fileInfo = new System.IO.FileInfo(Helpers.LocalFileStorageHelper.GetImageFilePath(userEssentialProfileEditionPageModel.ProfileImageId, userEssentialProfileEditionPageModel.ProfileImageExtension));
 
                             entity.Image = new SAPRESSC.Middleware.Media.Persistence.Entities.Image
                             {
@@ -160,7 +160,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                             {
                                 dbContext.Images.Remove(oldImage);
 
-                                System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(oldImage.Id, oldImage.ContentType.ContentTypeToExtension()));
+                                System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(oldImage.Id, oldImage.ContentType.ContentTypeToExtension()));
                             }
                         }
 
@@ -208,7 +208,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     var newImageId = System.Guid.NewGuid();
 
-                    using (var profileImageFileStream = System.IO.File.OpenWrite(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(newImageId, newImageExtension)))
+                    using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, newImageExtension)))
                     {
                         var pickImageFileStream = pickFileTask.Result.GetStream();
 

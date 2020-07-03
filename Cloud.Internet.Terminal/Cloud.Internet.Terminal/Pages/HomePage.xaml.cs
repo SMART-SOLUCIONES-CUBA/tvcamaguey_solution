@@ -9,6 +9,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
     {
 		public HomePage()
 		{
+            // TODO Uncomment xaml code block when Xamarin.Form release a version with MediaELement fixed!
 			InitializeComponent();
 
             IsEnabled = false;

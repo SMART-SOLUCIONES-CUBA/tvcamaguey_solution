@@ -19,11 +19,29 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            //var tintColor = UIColor.FromRGB(128, 0, 0); // Primary Brand Color
+            var tintColor = UIColor.FromRGB(238, 160, 85); // Secoundary Brand Color
+
+            UIButton.Appearance.TintColor = tintColor;
+            UISwitch.Appearance.OnTintColor = tintColor;
+
+            SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
+
+            Xamarin.Forms.Forms.SetFlags("MediaElement_Experimental");
+
             Xamarin.Forms.Forms.Init();
+
+            Xamarin.Forms.PancakeView.iOS.PancakeViewRenderer.Init();
+
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
             LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+            var result = base.FinishedLaunching(app, options);
+
+            UIApplication.SharedApplication.KeyWindow.TintColor = tintColor;
+
+            return result;
         }
     }
 }

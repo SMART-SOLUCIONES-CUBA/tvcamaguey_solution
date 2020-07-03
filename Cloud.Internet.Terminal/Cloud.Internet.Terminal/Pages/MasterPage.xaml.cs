@@ -1,4 +1,5 @@
 ﻿using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 {
@@ -12,8 +13,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
         public MasterPage()
 		{
 			InitializeComponent();
-
-            //NavigationListView.Header = new Models.View.MockListViewHeaderModel();
 
             homeNavigationSection = new Models.NavigationSectionModel
             {
@@ -100,7 +99,17 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             };
 
             IsEnabled = false;
-		}
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (NavigationListView.SelectedItem == null)
+            {
+                PresentHomeSection();
+            }
+        }
 
         internal void PresentHomeSection()
         {
@@ -115,16 +124,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
         internal void PresentNewsSection()
         {
             NavigationListView.SelectedItem = newsNavigationSection;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (NavigationListView.SelectedItem == null)
-            {
-                PresentHomeSection();
-            }
         }
 
         public void InitializeContent(bool autoShow = false)
@@ -167,14 +166,22 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
             var outgoingPage = (Parent as Xamarin.Forms.MasterDetailPage).Detail;
 
-            (Parent as Xamarin.Forms.MasterDetailPage).Detail = new Xamarin.Forms.NavigationPage((e.SelectedItem as Models.NavigationSectionModel).SelectionFunc.Invoke());
+            var incomingNavigationPage = new Xamarin.Forms.NavigationPage((e.SelectedItem as Models.NavigationSectionModel).SelectionFunc.Invoke());
+
+            (Parent as Xamarin.Forms.MasterDetailPage).Detail = incomingNavigationPage;
 
             if (outgoingPage is System.IDisposable)
             {
                 (outgoingPage as System.IDisposable).Dispose();
             }
 
-            (Parent as Xamarin.Forms.MasterDetailPage).IsPresented = false;
+            System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(100)).ContinueWith(task =>
+            {
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    (Parent as Xamarin.Forms.MasterDetailPage).IsPresented = false;
+                });
+            });
         }
 
         protected override void DisposeUnmanagementResources()

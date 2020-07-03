@@ -41,18 +41,14 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
 
         public Xamarin.Forms.ImageSource GetImage(System.Guid id, string extension)
         {
-            var filePathProvider = Xamarin.Forms.DependencyService.Get<Facade.IFilePathProviderFacade>();
-
-            var imageFilePath = filePathProvider.GetImageFilePath(id, extension);
+            var imageFilePath = Helpers.LocalFileStorageHelper.GetImageFilePath(id, extension);
 
             return Xamarin.Forms.ImageSource.FromFile(imageFilePath);
         }
 
         public Xamarin.Forms.ImageSource GetUserImage(System.Guid id, string extension, int width, int height)
         {
-            var filePathProvider = Xamarin.Forms.DependencyService.Get<Facade.IFilePathProviderFacade>();
-
-            var imageFilePath = filePathProvider.GetImageFilePath(id, extension);
+            var imageFilePath = Helpers.LocalFileStorageHelper.GetImageFilePath(id, extension);
 
             if (!System.IO.File.Exists(imageFilePath))
             {
@@ -64,7 +60,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
 
         private Xamarin.Forms.ImageSource GetDefaultUserProfile(int width, int height)
         {
-            var imageFilePath = Xamarin.Forms.DependencyService.Get<Facade.IFilePathProviderFacade>().GetDefaultUserProfileImageFilePath(width, height);
+            var imageFilePath = Helpers.LocalFileStorageHelper.GetDefaultUserProfileImageFilePath(width, height);
 
             if (System.IO.File.Exists(imageFilePath))
             {
@@ -75,16 +71,19 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
             {
                 surface.Canvas.Clear(SkiaSharp.SKColors.LightGray);
 
-                using (var paint = new SkiaSharp.SKPaint())
+                using (var fontFileStream = GetType().Assembly.GetManifestResourceStream("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Assets.Fonts.IconmonstrIconic.ttf"))
                 {
-                    paint.Typeface = Xamarin.Forms.DependencyService.Get<Helpers.Facade.ISkiaSharpHelperFacade>().GetSKTypefaceByFontFileName("IconmonstrIconic.ttf");
-                    paint.TextSize = width / 2;
-                    paint.IsAntialias = true;
-                    paint.TextAlign = SkiaSharp.SKTextAlign.Center;
-                    paint.Color = SkiaSharp.SKColors.Silver;
-                    paint.Style = SkiaSharp.SKPaintStyle.Fill;
+                    using (var paint = new SkiaSharp.SKPaint())
+                    {
+                        paint.Typeface = SkiaSharp.SKTypeface.FromStream(fontFileStream);
+                        paint.TextSize = width / 2;
+                        paint.IsAntialias = true;
+                        paint.TextAlign = SkiaSharp.SKTextAlign.Center;
+                        paint.Color = SkiaSharp.SKColors.Silver;
+                        paint.Style = SkiaSharp.SKPaintStyle.Fill;
 
-                    surface.Canvas.DrawText("\uE08f", width / 2, height / 2 + (paint.TextSize / 2), paint);
+                        surface.Canvas.DrawText("\uE08f", width / 2, height / 2 + (paint.TextSize / 2), paint);
+                    }
                 }
 
                 using (var skImage = surface.Snapshot())

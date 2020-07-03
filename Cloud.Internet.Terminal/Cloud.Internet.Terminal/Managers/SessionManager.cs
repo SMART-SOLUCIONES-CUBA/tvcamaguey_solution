@@ -52,13 +52,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
             }
         }
 
-        public string Login => Xamarin.Forms.Application.Current.Properties[LOGIN_KEY].ToString();
+        public string Login => Xamarin.Forms.Application.Current.Properties[LOGIN_KEY]?.ToString();
 
-        public System.Guid IdentityId => System.Guid.Parse(Xamarin.Forms.Application.Current.Properties[IDENTITY_ID_KEY].ToString());
+        public System.Guid IdentityId => System.Guid.Parse(Xamarin.Forms.Application.Current.Properties[IDENTITY_ID_KEY]?.ToString());
 
-        public string AuthenticationType => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TYPE_KEY].ToString();
+        public string AuthenticationType => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TYPE_KEY]?.ToString();
 
-        public string AuthenticationToken => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TOKEN_KEY].ToString();
+        public string AuthenticationToken => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TOKEN_KEY]?.ToString();
 
         public async System.Threading.Tasks.Task<string> RegisterAsync(string login)
         {
@@ -152,11 +152,11 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
                 images = dbContext.Images.Include(e => e.Thumbnail).ToArray();
             }
 
-            System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetDatabaseFilePath());
+            System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetDatabaseFilePath());
 
             foreach (var image in images)
             {
-                System.IO.File.Delete(Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>().GetImageFilePath(image.Id, image.ContentType.ToImageExtension()));
+                System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(image.Id, image.ContentType.ToImageExtension()));
             }
         }
     }

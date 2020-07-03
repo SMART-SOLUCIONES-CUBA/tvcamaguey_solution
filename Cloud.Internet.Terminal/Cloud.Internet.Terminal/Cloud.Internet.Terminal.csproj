@@ -25,11 +25,29 @@
     <None Remove="Assets\Images\Region-7.jpg" />
     <None Remove="Assets\Images\Region-8.jpg" />
     <None Remove="Assets\Images\Region-9.jpg" />
+    <None Remove="Assets\Fonts\HelveticaLTStd-BoldCond.otf" />
+    <None Remove="Assets\Fonts\HelveticaLTStd-Compressed.otf" />
+    <None Remove="Assets\Fonts\HelveticaLTStd-Cond.otf" />
+    <None Remove="Assets\Fonts\HelveticaLTStd-Light.otf" />
+    <None Remove="Assets\Fonts\HelveticaLTStd-UltraCompresed.otf" />
+    <None Remove="Assets\Fonts\IconmonstrIconic.ttf" />
+    <None Remove="Assets\Fonts\materialdesignicons-webfont.ttf" />
+    <None Remove="Assets\Fonts\Souvenir-Medium.otf" />
+    <None Remove="Assets\Fonts\SOUVNRD.ttf" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Assets\Images\Region-10.jpg" />
     <EmbeddedResource Include="Assets\Images\Region-2.jpg" />
+    <EmbeddedResource Include="Assets\Fonts\HelveticaLTStd-BoldCond.otf" />
+    <EmbeddedResource Include="Assets\Fonts\HelveticaLTStd-Compressed.otf" />
+    <EmbeddedResource Include="Assets\Fonts\HelveticaLTStd-Cond.otf" />
+    <EmbeddedResource Include="Assets\Fonts\HelveticaLTStd-Light.otf" />
+    <EmbeddedResource Include="Assets\Fonts\HelveticaLTStd-UltraCompresed.otf" />
+    <EmbeddedResource Include="Assets\Fonts\IconmonstrIconic.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\materialdesignicons-webfont.ttf" />
+    <EmbeddedResource Include="Assets\Fonts\Souvenir-Medium.otf" />
+    <EmbeddedResource Include="Assets\Fonts\SOUVNRD.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,7 +66,7 @@
     
   <ItemGroup>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.14" />
     <PackageReference Include="SAPRESSC.Middleware.Identity.Syncronization.Handling.Persistence.EF" Version="0.0.3-alpha" />
     <PackageReference Include="SAPRESSC.Syncronization.Api.Connect.Reception" Version="0.0.2-alpha" />
     <PackageReference Include="SAPRESSC.Syncronization.Persistence.EF" Version="0.0.6-alpha" />
@@ -57,8 +75,9 @@
     <PackageReference Include="SSCXFToolKit.Presentation" Version="0.4.5-alpha" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.968" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.41" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,6 +86,9 @@
     <ProjectReference Include="..\..\Cloud.Internet.Persistence.EF\Cloud.Internet.Persistence.EF.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Helpers\Facade\ISkiaSharpHelperFacade.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="LocalizationResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -132,5 +154,8 @@
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
   </ItemGroup>
 </Project>

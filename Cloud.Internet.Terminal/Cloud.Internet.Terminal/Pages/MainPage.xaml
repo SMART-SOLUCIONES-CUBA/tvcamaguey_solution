@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:pages="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages"
-    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.MainPage">
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.MainPage"
+    ios:MasterDetailPage.ApplyShadow="true">
     <MasterDetailPage.Master>
         <pages:MasterPage />
     </MasterDetailPage.Master>

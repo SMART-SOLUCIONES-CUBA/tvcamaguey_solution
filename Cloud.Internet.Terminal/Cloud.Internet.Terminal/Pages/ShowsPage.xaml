@@ -23,12 +23,8 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xf6ea;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                    </FontImageSource.Color>
-                </FontImageSource>
+                    FontFamily="Material Design Icons" 
+                    Glyph="&#xf6ea;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>    

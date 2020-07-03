@@ -6,9 +6,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers
     {
         public static async System.Threading.Tasks.Task FetchRemoteImageFileAsync(System.Guid id, string contentType)
         {
-            var filePathProvider = Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>();
-
-            var imageFilePath = filePathProvider.GetImageFilePath(id, contentType.ContentTypeToExtension());
+            var imageFilePath = LocalFileStorageHelper.GetImageFilePath(id, contentType.ContentTypeToExtension());
 
             if (System.IO.File.Exists(imageFilePath)) return;
 
@@ -29,9 +27,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers
 
         public static void RemoveLocalImageFile(System.Guid id, string contentType)
         {
-            var filePathProvider = Xamarin.Forms.DependencyService.Get<Providers.Facade.IFilePathProviderFacade>();
-
-            var imageFilePath = filePathProvider.GetImageFilePath(id, contentType.ContentTypeToExtension());
+            var imageFilePath = LocalFileStorageHelper.GetImageFilePath(id, contentType.ContentTypeToExtension());
 
             System.IO.File.Delete(imageFilePath);
         }

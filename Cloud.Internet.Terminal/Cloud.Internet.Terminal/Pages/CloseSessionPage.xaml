@@ -16,7 +16,7 @@
                         Margin="0,20"
                         HorizontalOptions="Center"
                         Text="&#xf5fd;"
-                        FontFamily="{StaticResource IconFontFamily}"
+                        FontFamily="Material Design Icons"
                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
                     <Label
                         Text="En esta sección podrá cerrar su sesión y con ella eliminar localmente los datos especificados en su perfil, configuraciones realizadas a la aplicación, las actualizaciones acumuladas, así como los comentarios, valoraciones, denuncias y otros cambios no sincronizados." />

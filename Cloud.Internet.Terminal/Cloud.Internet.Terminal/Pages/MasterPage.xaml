@@ -6,11 +6,13 @@
     xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:providers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers"
     xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Rendered"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.MasterPage"
-    Title="TuTV Camagüey"
+    Title="Navegación"
     x:Name="Page">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,9 +20,11 @@
             <converters:UserImageIdToOverviewImageSourceConverter x:Key="UserImageIdToOverviewImageSource" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness" iOS="0,20,0,0" />
-    </ContentPage.Padding>
+    <ContentPage.IconImageSource>
+        <FontImageSource
+            Glyph="&#xf35c;"
+            FontFamily="Material Design Icons" />
+    </ContentPage.IconImageSource>
     <ContentPage.Content>
         <Grid
             RowSpacing="0" ColumnSpacing="0">
@@ -28,9 +32,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <ListView 
-                Grid.RowSpan="2"
+            <ListView
                 x:Name="NavigationListView"
+                Grid.RowSpan="2"
+                BackgroundColor="GhostWhite"
                 Header="{Binding .}"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Title}"
@@ -38,10 +43,11 @@
                 ItemSelected="NavigationListView_ItemSelected">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell ios:Cell.DefaultBackgroundColor="GhostWhite">
                             <Label
-                                Text="{Binding Title}"
-                                Margin="10,20,0,0" />
+                                Margin="10"
+                                Text="{Binding Path=Title}"
+                                TextColor="DimGray" />
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
@@ -87,21 +93,16 @@
                 </ListView.HeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" Margin="10">
-                                <Label 
-                                    Text="{Binding Glyph}"
-                                    TextColor="{StaticResource BrandPrimaryColor}"
-                                    VerticalOptions="CenterAndExpand"
-                                    FontFamily="{StaticResource IconFontFamily}"
-                                    FontSize="Medium"
-                                    Margin="0,0,4,0" />
-                                <Label 
-                                    Text="{Binding Title}" 
-                                    TextColor="{StaticResource BrandPrimaryColor}"
-                                    VerticalOptions="CenterAndExpand" />
-                            </StackLayout>
-                        </ViewCell>
+                        <renderedviews:ResponsiveImageCell 
+                            Text="{Binding Title}"
+                            TextColor="Black">
+                            <ImageCell.ImageSource>
+                                <FontImageSource 
+                                    Glyph="{Binding Glyph}"
+                                    FontFamily="Material Design Icons"
+                                    Color="Black" />
+                            </ImageCell.ImageSource>
+                        </renderedviews:ResponsiveImageCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.Footer>
@@ -109,7 +110,11 @@
                         <Image 
                             VerticalOptions="End" HorizontalOptions="Start">
                             <Image.Source>
-                                <OnPlatform Android="vendor_tail.png" UWP="Assets/Images/VendorTail.png" />
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="vendor_tail.png" />
+                                    <On Platform="UWP" Value="Assets/Images/VendorTail.png" />
+                                    <On Platform="iOS" Value="VendorSignature" />
+                                </OnPlatform>
                             </Image.Source>
                         </Image>
                         <StackLayout Spacing="0" Margin="10,40,10,80">

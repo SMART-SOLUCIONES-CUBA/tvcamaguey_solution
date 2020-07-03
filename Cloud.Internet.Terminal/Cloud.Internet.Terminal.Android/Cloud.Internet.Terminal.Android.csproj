@@ -83,38 +83,34 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.7.0.968</Version>
+      <Version>4.7.0.1080</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms.PancakeView">
+      <Version>1.4.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\SizeCalculationHelper.cs" />
-    <Compile Include="Helpers\SkiaSharpHelper.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Providers\ConstantProvider.cs" />
-    <Compile Include="Providers\FilePathProvider.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Renderer\ExoVideoPlayerViewRenderer.cs" />
     <Compile Include="Views\Renderer\FontStrechLabelRenderer.cs" />
     <Compile Include="Views\Renderer\HighContrastEntryRenderer.cs" />
+    <Compile Include="Views\Renderer\ResponsiveImageCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fonts\materialdesignicons-webfont.ttf" />
     <AndroidResource Include="Resources\values\values.xml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-    <AndroidAsset Include="Assets\fonts\HelveticaLTStd-BoldCond.otf" />
-    <AndroidAsset Include="Assets\fonts\HelveticaLTStd-Compressed.otf" />
-    <AndroidAsset Include="Assets\fonts\HelveticaLTStd-Cond.otf" />
-    <AndroidAsset Include="Assets\fonts\HelveticaLTStd-Light.otf" />
-    <AndroidAsset Include="Assets\fonts\HelveticaLTStd-UltraCompresed.otf" />
-    <AndroidAsset Include="Assets\fonts\Souvenir-Medium.otf" />
-    <AndroidAsset Include="Assets\fonts\IconmonstrIconic.ttf" />
-    <AndroidAsset Include="Assets\fonts\SOUVNRD.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\raw\home.mp4">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -131,9 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\network_security_config.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\videos\home.mp4" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\app_logo.png" />
@@ -245,6 +238,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\raw\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

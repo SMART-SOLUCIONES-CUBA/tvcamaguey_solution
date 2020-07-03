@@ -30,22 +30,28 @@
                     BackgroundColor="White">
                     <Label 
                         Text="{Binding  Path=Post.Title}"
-                        TextColor="{StaticResource BrandPrimaryColor}"
+                        TextColor="Black"
                         FontSize="Title"
-                        FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                        FontFamily="Helvetica LT Std Condensed"
                         MaxLines="2"
-                        LineBreakMode="TailTruncation" />
+                        LineBreakMode="TailTruncation">
+                        <Label.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                <On Platform="iOS" Value="0,4,0,0" />
+                            </OnPlatform>
+                        </Label.Padding>
+                    </Label>
                     <Label
                         VerticalOptions="StartAndExpand"
                         Text="{Binding Path=Post.Summary}"
                         TextColor="Black"
-                        FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                        FontFamily="Helvetica LT Std Light"
                         MaxLines="5"
                         LineBreakMode="TailTruncation" />
                     <Label 
                         Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                        TextColor="{StaticResource BrandSecoundaryColor}"
-                        FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                        TextColor="DarkGray"
+                        FontFamily="Helvetica LT Std Compresed" />
                 </StackLayout>
             </DataTemplate>
             <DataTemplate x:Key="HasHorizontalPosterPostDataTemplate">
@@ -69,11 +75,17 @@
                     <Label 
                         Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
                         Text="{Binding Path=Post.Title}"
-                        TextColor="{StaticResource BrandPrimaryColor}"
+                        TextColor="Black"
                         FontSize="Title"
-                        FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                        FontFamily="Helvetica LT Std Condensed"
                         MaxLines="2"
-                        LineBreakMode="TailTruncation" />
+                        LineBreakMode="TailTruncation">                        
+                        <Label.Padding>
+                            <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                <On Platform="iOS" Value="0,4,0,0" />
+                            </OnPlatform>
+                        </Label.Padding>
+                    </Label>
                     <ffimageloadingforms:CachedImage
                         x:Name="HorizontalImage"
                         Grid.Column="0" Grid.Row="1"
@@ -84,13 +96,13 @@
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                            FontFamily="Helvetica LT Std Light"
                             MaxLines="6"
                             LineBreakMode="TailTruncation" />
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                            TextColor="{StaticResource BrandSecoundaryColor}"
-                            FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                            TextColor="DarkGray"
+                            FontFamily="Helvetica LT Std Compresed" />
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -115,22 +127,28 @@
                     <StackLayout Grid.Column="1">
                         <Label 
                             Text="{Binding Path=Post.Title}"
-                            TextColor="{StaticResource BrandPrimaryColor}"
+                            TextColor="Black"
                             FontSize="Title"
-                            FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                            FontFamily="Helvetica LT Std Condensed"
                             MaxLines="3"
-                            LineBreakMode="TailTruncation" />
+                            LineBreakMode="TailTruncation">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                    <On Platform="iOS" Value="0,4,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
                         <Label
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                            FontFamily="Helvetica LT Std Light"
                             MaxLines="4"
                             LineBreakMode="TailTruncation" />
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                            TextColor="{StaticResource BrandSecoundaryColor}"
-                            FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                            TextColor="DarkGray"
+                            FontFamily="Helvetica LT Std Compresed" />
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -147,12 +165,8 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="{StaticResource IconFontFamily}" 
-                    Glyph="&#xf6ea;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:DataType="Color" UWP="Black" Android="White" iOS="Black" />
-                    </FontImageSource.Color>
-                </FontImageSource>
+                    FontFamily="Material Design Icons" 
+                    Glyph="&#xf6ea;" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -163,6 +177,7 @@
             <dltoolkitforms:FlowListView
                 x:Name="FlowListView"
                 ClassId="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=UnselectableRowFlowListViewStyleId}"
+                BackgroundColor="GhostWhite"
                 IsRefreshing="{Binding IsBusy}"
                 IsPullToRefreshEnabled="True"
                 Refreshing="ListView_Refreshing"

@@ -8,23 +8,27 @@
     xmlns:providers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers"
     xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Rendered"
     xmlns:selectors="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Cell.Selector"
-    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
-    xmlns:sscxftoolkitpresentationrenderedviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views.Rendered;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"    
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.HomePage"
     Title="Portada"
     x:Name="Page">
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="HasPosterPostDataTemplate">
-                <Frame 
+                <pancake:PancakeView 
                     BackgroundColor="White" 
                     Margin="8"
                     Padding="0"
-                    WidthRequest="240" HeightRequest="360">
-                    <Frame.GestureRecognizers>
+                    WidthRequest="240" HeightRequest="360"
+                    CornerRadius="4">
+                    <pancake:PancakeView.Shadow>
+                        <pancake:DropShadow BlurRadius="2" />
+                    </pancake:PancakeView.Shadow>
+                    <pancake:PancakeView.GestureRecognizers>
                         <ClickGestureRecognizer Clicked="PostsItemClickGesture_Recognized" />
-                    </Frame.GestureRecognizers>
+                    </pancake:PancakeView.GestureRecognizers>
                     <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -43,26 +47,36 @@
                                 Text="{Binding Path=Post.Title}"
                                 TextColor="Black"
                                 FontSize="Title"
-                                FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                                FontFamily="Helvetica LT Std Condensed"
                                 MaxLines="4"
-                                LineBreakMode="TailTruncation" />
+                                LineBreakMode="TailTruncation">
+                                <Label.Padding>
+                                    <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                        <On Platform="iOS" Value="0,4,0,0" />
+                                    </OnPlatform>
+                                </Label.Padding>
+                            </Label>
                             <Label 
                                 Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                                 TextColor="DarkGray"
-                                FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                                FontFamily="Helvetica LT Std Compresed" />
                         </StackLayout>
                     </Grid>
-                </Frame>
+                </pancake:PancakeView>
             </DataTemplate>
             <DataTemplate x:Key="TextOnlyPostDataTemplate">
-                <Frame 
-                    BackgroundColor="White" 
+                <pancake:PancakeView 
+                    BackgroundColor="White"
                     Margin="8"
                     Padding="0"
-                    WidthRequest="240" HeightRequest="360">
-                    <Frame.GestureRecognizers>
+                    WidthRequest="240" HeightRequest="360"
+                    CornerRadius="4">
+                    <pancake:PancakeView.Shadow>
+                        <pancake:DropShadow BlurRadius="2" />
+                    </pancake:PancakeView.Shadow>
+                    <pancake:PancakeView.GestureRecognizers>
                         <ClickGestureRecognizer Clicked="PostsItemClickGesture_Recognized" />
-                    </Frame.GestureRecognizers>
+                    </pancake:PancakeView.GestureRecognizers>
                     <StackLayout 
                             Grid.Row="1"
                             Margin="8" Spacing="8">
@@ -70,22 +84,28 @@
                             Text="{Binding Path=Post.Title}"
                             TextColor="Black"
                             FontSize="Title"
-                            FontFamily="{StaticResource HelveticaLTStdCondFontFamily}"
+                            FontFamily="Helvetica LT Std Condensed"
                             MaxLines="5"
-                            LineBreakMode="TailTruncation" />
+                            LineBreakMode="TailTruncation">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                    <On Platform="iOS" Value="0,4,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
                         <Label 
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="{StaticResource HelveticaLTStdLightFontFamily}"
+                            FontFamily="Helvetica LT Std Light"
                             MaxLines="7"
                             LineBreakMode="TailTruncation" />
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                             TextColor="DarkGray"
-                            FontFamily="{StaticResource HelveticaLTStdCompFontFamily}" />
+                            FontFamily="Helvetica LT Std Compresed" />
                     </StackLayout>
-                </Frame>
+                </pancake:PancakeView>
             </DataTemplate>
 
             <selectors:PostCardDataTemplateSelector 
@@ -98,6 +118,7 @@
             <converters:DateTimeToInvarianCultureRelativeDayStringConverter x:Key="DateTimeToInvarianCultureRelativeDayString" />
             <converters:HomePageWidthToHomeHeaderSectionWidthConverter x:Key="HomePageWidthToHomeHeaderSectionWidth" />
             <converters:HomePageWidthToHomeHeaderSectionHeightConverter x:Key="HomePageWidthToHomeHeaderSectionHeight" />
+            <sscxftoolkitpresentationconverters:FactorConverter x:Key="Factor" />
             <sscxftoolkitpresentationconverters:FractionConverter x:Key="Fraction" />
             <sscxftoolkitpresentationconverters:NullToBooleanConverter x:Key="NullToBoolean" />
             <sscxftoolkitpresentationconverters:EnumerableEmptyToBooleanConverter x:Key="EnumerableEmptyToBoolean" Inverse="True" />
@@ -111,11 +132,12 @@
                         x:Name="AnimationVideoClipContainer"
                         WidthRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource HomePageWidthToHomeHeaderSectionWidth}}"
                         HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource HomePageWidthToHomeHeaderSectionHeight}}">
-                        <sscxftoolkitpresentationrenderedviews:VideoPlayerView                    
+                        <!--<MediaElement                    
                             AutoPlay="True"
-                            Repeat="True"
-                            ShowControls="False"
-                            Source="{Binding Source={x:Static providers:VideoSourceProvider.HomeVideoSource}}" />
+                            IsLooping="True"
+                            ShowsPlaybackControls="False"
+                            Aspect="Fill"
+                            Source="ms-appx:///home.mp4" />-->
                         <BoxView Color="{StaticResource BrandPrimaryColor}" Opacity="0.5" />
                     </Grid>
                     <Grid
@@ -131,7 +153,11 @@
                             VerticalOptions="Center" HorizontalOptions="Center">
                             <Image HorizontalOptions="Center">
                                 <Image.Source>
-                                    <OnPlatform Android="app_logo.png" UWP="Assets/Images/AppLogo.png" />
+                                    <OnPlatform x:TypeArguments="FileImageSource">
+                                        <On Platform="Android" Value="app_logo.png" />
+                                        <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                        <On Platform="iOS" Value="AppLogo" />
+                                    </OnPlatform>
                                 </Image.Source>
                             </Image>
                             <Label 
@@ -141,12 +167,12 @@
                                         <Span 
                                             Text="TuTV" 
                                             TextColor="#c3c3c3"
-                                            FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                            FontFamily="Souvenir Lt BT Bold"
                                             FontSize="Subtitle" />
                                         <Span 
                                             Text="Camagüey"
                                             TextColor="#f2f2f2"
-                                            FontFamily="{StaticResource SouvenirLtBTBoldFontFamily}"
+                                            FontFamily="Souvenir Lt BT Bold"
                                             FontSize="Subtitle" />
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -159,7 +185,7 @@
                                 Text="Bienvenido"
                                 TextColor="White"
                                 HorizontalTextAlignment="Center"
-                                FontFamily="{StaticResource SouvenirMediumFontFamily}"
+                                FontFamily="Souvenir Medium"
                                 FontSize="Title" />
                         </StackLayout>
                     </Grid>
@@ -180,14 +206,14 @@
                             Text="&#xfdfa;"
                             TextColor="Black"
                             VerticalTextAlignment="Center"
-                            FontFamily="{StaticResource IconFontFamily}"
+                            FontFamily="Material Design Icons"
                             FontSize="Medium" />
                         <Label 
                             Grid.Column="1" Grid.Row="0"
                             Text="Cartelera"
                             TextColor="Black"
                             VerticalTextAlignment="Center"
-                            FontFamily="{StaticResource SouvenirMediumFontFamily}"
+                            FontFamily="Souvenir Medium"
                             FontSize="Subtitle" />
                         <Button
                             Grid.Column="2" Grid.Row="0"
@@ -205,13 +231,17 @@
                             BindableLayout.ItemsSource="{Binding Presentations}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame 
+                                    <pancake:PancakeView 
                                         WidthRequest="320" HeightRequest="180"
                                         Padding="0"
-                                        Margin="8">
-                                        <Frame.GestureRecognizers>
+                                        Margin="8"
+                                        CornerRadius="4">
+                                        <pancake:PancakeView.Shadow>
+                                            <pancake:DropShadow BlurRadius="2" />
+                                        </pancake:PancakeView.Shadow>
+                                        <pancake:PancakeView.GestureRecognizers>
                                             <ClickGestureRecognizer Clicked="PresentationsItemClickGesture_Recognized" />
-                                        </Frame.GestureRecognizers>
+                                        </pancake:PancakeView.GestureRecognizers>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -234,31 +264,40 @@
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition />
-                                                    <RowDefinition />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
                                                 <Label
                                                     Grid.ColumnSpan="2" Grid.Row="0"
                                                     FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="{StaticResource HelveticaLTStdUltraCompFontFamily}"
+                                                    FontFamily="Helvetica LT Std Ultra Compresed"
                                                     Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
                                                     TextColor="White"
                                                     HorizontalTextAlignment="Center" />
                                                 <renderedviews:FontStrechLabel
                                                     Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
                                                     FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
-                                                    FontFamily="{StaticResource HelveticaLTStdUltraCompFontFamily}"
+                                                    FontFamily="Helvetica LT Std Ultra Compresed"
                                                     Text="{Binding Path=At, StringFormat='{0:hh}'}"
                                                     TextColor="White">
                                                     <Label.Margin>
-                                                        <OnPlatform Android="0,1,0,0" UWP="0,2,0,0" />
+                                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                            <On Platform="Android" Value="0,4,0,0" />
+                                                            <On Platform="UWP" Value="0,2,0,0" />
+                                                        </OnPlatform>
                                                     </Label.Margin>
+                                                    <Label.Padding>
+                                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                            <On Platform="iOS" Value="0,14,0,0" />
+                                                        </OnPlatform>
+                                                    </Label.Padding>
                                                 </renderedviews:FontStrechLabel>
                                                 <Label
                                                     Grid.Column="1" Grid.Row="1"
                                                     FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="{StaticResource HelveticaLTStdUltraCompFontFamily}"
+                                                    FontFamily="Helvetica LT Std Ultra Compresed"
                                                     FontAttributes="Bold"
                                                     Text="{Binding Path=At, StringFormat='{0:mm}'}"
                                                     TextColor="White"
@@ -266,14 +305,14 @@
                                                 <Label
                                                     Grid.Column="1" Grid.Row="2"
                                                     FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="{StaticResource HelveticaLTStdUltraCompFontFamily}"
+                                                    FontFamily="Helvetica LT Std Ultra Compresed"
                                                     FontAttributes="Bold"
                                                     Text="{Binding Path=At, StringFormat='{0:tt}'}"
                                                     TextColor="White"
                                                     VerticalOptions="Start" />
                                             </Grid>
                                         </Grid>
-                                    </Frame>
+                                    </pancake:PancakeView>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </FlexLayout>
@@ -301,14 +340,14 @@
                             Text="&#xf395;"
                             TextColor="Black"
                             VerticalTextAlignment="Center"
-                            FontFamily="{StaticResource IconFontFamily}"
+                            FontFamily="Material Design Icons"
                             FontSize="Medium" />
                         <Label 
                             Grid.Column="1" Grid.Row="0"
                             Text="Noticias"
                             TextColor="Black"
                             VerticalTextAlignment="Center"
-                            FontFamily="{StaticResource SouvenirMediumFontFamily}"
+                            FontFamily="Souvenir Medium"
                             FontSize="Subtitle" />
                         <Button
                             Grid.Column="2" Grid.Row="0"

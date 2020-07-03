@@ -17,6 +17,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Droid
 
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            Xamarin.Forms.PancakeView.Droid.PancakeViewRenderer.Init();
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
 
             LoadApplication(new App());

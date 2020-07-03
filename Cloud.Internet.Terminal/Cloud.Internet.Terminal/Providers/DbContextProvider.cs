@@ -23,11 +23,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
 
         public Persistence.EF.Context.ApplicationDbContext GetDbContext()
         {
-            var fileInformationProvider = Xamarin.Forms.DependencyService.Get<Facade.IFilePathProviderFacade>();
-
             var optionBuilder = new DbContextOptionsBuilder();
 
-            optionBuilder.UseSqlite(string.Format("Filename={0}", fileInformationProvider.GetDatabaseFilePath()));
+            optionBuilder.UseSqlite(string.Format("Filename={0}", Helpers.LocalFileStorageHelper.GetDatabaseFilePath()));
 
             var syncronizationDbChangeHandleHelpers = new SAPRESSC.Syncronization.Persistence.EF.Helpers.Facade.ISyncronizationDbChangeHandleHelperFacade[]
             {
@@ -43,7 +41,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
                 new SAPRESSC.Middleware.Identity.Persistence.EF.Providers.IdentityMiddlewareDbSchemaConfigurationProvider(),
                 new SAPRESSC.Syncronization.Persistence.EF.Providers.SyncronizationDbSchemaConfigurationProvider(),
                 new Cloud.Persistence.EF.Providers.BusinessDbSchemaConfigurationProvider(),
-                new Cloud.Internet.Persistence.EF.Providers.InternetCloudDbSchemaConfigurationProvider(),
+                new Internet.Persistence.EF.Providers.InternetCloudDbSchemaConfigurationProvider(),
                 new Persistence.EF.Providers.ApplicationDbSchemaConfigurationProvider()
             };
 
