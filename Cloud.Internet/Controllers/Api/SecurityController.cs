@@ -15,13 +15,15 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Controllers.Api
         private const string TOKEN_PROVIDER = "Phone";
 
         private readonly SignInManager<Persistence.Entities.TerminalUser> signInManager;
-        private readonly IOptions<Configurations.JwtConfiguration> jwtConfiguration;
+        private readonly IOptions<Options.JwtOptions> jwtOptions;
+        private readonly IOptions<Options.MailSendOptions> mailSendOptions;
         private readonly IEntityRepository<PersonIdentity, System.Guid> personIdentityRepository;
 
-        public SecurityController(IEntityRepository<PersonIdentity, System.Guid> personIdentityRepository, IOptions<Configurations.JwtConfiguration> jwtConfiguration, SignInManager<Persistence.Entities.TerminalUser> signInManager, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
+        public SecurityController(IEntityRepository<PersonIdentity, System.Guid> personIdentityRepository, IOptions<Options.MailSendOptions> mailSendOptions, IOptions<Options.JwtOptions> jwtOptions, SignInManager<Persistence.Entities.TerminalUser> signInManager, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
         {
             this.signInManager = signInManager;
-            this.jwtConfiguration = jwtConfiguration;
+            this.jwtOptions = jwtOptions;
+            this.mailSendOptions = mailSendOptions;
             this.personIdentityRepository = personIdentityRepository;
         }
 
@@ -78,7 +80,27 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Controllers.Api
 
                     var token = await signInManager.UserManager.GenerateUserTokenAsync(user, TOKEN_PROVIDER, purpose);
 
-                    logger.LogInformation("#*# Sended token by Email: {0}", token);
+                    using (var smtpClient = new System.Net.Mail.SmtpClient(mailSendOptions.Value.Host, mailSendOptions.Value.Port))
+                    {
+                        smtpClient.EnableSsl = mailSendOptions.Value.UseSSL;
+                        smtpClient.UseDefaultCredentials = false;
+                        smtpClient.Credentials = new System.Net.NetworkCredential(mailSendOptions.Value.User, mailSendOptions.Value.Password);
+
+                        var message = new System.Net.Mail.MailMessage
+                        {
+                            IsBodyHtml = true,
+                            Subject = string.Format(mailSendOptions.Value.SubjectTemplate, model.Login),
+                            Body = string.Format(mailSendOptions.Value.BodyTemplate, model.Login, token)
+                        };
+
+                        message.From = new System.Net.Mail.MailAddress(mailSendOptions.Value.User);
+
+                        message.To.Add(model.Login);
+
+                        await smtpClient.SendMailAsync(message);
+                    }
+
+                    //logger.LogInformation("#*# Sended token by Email: {0}", token);
 
                     return Json(purpose);
                 }
@@ -99,12 +121,12 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Controllers.Api
                 new System.Security.Claims.Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, System.Guid.NewGuid().ToString())
             };
 
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtConfiguration.Value.Key));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtOptions.Value.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
-                jwtConfiguration.Value.Issuer,
-                jwtConfiguration.Value.Issuer,
+                jwtOptions.Value.Issuer,
+                jwtOptions.Value.Issuer,
                 claims,
                 signingCredentials: creds
             );

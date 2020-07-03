@@ -36,7 +36,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<Configurations.JwtConfiguration>(configuration.GetSection("JWT"));
+            services.Configure<Options.JwtOptions>(configuration.GetSection("JWT"));
+            services.Configure<Options.MailSendOptions>(configuration.GetSection("MailSend"));
 
             services.AddDbContext<Persistence.EF.Context.ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), mySqlOptions =>
             {
