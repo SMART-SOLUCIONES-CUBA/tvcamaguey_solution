@@ -21,5 +21,7 @@
         public ProductionTeam ProductionTeam { get; set; }
 
         public System.Guid ProductionTeamId { get; set; }
+
+        public string About { get; set; }
     }
 }

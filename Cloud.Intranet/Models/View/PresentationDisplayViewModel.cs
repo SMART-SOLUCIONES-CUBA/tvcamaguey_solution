@@ -16,6 +16,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View
 
         public string ProductionTeamName { get; set; }
 
+        public string About { get; set; }
+
         public void Import(Cloud.Persistence.Entities.Presentation entity)
         {
             Id = entity.Id;
@@ -24,6 +26,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View
             ShowLogoId = entity.Show.Logo.Id;
             ShowLogoExtension = entity.Show.Logo.ContentType.ContentTypeToExtension();
             ProductionTeamName = entity.ProductionTeam.Name;
+            About = entity.About;
         }
     }
 }

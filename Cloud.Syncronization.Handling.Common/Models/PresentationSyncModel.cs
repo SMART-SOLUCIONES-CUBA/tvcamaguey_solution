@@ -10,6 +10,8 @@
 
         public System.Guid ProductionTeamId { get; set; }
 
+        public string About { get; set; }
+
         public System.Func<Persistence.Entities.Presentation, bool> Finder => e => e.Id == Id;
 
         public Persistence.Entities.Presentation Export()
@@ -30,6 +32,7 @@
             At = entity.At;
             ShowId = entity.ShowId;
             ProductionTeamId = entity.ProductionTeamId;
+            About = entity.About;
         }
 
         public void Mergue(Persistence.Entities.Presentation entity)
@@ -37,6 +40,7 @@
             entity.At = At;
             entity.ShowId = ShowId;
             entity.ProductionTeamId = ProductionTeamId;
+            entity.About = About;
         }
     }
 }

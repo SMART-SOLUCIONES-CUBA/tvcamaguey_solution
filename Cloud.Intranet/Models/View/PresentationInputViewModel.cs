@@ -29,6 +29,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View
 
         public System.Collections.Generic.List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> AvailableProductionTeamSelectListItems { get; set; }
 
+        [Display(Name = "About")]
+        public string About { get; set; }
+
         public Cloud.Persistence.Entities.Presentation Export()
         {
             var entity = new Cloud.Persistence.Entities.Presentation();
@@ -44,11 +47,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Models.View
             At = entity.At;
             ShowId = entity.Show.Id;
             ProductionTeamId = entity.ProductionTeam.Id;
+            About = entity.About;
         }
 
         public void Mergue(Cloud.Persistence.Entities.Presentation entity)
         {
             entity.At = At;
+            entity.About = About;
         }
     }
 }

@@ -1250,6 +1250,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id");
 
+                    b.Property<string>("About")
+                        .HasColumnName("about");
+
                     b.Property<DateTime>("At")
                         .HasColumnName("at");
 

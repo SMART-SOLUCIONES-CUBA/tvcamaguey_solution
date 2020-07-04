@@ -6,6 +6,8 @@
 
         public System.DateTime At { get; set; }
 
+        public string About { get; set; }
+
         public ShowDisplayModel Show { get; set; }
 
         public ProductionTeamDisplayModel ProductionTeam { get; set; }
@@ -14,6 +16,7 @@
         {
             Id = entity.Id;
             At = entity.At;
+            About = entity.About;
             Show = new ShowDisplayModel();
             ProductionTeam = new ProductionTeamDisplayModel();
 
