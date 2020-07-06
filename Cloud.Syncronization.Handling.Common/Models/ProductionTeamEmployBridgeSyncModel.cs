@@ -8,7 +8,7 @@
 
         public Persistence.Enumerations.ProductionRole ProductionRole { get; set; }
 
-        public System.Func<Persistence.Entities.ProductionTeamEmployBridge, bool> Finder => e => e.EmployId == EmployId && e.ProductionTeamId == ProductionTeamId;
+        public System.Func<Persistence.Entities.ProductionTeamEmployBridge, bool> Finder => e => e.EmployId == EmployId && e.ProductionTeamId == ProductionTeamId && e.ProductionRole == ProductionRole;
 
         public Persistence.Entities.ProductionTeamEmployBridge Export()
         {

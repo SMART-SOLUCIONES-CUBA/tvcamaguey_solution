@@ -1,4 +1,6 @@
-﻿namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Api.Common.Models
+﻿using System.Linq;
+
+namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Api.Common.Models
 {
     public class PostDisplayModel : SAPRESSC.Core.Persistence.Models.IEntityDisplayModel<Persistence.Entities.Post, string>
     {
@@ -32,6 +34,15 @@
             PostedAt = entity.PostedAt;
             Summary = entity.Summary;
             Content = entity.Content;
+
+            Tags.AddRange(entity.TagBridges.Select(b =>
+            {
+                var model = new TagDisplayModel();
+
+                model.Import(b.Tag);
+
+                return model;
+            }));
 
             Author = new EmployDisplayModel();
             Category = new CategoryDisplayModel();
