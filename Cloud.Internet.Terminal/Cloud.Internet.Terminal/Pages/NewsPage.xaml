@@ -16,8 +16,6 @@
         <ResourceDictionary>
             <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
             <converters:DateTimeToInvarianCultureRelativeDateTimeStringConverter x:Key="DateTimeToInvarianCultureRelativeDateTimeString" />
-            <converters:PreserveImageAspectRatioConverter x:Key="PreserveImageAspectRatio" />
-            <sscxftoolkitpresentationconverters:BoolToStringConverter x:Key="BoolToString" FalseString="Sin elementos que mostrar" TrueString="" />
 
             <DataTemplate x:Key="TextOnlyPostDataTemplate">
                 <x:Arguments>
@@ -186,7 +184,8 @@
                 FlowIsLoadingInfinite="{Binding IsLoadingInfinite}"
                 FlowTotalRecords="{Binding Total}"
                 FlowColumnMinWidth="480"
-                FlowItemsSource="{Binding Posts}"        
+                FlowItemsSource="{Binding Posts}"
+                FlowItemTapped="FlowListView_FlowItemTapped"
                 FlowColumnTemplate="{StaticResource PostFlowDataTemplateSelector}">
                 <dltoolkitforms:FlowListView.FlowLoadingTemplate>
                     <DataTemplate>
@@ -201,8 +200,8 @@
                             <Label
                                 HorizontalTextAlignment="Center"
                                 Margin="10"
-                                TextColor="DarkGray"
-                                Text="{Binding IsLoadingInfinite, Converter={StaticResource BoolToString}}" />
+                                TextColor="DimGray"
+                                Text="Sin elementos que mostrar" />
                         </ViewCell>
                     </DataTemplate>
                 </dltoolkitforms:FlowListView.FlowEmptyTemplate>

@@ -46,5 +46,9 @@
         public int PostListViewItemHorizontalPosterTemplateHeight => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().PostListViewItemHorizontalPosterTemplateHeight;
 
         public int PostListViewItemVerticalPosterTemplateHeight => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().PostListViewItemVerticalPosterTemplateHeight;
+
+        public int EmployOverviewContainerSize => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().EmployOverviewContainerSize;
+
+        public int EmployOverviewImageSize => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().EmployOverviewImageSize;
     }
 }

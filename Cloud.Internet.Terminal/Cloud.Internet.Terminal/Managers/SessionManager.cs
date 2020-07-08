@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SmartSolucionesCuba.TVCamaguey.Cloud.Common.Extensions;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
 using System.Linq;
 

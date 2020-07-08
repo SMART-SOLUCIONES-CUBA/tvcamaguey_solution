@@ -2,14 +2,207 @@
 <sscxftoolkitmvvmpages:ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:jmci="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffiltransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.PresentationDetailPage"
     Title="Presentación">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:EmployToImageSourceConverter x:Key="EmployToImageSource" />
+            <converters:DateTimeToInvarianCultureRelativeDateTimeStringConverter x:Key="DateTimeToInvarianCultureRelativeDateTimeString" />
+            <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+            <sscxftoolkitpresentationconverters:NotNullToBooleanConverter x:Key="NotNullToBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="En construcción!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <ScrollView>
+                <StackLayout>
+                    <Grid>
+                        <ffilforms:CachedImage
+                            WidthRequest="{Binding Source={x:Reference PosterImageView}, Path=Width}"
+                            Aspect="AspectFill"
+                            Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
+                            CacheType="All"
+                            CacheDuration="8760:00:00">
+                            <ffilforms:CachedImage.Transformations>
+                                <ffiltransformations:BlurredTransformation />
+                            </ffilforms:CachedImage.Transformations>
+                        </ffilforms:CachedImage>
+                        <ffilforms:CachedImage
+                            x:Name="PosterImageView"
+                            HorizontalOptions="Center"
+                            Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
+                            CacheType="All"
+                            CacheDuration="8760:00:00" />
+                    </Grid>
+                    <Label
+                        Margin="8"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
+                        FontAttributes="Italic" />
+                    <StackLayout Margin="8">
+                        <Label
+                            Text="{Binding Path=Show.Name}"
+                            TextColor="{StaticResource BrandPrimaryColor}"
+                            FontSize="Title"
+                            FontFamily="Helvetica LT Std Condensed">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                    <On Platform="iOS" Value="0,4,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
+                        <Label
+                            Text="{Binding Path=Show.About}"
+                            TextColor="Black" />
+                        <StackLayout IsVisible="{Binding Path=About, Converter={StaticResource NotNullToBoolean}}">                            
+                            <Label
+                                Margin="0,12,0,0"
+                                Text="Tema"
+                                TextColor="{StaticResource BrandPrimaryColor}"
+                                FontSize="Caption"
+                                FontAttributes="Bold"/>
+                            <Label
+                                Text="{Binding Path=About}"
+                                TextColor="Black" />
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding Path=ConductionEmploies, Converter={StaticResource NotNullToBoolean}}">
+                            <Label
+                                Margin="0,12,0,0"
+                                Text="Conducción"
+                                TextColor="{StaticResource BrandPrimaryColor}"
+                                FontSize="Caption"
+                                FontAttributes="Bold"/>
+                            <ScrollView
+                                Orientation="Horizontal" 
+                                Margin="0,0,0,8">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding Path=ConductionEmploies}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewContainerSize}">
+                                                <jmci:CircleImage
+                                                    HorizontalOptions="Center"
+                                                    Source="{Binding Converter={StaticResource EmployToImageSource}}"
+                                                    BorderThickness="0.75"
+                                                    BorderColor="DimGray"
+                                                    WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"
+                                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"/>
+                                                <Label
+                                                    HorizontalTextAlignment="Center"
+                                                    TextColor="Black"
+                                                    FontSize="Caption">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text="{Binding Path=Identity.Name}" />
+                                                                <Span Text=" " />
+                                                                <Span Text="{Binding Path=Identity.LastName}" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding Path=DirectionEmploies, Converter={StaticResource NotNullToBoolean}}">                            
+                            <Label
+                                Margin="0,12,0,0"
+                                Text="Dirección"
+                                TextColor="{StaticResource BrandPrimaryColor}"
+                                FontSize="Caption"
+                                FontAttributes="Bold"/>
+                            <ScrollView
+                                Orientation="Horizontal" 
+                                Margin="0,0,0,8">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding Path=DirectionEmploies}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewContainerSize}">
+                                                <jmci:CircleImage
+                                                    HorizontalOptions="Center"
+                                                    Source="{Binding Converter={StaticResource EmployToImageSource}}"
+                                                    BorderThickness="0.75"
+                                                    BorderColor="DimGray"
+                                                    WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"
+                                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"/>
+                                                <Label
+                                                    HorizontalTextAlignment="Center"
+                                                    TextColor="Black"
+                                                    FontSize="Caption">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text="{Binding Path=Identity.Name}" />
+                                                                <Span Text=" " />
+                                                                <Span Text="{Binding Path=Identity.LastName}" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                        </StackLayout>                        
+                        <StackLayout IsVisible="{Binding Path=ProductionEmploies, Converter={StaticResource NotNullToBoolean}}">                            
+                            <Label
+                                Margin="0,12,0,0"
+                                Text="Producción"
+                                TextColor="{StaticResource BrandPrimaryColor}"
+                                FontSize="Caption"
+                                FontAttributes="Bold"/>
+                            <ScrollView
+                                Orientation="Horizontal" 
+                                Margin="0,0,0,8">
+                                <FlexLayout BindableLayout.ItemsSource="{Binding Path=ProductionEmploies}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewContainerSize}">
+                                                <jmci:CircleImage
+                                                    HorizontalOptions="Center"
+                                                    Source="{Binding Converter={StaticResource EmployToImageSource}}"
+                                                    BorderThickness="0.75"
+                                                    BorderColor="DimGray"
+                                                    WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"
+                                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=EmployOverviewImageSize}"/>
+                                                <Label
+                                                    HorizontalTextAlignment="Center"
+                                                    TextColor="Black"
+                                                    FontSize="Caption">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <FormattedString.Spans>
+                                                                <Span Text="{Binding Path=Identity.Name}" />
+                                                                <Span Text=" " />
+                                                                <Span Text="{Binding Path=Identity.LastName}" />
+                                                            </FormattedString.Spans>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <sscxftoolkitpresentationviews:BusyView />
+        </Grid>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

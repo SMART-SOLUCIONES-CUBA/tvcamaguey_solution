@@ -54,7 +54,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
 
             var message = "Problemas no esperados en el sistema.";
 
-            if (targetException is System.Net.Http.HttpRequestException)
+            targetException = Xamarin.Forms.DependencyService.Get<Helpers.Facade.IExceptionHandlingHelper>().ToCrossPlatformException(targetException);
+
+            if (targetException is System.Net.Http.HttpRequestException || targetException is System.Net.WebException)
             {
                 message = "No se puede acceder al servidor. Revise su conexión de red y/o la disponibilidad del servicio.";
             }

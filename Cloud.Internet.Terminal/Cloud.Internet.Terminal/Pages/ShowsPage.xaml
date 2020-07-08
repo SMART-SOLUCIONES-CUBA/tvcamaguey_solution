@@ -14,7 +14,6 @@
         <ResourceDictionary>
             <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
             <converters:PreserveWideScreenAspectRatioConverter x:Key="PreserveWideScreenAspectRatio" />
-            <sscxftoolkitpresentationconverters:BoolToStringConverter x:Key="BoolToString" FalseString="Sin elementos que mostrar" TrueString="" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -33,20 +32,21 @@
             x:Name="FlowListView"
             ClassId="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=UnselectableRowFlowListViewStyleId}"
             IsPullToRefreshEnabled="True"
-            IsRefreshing="{Binding IsBusy}"
+            IsRefreshing="{Binding Path=IsBusy}"
             Refreshing="ListView_Refreshing"
             SeparatorVisibility="None"
             RowHeight="{Binding Source={x:Reference FlowListView}, Path=Width, Converter={StaticResource PreserveWideScreenAspectRatio}, ConverterParameter={x:Reference FlowListView}}"
             FlowColumnMinWidth="272"
-            FlowItemsSource="{Binding Shows}">
+            FlowItemsSource="{Binding Shows}"
+            FlowItemTapped="FlowListView_FlowItemTapped">
             <dltoolkitforms:FlowListView.FlowEmptyTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Label
                             HorizontalTextAlignment="Center"
                             Margin="10"
-                            TextColor="DarkGray"
-                            Text="{Binding IsBusy, Converter={StaticResource BoolToString}}" />
+                            Text="Sin elementos que mostrar"
+                            TextColor="DimGray" />
                     </ViewCell>
                 </DataTemplate>
             </dltoolkitforms:FlowListView.FlowEmptyTemplate>

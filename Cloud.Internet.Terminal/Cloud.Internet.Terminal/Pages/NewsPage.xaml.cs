@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
+using SmartSolucionesCuba.XFToolKit.Mvvm.Extensions;
 using System.Linq;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
@@ -49,6 +50,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
         {
             var stopwatch = new System.Diagnostics.Stopwatch();
 
+            var pageBindingContext = BindingContext as Models.Page.NewsPageModel;
+
             System.Threading.Tasks.Task.Run(() =>
             {
                 stopwatch.Start();
@@ -57,12 +60,12 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
                 {
-                    if ((BindingContext as Models.Page.NewsPageModel).Total == 0)
+                    if (pageBindingContext.Total == 0)
                     {
-                        (BindingContext as Models.Page.NewsPageModel).Total = dbContext.Posts.Count();
+                        pageBindingContext.Total = dbContext.Posts.Count();
                     }
 
-                    posts = dbContext.Posts.Include(e => e.Poster).OrderByDescending(e => e.PostedAt).Skip((BindingContext as Models.Page.NewsPageModel).Posts.Count).Take(PAGING_ITEMS_LIMIT).ToList();
+                    posts = dbContext.Posts.Include(e => e.Poster).Include(e => e.Category).OrderByDescending(e => e.PostedAt).Skip(pageBindingContext.Posts == null ? 0 : pageBindingContext.Posts.Count).Take(PAGING_ITEMS_LIMIT).ToList();
                 }
 
                 return posts;
@@ -79,11 +82,16 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    (BindingContext as Models.Page.NewsPageModel).Posts.AddRange(task.Result.ToViewModels());
+                    if (pageBindingContext.Posts == null)
+                    {
+                        pageBindingContext.Posts = new DLToolkit.Forms.Controls.FlowObservableCollection<Models.View.BasePostViewModel>();
+                    }
 
-                    (BindingContext as Models.Page.NewsPageModel).IsBusy = false;
+                    pageBindingContext.Posts.AddRange(task.Result.ToViewModels());
 
-                    //(BindingContext as Models.Page.NewsPageModel).IsLoadingInfinite = false;
+                    pageBindingContext.IsBusy = false;
+
+                    //pageBindingContext.IsLoadingInfinite = false;
                 });
             });
         }
@@ -126,7 +134,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     {
                         var remotePost = remoteEntitiesQueue.Dequeue();
 
-                        var localPost = dbContext.Posts.Include(e => e.Category).Include(e => e.Poster).FirstOrDefault(e => e.Id == remotePost.Id);
+                        var localPost = dbContext.Posts.Include(e => e.Category).Include(e => e.Poster).Include(e => e.TagBridges).ThenInclude(b => b.Tag).FirstOrDefault(e => e.Id == remotePost.Id);
 
                         dbContext.AddOrUpdate(localPost, remotePost, deleteImageEntities, downloadImageEntities);
                     }
@@ -174,6 +182,11 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     (BindingContext as Models.Page.NewsPageModel).IsBusy = false;
                 });
             });
+        }
+
+        private void FlowListView_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            this.NavigationPushPageAsync(new PostDetailPage((e.Item as Models.View.BasePostViewModel).Post));
         }
     }
 }

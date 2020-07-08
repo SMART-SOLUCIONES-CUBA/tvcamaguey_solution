@@ -27,5 +27,10 @@
                     return string.Format("image/{0}", discriminator);
             }
         }
+
+        public static string ToStandarizedHtmlPostContent(this string target)
+        {
+            return string.Format("<html><head><style type=\"text/css\">html,body,p,span,a {{ color: #212529 !important; font-family: sans-serif !important; line-height: 1.15 !important; }}</style></head><body>{0}</body></html>", target);
+        }
     }
 }

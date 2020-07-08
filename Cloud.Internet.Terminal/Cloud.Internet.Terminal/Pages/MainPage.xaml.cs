@@ -30,6 +30,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             else
             {
                 (Master as MasterPage).InitializeContent(false);
+
+                (Master as MasterPage).PresentHomeSection();
             }
         }
 

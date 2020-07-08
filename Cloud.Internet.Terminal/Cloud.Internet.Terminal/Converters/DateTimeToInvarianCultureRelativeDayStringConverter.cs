@@ -8,14 +8,19 @@
 
             var dayDiff = datetime.Date - System.DateTime.Today;
 
-            if (dayDiff.Days < 1 && dayDiff.Days > 0)
+            if ((dayDiff.Days < 1 && dayDiff.Days > 0) || (dayDiff.Days > -1 && dayDiff.Days < 0))
             {
                 return "Hoy";
             }
 
-            if (dayDiff.Days < 2)
+            if (dayDiff.Days < 2 && dayDiff.Days > 0)
             {
                 return "Mañana";
+            }
+
+            if (dayDiff.Days > -2 && dayDiff.Days < 0)
+            {
+                return "Ayer";
             }
 
             return datetime.ToString("MMMM dd");

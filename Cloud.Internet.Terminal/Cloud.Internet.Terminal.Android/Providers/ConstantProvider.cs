@@ -25,5 +25,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Droid.Providers
         public int PostListViewItemHorizontalPosterTemplateHeight => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.post_list_view_item_horizontal_template_height);
 
         public int PostListViewItemVerticalPosterTemplateHeight => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.post_list_view_item_vertical_template_height);
+
+        public int EmployOverviewContainerSize => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.employ_overview_container_size);
+
+        public int EmployOverviewImageSize => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.employ_overview_image_size);
     }
 }

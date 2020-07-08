@@ -11,3 +11,4 @@
 [assembly: Xamarin.Forms.ExportFont("HelveticaLTStd-UltraCompresed.otf", Alias = "Helvetica LT Std Ultra Compresed")]
 [assembly: Xamarin.Forms.ExportFont("Souvenir-Medium.otf", Alias = "Souvenir Medium")]
 [assembly: Xamarin.Forms.ExportFont("SOUVNRD.ttf", Alias = "Souvenir Lt BT Bold")]
+[assembly: Xamarin.Forms.ExportFont("MyriadProBoldCondIt.otf", Alias = "Myriad Pro Bold Condensed Italic")]

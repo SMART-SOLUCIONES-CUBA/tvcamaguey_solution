@@ -97,5 +97,63 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers
 
             return Xamarin.Forms.ImageSource.FromFile(imageFilePath);
         }
+
+        public Xamarin.Forms.ImageSource ProfileMaleDefault()
+        {
+            return ProfileDefault("employ-male-default.jpg", "\uE08f");
+        }
+
+        public Xamarin.Forms.ImageSource ProfileFemaleDefault()
+        {
+            return ProfileDefault("employ-female-default.jpg", "\uE090");
+        }
+
+        private Xamarin.Forms.ImageSource ProfileDefault(string fileName, string unicode)
+        {
+            var imageFilePath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), fileName);
+
+            if (System.IO.File.Exists(imageFilePath))
+            {
+                return Xamarin.Forms.ImageSource.FromFile(imageFilePath);
+            }
+
+            using (var imageSKData = GetIconImageSKData(unicode, Helpers.ConstantProvisionHelper.Instance.RegularProfileImageSize, SkiaSharp.SKColors.Silver, SkiaSharp.SKColors.LightGray))
+            {
+                using (var output = System.IO.File.OpenWrite(imageFilePath))
+                {
+                    imageSKData.SaveTo(output);
+                }
+            }
+
+            return Xamarin.Forms.ImageSource.FromFile(imageFilePath);
+        }
+
+        private SkiaSharp.SKData GetIconImageSKData(string unicode, int size, SkiaSharp.SKColor foregroundColor, SkiaSharp.SKColor backgroundColor)
+        {
+            using (var surface = SkiaSharp.SKSurface.Create(new SkiaSharp.SKImageInfo(size, size, SkiaSharp.SKImageInfo.PlatformColorType, SkiaSharp.SKAlphaType.Premul)))
+            {
+                surface.Canvas.Clear(backgroundColor);
+
+                using (var fontFileStream = GetType().Assembly.GetManifestResourceStream("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Assets.Fonts.IconmonstrIconic.ttf"))
+                {
+                    using (var paint = new SkiaSharp.SKPaint())
+                    {
+                        paint.Typeface = SkiaSharp.SKTypeface.FromStream(fontFileStream);
+                        paint.TextSize = size / 2;
+                        paint.IsAntialias = true;
+                        paint.TextAlign = SkiaSharp.SKTextAlign.Center;
+                        paint.Color = foregroundColor;
+                        paint.Style = SkiaSharp.SKPaintStyle.Fill;
+
+                        surface.Canvas.DrawText(unicode, size / 2, size / 2 + (paint.TextSize / 2), paint);
+                    }
+
+                    using (var skImage = surface.Snapshot())
+                    {
+                        return skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75);
+                    }
+                }
+            }
+        }
     }
 }

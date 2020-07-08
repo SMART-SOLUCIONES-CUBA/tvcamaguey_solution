@@ -23,5 +23,9 @@
         int PostListViewItemHorizontalPosterTemplateHeight { get; }
 
         int PostListViewItemVerticalPosterTemplateHeight { get; }
+
+        int EmployOverviewContainerSize { get; }
+
+        int EmployOverviewImageSize { get; }
     }
 }

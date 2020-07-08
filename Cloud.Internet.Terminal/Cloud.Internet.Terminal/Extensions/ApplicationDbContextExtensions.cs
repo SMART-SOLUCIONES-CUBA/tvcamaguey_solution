@@ -64,13 +64,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
 
                 var localCategory = target.Categories.FirstOrDefault(e => e.Id == externalEntity.Category.Id) ?? target.Categories.Local.FirstOrDefault(e => e.Id == externalEntity.Category.Id);
 
-                target.AddOrUpdate(localCategory, externalEntity.Category);
+                localCategory = target.AddOrUpdate(localCategory, externalEntity.Category);
 
                 localEntity.Category = localCategory;
 
                 var localAuthor = target.Employs.FirstOrDefault(e => e.Id == externalEntity.Author.Id) ?? target.Employs.FirstOrDefault(e => e.Id == externalEntity.Author.Id);
 
-                target.AddOrUpdate(localAuthor, externalEntity.Author, deleteImageEntities, downloadImageEntities);
+                localAuthor = target.AddOrUpdate(localAuthor, externalEntity.Author, deleteImageEntities, downloadImageEntities);
 
                 localEntity.AuthorId = localAuthor.Id;
                 localEntity.Author = localAuthor;
@@ -130,9 +130,16 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
             {
                 var localCategory = target.Categories.FirstOrDefault(e => e.Id == externalEntity.Category.Id) ?? target.Categories.Local.FirstOrDefault(e => e.Id == externalEntity.Category.Id);
 
-                target.AddOrUpdate(localCategory, externalEntity.Category);
+                localCategory = target.AddOrUpdate(localCategory, externalEntity.Category);
 
                 externalEntity.Category = localCategory;
+
+                var localAuthor = target.Employs.FirstOrDefault(e => e.Id == externalEntity.Author.Id) ?? target.Employs.FirstOrDefault(e => e.Id == externalEntity.Author.Id);
+
+                localAuthor = target.AddOrUpdate(localAuthor, externalEntity.Author, deleteImageEntities, downloadImageEntities);
+
+                externalEntity.AuthorId = localAuthor.Id;
+                externalEntity.Author = localAuthor;
 
                 target.Posts.Add(externalEntity);
 
@@ -209,7 +216,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
                     localEntity.Identity.ImageId = externalEntity.Identity.ImageId;
                     localEntity.Identity.Image = externalEntity.Identity.Image;
 
-                    if (localEntity.Identity.Image != null) downloadImageEntities?.Add(localEntity.Identity.Image);
+                    if (externalEntity.Identity.Image != null) downloadImageEntities?.Add(localEntity.Identity.Image);
                 }
 
                 target.Employs.Update(localEntity);
@@ -310,15 +317,16 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
             if (localEntity != null)
             {
                 localEntity.At = externalEntity.At;
+                localEntity.About = externalEntity.About;
 
-                var localShow = target.Shows.FirstOrDefault(e => e.Id == externalEntity.ShowId);
+                var localShow = target.Shows.FirstOrDefault(e => e.Id == externalEntity.ShowId) ?? target.Shows.Local.FirstOrDefault(e => e.Id == externalEntity.ShowId);
 
                 target.AddOrUpdate(localShow, externalEntity.Show, deleteImageEntities, downloadImageEntities);
 
                 localEntity.ShowId = localShow.Id;
                 localEntity.Show = localShow;
 
-                var localProductionTeam = target.ProductionTeams.Include(e => e.EmployBridges).FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId);
+                var localProductionTeam = target.ProductionTeams.Include(e => e.EmployBridges).FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId) ?? target.ProductionTeams.Local.FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId);
 
                 localProductionTeam = target.AddOrUpdate(localProductionTeam, externalEntity.ProductionTeam, deleteImageEntities, downloadImageEntities);
 
@@ -331,13 +339,27 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
             }
             else
             {
-                var localShow = target.Shows.FirstOrDefault(e => e.Id == externalEntity.ShowId);
+                var localShow = target.Shows.Local.FirstOrDefault(e => e.Id == externalEntity.ShowId);
 
-                target.AddOrUpdate(localShow, externalEntity.Show, deleteImageEntities, downloadImageEntities);
+                if (localShow == null)
+                {
+                    localShow = target.Shows.Include(e => e.Poster).Include(e => e.Logo).FirstOrDefault(e => e.Id == externalEntity.ShowId);
 
-                var localProductionTeam = target.ProductionTeams.FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId);
+                    localShow = target.AddOrUpdate(localShow, externalEntity.Show, deleteImageEntities, downloadImageEntities);
+                }
 
-                localProductionTeam = target.AddOrUpdate(localProductionTeam, externalEntity.ProductionTeam, deleteImageEntities, downloadImageEntities);
+                externalEntity.Show = localShow;
+
+                var localProductionTeam = target.ProductionTeams.Local.FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId);
+
+                if (localProductionTeam == null)
+                {
+                    localProductionTeam = target.ProductionTeams.FirstOrDefault(e => e.Id == externalEntity.ProductionTeamId);
+
+                    target.AddOrUpdate(localProductionTeam, externalEntity.ProductionTeam, deleteImageEntities, downloadImageEntities);
+                }
+
+                externalEntity.ProductionTeam = localProductionTeam;
 
                 if (!target.Presentations.Local.Any(e => e.Id == externalEntity.Id))
                 {

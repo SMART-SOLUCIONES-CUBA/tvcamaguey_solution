@@ -174,7 +174,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     await this.NavigationPopModalPageAsync();
 
-                    ((Xamarin.Forms.Application.Current.MainPage as MainPage).Master as MasterPage).InitializeContent(true);
+                    ((Xamarin.Forms.Application.Current.MainPage as MainPage).Master as MasterPage).InitializeContent(false);
+
+                    ((Xamarin.Forms.Application.Current.MainPage as MainPage).Master as MasterPage).PresentHomeSection();
                 });
             });            
         }

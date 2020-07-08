@@ -33,11 +33,75 @@
                     Opacity="0.20"
                     Aspect="AspectFill"
                     Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomOfficeImageSource}" />
-                <ScrollView
+                <StackLayout
                     Grid.Column="1"
                     VerticalOptions="Center" HorizontalOptions="Center"
                     Margin="10">
-                    <StackLayout>
+                    <Image HorizontalOptions="Center">
+                        <Image.Source>
+                            <OnPlatform x:TypeArguments="FileImageSource">
+                                <On Platform="Android" Value="app_logo.png" />
+                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                <On Platform="iOS" Value="AppLogo" />
+                            </OnPlatform>
+                        </Image.Source>
+                    </Image>
+                    <Label HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span 
+                                    Text="TuTV" 
+                                    TextColor="#c3c3c3"
+                                    FontFamily="Souvenir Lt BT Bold"
+                                    FontSize="Subtitle" />
+                                <Span 
+                                    Text="Camagüey"
+                                    TextColor="#f2f2f2"
+                                    FontFamily="Souvenir Lt BT Bold"
+                                    FontSize="Subtitle" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Text="{StaticResource ProductConcept}"
+                        TextColor="WhiteSmoke"
+                        HorizontalTextAlignment="Center" />
+                    <Label
+                        Margin="0,0,0,20"
+                        Text="Bienvenido"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"
+                        FontFamily="Souvenir Medium"
+                        FontSize="Title" />
+                    <Button
+                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                        Text="Comenzar"
+                        TextColor="White"
+                        Clicked="BeginButton_Clicked" />
+                </StackLayout>                
+            </Grid>
+        </ContentPage.Content>
+    </sscxftoolkitmvvmpages:ContentPage>
+
+    <sscxftoolkitmvvmpages:ContentPage BackgroundColor="{StaticResource BrandPrimaryColor}" BindingContext="{Binding UserRegistrationPageModel}">
+        <ContentPage.Content>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FluidContainerWidth}" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.ColumnSpan="3"
+                    Opacity="0.20"
+                    Aspect="AspectFill"
+                    Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomRegionImageSource}" />
+                <ScrollView
+                    Grid.Column="1">
+                    <StackLayout
+                        Spacing="20"
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand">
                         <Image HorizontalOptions="Center">
                             <Image.Source>
                                 <OnPlatform x:TypeArguments="FileImageSource">
@@ -64,88 +128,24 @@
                             </Label.FormattedText>
                         </Label>
                         <Label
-                            Text="{StaticResource ProductConcept}"
-                            TextColor="WhiteSmoke"
-                            HorizontalTextAlignment="Center" />
-                        <Label
-                            Margin="0,0,0,20"
-                            Text="Bienvenido"
-                            TextColor="White"
-                            HorizontalTextAlignment="Center"
-                            FontFamily="Souvenir Medium"
-                            FontSize="Title" />
+                            Text="Escribe una cuenta de correo electrónico con la cual identificarte."
+                            TextColor="White" />
+                        <renderedviews:HighContrastEntry
+                            Margin="0,20,0,0"
+                            Text="{Binding Login}">
+                            <Entry.TextColor>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="Android" Value="WhiteSmoke" />
+                                </OnPlatform>
+                            </Entry.TextColor>
+                        </renderedviews:HighContrastEntry>
                         <Button
                             BackgroundColor="{StaticResource BrandSecoundaryColor}"
-                            Text="Comenzar"
+                            Text="Continuar"
                             TextColor="White"
-                            Clicked="BeginButton_Clicked" />
+                            Clicked="RegisterButton_Clicked" />
                     </StackLayout>
-                </ScrollView>                
-            </Grid>
-        </ContentPage.Content>
-    </sscxftoolkitmvvmpages:ContentPage>
-
-    <sscxftoolkitmvvmpages:ContentPage BackgroundColor="{StaticResource BrandPrimaryColor}" BindingContext="{Binding UserRegistrationPageModel}">
-        <ContentPage.Content>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FluidContainerWidth}" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Image
-                    Grid.ColumnSpan="3"
-                    Opacity="0.20"
-                    Aspect="AspectFill"
-                    Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomRegionImageSource}" />
-                <StackLayout
-                    Grid.Column="1"
-                    Spacing="20"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand">
-                    <Image HorizontalOptions="Center">
-                        <Image.Source>
-                            <OnPlatform x:TypeArguments="FileImageSource">
-                                <On Platform="Android" Value="app_logo.png" />
-                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
-                                <On Platform="iOS" Value="AppLogo" />
-                            </OnPlatform>
-                        </Image.Source>
-                    </Image>
-                    <Label HorizontalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    Text="TuTV" 
-                                    TextColor="#c3c3c3"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                                <Span 
-                                    Text="Camagüey"
-                                    TextColor="#f2f2f2"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label
-                        Text="Escribe una cuenta de correo electrónico con la cual identificarte."
-                        TextColor="White" />
-                    <renderedviews:HighContrastEntry
-                        Margin="0,20,0,0"
-                        Text="{Binding Login}">
-                        <Entry.TextColor>
-                            <OnPlatform x:TypeArguments="Color">
-                                <On Platform="Android" Value="WhiteSmoke" />
-                            </OnPlatform>
-                        </Entry.TextColor>
-                    </renderedviews:HighContrastEntry>
-                    <Button
-                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
-                        Text="Continuar"
-                        TextColor="White"
-                        Clicked="RegisterButton_Clicked" />
-                </StackLayout>
+                </ScrollView>
                 <sscxftoolkitpresentationviews:BusyView
                     Grid.ColumnSpan="3" />
             </Grid>
@@ -165,63 +165,65 @@
                     Opacity="0.20"
                     Aspect="AspectFill"
                     Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomRegionImageSource}" />
-                <StackLayout
-                    Grid.Column="1"
-                    Spacing="20"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand">
-                    <Image HorizontalOptions="Center">
-                        <Image.Source>
-                            <OnPlatform x:TypeArguments="FileImageSource">
-                                <On Platform="Android" Value="app_logo.png" />
-                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
-                                <On Platform="iOS" Value="AppLogo" />
-                            </OnPlatform>
-                        </Image.Source>
-                    </Image>
-                    <Label HorizontalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    Text="TuTV" 
-                                    TextColor="#c3c3c3"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                                <Span 
-                                    Text="Camagüey"
-                                    TextColor="#f2f2f2"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label 
-                        Text="{Binding Login}"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        FontSize="16" />
-                    <Label
-                        Text="Te hemos enviado un correo electrónico con tu código de verificación. Por favor, escribelo a continuación."
-                        TextColor="White" />
-                    <Label                    
-                        Margin="0,20,0,0"
-                        Text="Código de Verificación (6 dígitos)"
-                        TextColor="{StaticResource BrandSecoundaryColor}"
-                        FontAttributes="Bold" />
-                    <renderedviews:HighContrastEntry
-                        Text="{Binding Token}">
-                        <Entry.TextColor>
-                            <OnPlatform x:TypeArguments="Color">
-                                <On Platform="Android" Value="WhiteSmoke" />
-                            </OnPlatform>
-                        </Entry.TextColor>
-                    </renderedviews:HighContrastEntry>
-                    <Button
-                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
-                        Text="Siguiente"
-                        TextColor="White"
-                        Clicked="AuthenticateButton_Clicked" />
-                </StackLayout>
+                <ScrollView
+                    Grid.Column="1">
+                    <StackLayout
+                        Spacing="20"
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand">
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="app_logo.png" />
+                                    <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                    <On Platform="iOS" Value="AppLogo" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Label HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        Text="TuTV" 
+                                        TextColor="#c3c3c3"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                    <Span 
+                                        Text="Camagüey"
+                                        TextColor="#f2f2f2"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label 
+                            Text="{Binding Login}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+                        <Label
+                            Text="Te hemos enviado un correo electrónico con tu código de verificación. Por favor, escribelo a continuación."
+                            TextColor="White" />
+                        <Label                    
+                            Margin="0,20,0,0"
+                            Text="Código de Verificación (6 dígitos)"
+                            TextColor="{StaticResource BrandSecoundaryColor}"
+                            FontAttributes="Bold" />
+                        <renderedviews:HighContrastEntry
+                            Text="{Binding Token}">
+                            <Entry.TextColor>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="Android" Value="WhiteSmoke" />
+                                </OnPlatform>
+                            </Entry.TextColor>
+                        </renderedviews:HighContrastEntry>
+                        <Button
+                            BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                            Text="Siguiente"
+                            TextColor="White"
+                            Clicked="AuthenticateButton_Clicked" />
+                    </StackLayout>
+                </ScrollView>
                 <sscxftoolkitpresentationviews:BusyView Grid.ColumnSpan="3" />
             </Grid>
         </ContentPage.Content>
@@ -240,79 +242,81 @@
                     Opacity="0.20"
                     Aspect="AspectFill"
                     Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomRegionImageSource}" />
-                <StackLayout
-                    Grid.Column="1"
-                    Spacing="20"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand">
-                    <Image HorizontalOptions="Center">
-                        <Image.Source>
-                            <OnPlatform x:TypeArguments="FileImageSource">
-                                <On Platform="Android" Value="app_logo.png" />
-                                <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
-                                <On Platform="iOS" Value="AppLogo" />
-                            </OnPlatform>
-                        </Image.Source>
-                    </Image>
-                    <Label HorizontalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    Text="TuTV" 
-                                    TextColor="#c3c3c3"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                                <Span 
-                                    Text="Camagüey"
-                                    TextColor="#f2f2f2"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label
-                        Text="Y para terminar, entra tu nombre y si lo deseas una fotografía para tu perfil."
-                        TextColor="White" />
-                    <Grid>
-                        <jmci:CircleImage
-                            HorizontalOptions="Center"
-                            BorderThickness="2"
-                            BorderColor="White"
-                            Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference ProfilePage}}"
-                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
+                <ScrollView
+                    Grid.Column="1">
+                    <StackLayout
+                        Spacing="20"
+                        VerticalOptions="CenterAndExpand" 
+                        HorizontalOptions="CenterAndExpand">
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="app_logo.png" />
+                                    <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                    <On Platform="iOS" Value="AppLogo" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Label HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        Text="TuTV" 
+                                        TextColor="#c3c3c3"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                    <Span 
+                                        Text="Camagüey"
+                                        TextColor="#f2f2f2"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label
+                            Text="Y para terminar, entra tu nombre y si lo deseas una fotografía para tu perfil."
+                            TextColor="White" />
+                        <Grid>
+                            <jmci:CircleImage
+                                HorizontalOptions="Center"
+                                BorderThickness="2"
+                                BorderColor="White"
+                                Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference ProfilePage}}"
+                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
+                            <Button
+                                HorizontalOptions="Center"
+                                BackgroundColor="#33000000"
+                                BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
+                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                                FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
+                                FontFamily="Material Design Icons"
+                                Text="&#xf100;"
+                                TextColor="White"
+                                Clicked="PickImageButton_Clicked" />
+                        </Grid>
+                        <renderedviews:HighContrastEntry
+                            PlaceholderColor="LightGray"
+                            Placeholder="Nombre(s)"
+                            Text="{Binding Name}">
+                            <Entry.TextColor>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="Android" Value="WhiteSmoke" />
+                                </OnPlatform>
+                            </Entry.TextColor>
+                        </renderedviews:HighContrastEntry>
+                        <Label
+                            TextColor="WhiteSmoke"
+                            Text="Podrás completar otros datos de tu perfil en otro momento."
+                            HorizontalTextAlignment="Center" />
                         <Button
-                            HorizontalOptions="Center"
-                            BackgroundColor="#33000000"
-                            BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
-                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
-                            FontFamily="Material Design Icons"
-                            Text="&#xf100;"
+                            BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                            Text="Finalizar"
                             TextColor="White"
-                            Clicked="PickImageButton_Clicked" />
-                    </Grid>
-                    <renderedviews:HighContrastEntry
-                        PlaceholderColor="LightGray"
-                        Placeholder="Nombre(s)"
-                        Text="{Binding Name}">
-                        <Entry.TextColor>
-                            <OnPlatform x:TypeArguments="Color">
-                                <On Platform="Android" Value="WhiteSmoke" />
-                            </OnPlatform>
-                        </Entry.TextColor>
-                    </renderedviews:HighContrastEntry>
-                    <Label
-                        TextColor="WhiteSmoke"
-                        Text="Podrás completar otros datos de tu perfil en otro momento."
-                        HorizontalTextAlignment="Center" />
-                    <Button
-                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
-                        Text="Finalizar"
-                        TextColor="White"
-                        Clicked="FinalizeButton_Clicked" />
-                </StackLayout>
+                            Clicked="FinalizeButton_Clicked" />
+                    </StackLayout>
+                </ScrollView>
                 <sscxftoolkitpresentationviews:BusyView
                     Grid.ColumnSpan="3" />
             </Grid>

@@ -2,12 +2,9 @@
 {
     public class ShowsPageModel : XFToolKit.Mvvm.Models.Page.BasePageModel
     {
-        public ShowsPageModel()
-        {
-            Shows = new DLToolkit.Forms.Controls.FlowObservableCollection<Cloud.Persistence.Entities.Show>();
-        }
+        private DLToolkit.Forms.Controls.FlowObservableCollection<Cloud.Persistence.Entities.Show> shows;
 
-        public DLToolkit.Forms.Controls.FlowObservableCollection<Cloud.Persistence.Entities.Show> Shows { get; private set; }
+        public DLToolkit.Forms.Controls.FlowObservableCollection<Cloud.Persistence.Entities.Show> Shows { get => shows; set => SetProperty(ref shows, value); }
 
         protected override void DisposeUnmanagementResources()
         {

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Custom.HorizontalPosterView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <ffilforms:CachedImage
+            Source="{Binding Converter={StaticResource ImageEntityToImageSource}}"
+            CacheType="All"
+            CacheDuration="8760:00:00" />
+    </ContentView.Content>
+</ContentView>

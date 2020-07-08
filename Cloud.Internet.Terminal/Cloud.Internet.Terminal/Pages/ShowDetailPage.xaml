@@ -2,14 +2,41 @@
 <sscxftoolkitmvvmpages:ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.ShowDetailPage"
+    x:Name="Page"
     Title="Programa">
+    <ContentPage.Resources>
+        <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+        <converters:PageWidthToPreservedImageAspectRatioHeightConverter x:Key="PageWidthToPreservedImageAspectRatioHeight" ImageContextBindingPage="{x:Reference Page}" />
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="En construcción!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <ffilforms:CachedImage
+                    Source="{Binding Path=Poster, Converter={StaticResource ImageEntityToImageSource}}"
+                    CacheType="All"
+                    CacheDuration="8760:00:00"
+                    HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToPreservedImageAspectRatioHeight}}"/>
+                <StackLayout Margin="8">
+                        <Label
+                            Text="{Binding Path=Name}"
+                            TextColor="{StaticResource BrandPrimaryColor}"
+                            FontSize="Title"
+                            FontFamily="Helvetica LT Std Condensed">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                    <On Platform="iOS" Value="0,4,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
+                        <Label
+                            Text="{Binding Path=About}"
+                            TextColor="Black" />
+                    </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

@@ -25,5 +25,9 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS.Providers
         public int PostListViewItemHorizontalPosterTemplateHeight => 240;
 
         public int PostListViewItemVerticalPosterTemplateHeight => 216;
+
+        public int EmployOverviewContainerSize => 100;
+
+        public int EmployOverviewImageSize => 72;
     }
 }

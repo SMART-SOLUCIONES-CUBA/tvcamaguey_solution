@@ -10,4 +10,6 @@
   <integer name="post_list_view_item_textonly_template_height">144</integer>
   <integer name="post_list_view_item_horizontal_template_height">240</integer>
   <integer name="post_list_view_item_vertical_template_height">216</integer>
+  <integer name="employ_overview_container_size">100</integer>
+  <integer name="employ_overview_image_size">72</integer>
 </resources>

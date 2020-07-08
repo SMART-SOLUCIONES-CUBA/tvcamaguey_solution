@@ -26,10 +26,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     {
                         Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                         {
-                            (BindingContext as XFToolKit.Mvvm.Models.Page.BasePageModel).IsBusy = false;
-
-                            ((Xamarin.Forms.Application.Current.MainPage as MainPage).Master as MasterPage).PresentHomeSection();
-
                             if (!Managers.SessionManager.Instance.IsAuthenticated)
                             {
                                 Xamarin.Forms.Application.Current.MainPage.NavigationPushModalPageAsync(new SessionConfigurationPage());

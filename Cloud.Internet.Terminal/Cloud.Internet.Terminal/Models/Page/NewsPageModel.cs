@@ -4,15 +4,14 @@
     {
         private int total;
         private bool isLoadingInfinity;
+        private DLToolkit.Forms.Controls.FlowObservableCollection<View.BasePostViewModel> posts;
 
         public NewsPageModel()
         {
             isLoadingInfinity = false;
-
-            Posts = new DLToolkit.Forms.Controls.FlowObservableCollection<View.BasePostViewModel>();
         }
 
-        public DLToolkit.Forms.Controls.FlowObservableCollection<View.BasePostViewModel> Posts { get; set; }
+        public DLToolkit.Forms.Controls.FlowObservableCollection<View.BasePostViewModel> Posts { get => posts; set => SetProperty(ref posts, value); }
 
         public int Total { get => total; set => SetProperty(ref total, value); }
 

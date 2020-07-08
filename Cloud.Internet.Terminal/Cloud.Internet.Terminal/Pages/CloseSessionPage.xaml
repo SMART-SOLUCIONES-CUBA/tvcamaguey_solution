@@ -16,6 +16,7 @@
                         Margin="0,20"
                         HorizontalOptions="Center"
                         Text="&#xf5fd;"
+                        TextColor="Black"
                         FontFamily="Material Design Icons"
                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
                     <Label

@@ -70,6 +70,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions
             {
                 Id = target.Id,
                 At = target.At,
+                About = target.About,
                 ShowId = target.Show.Id,
                 Show = target.Show.ToPersistenceEntity(),
                 ProductionTeamId = target.ProductionTeam.Id,

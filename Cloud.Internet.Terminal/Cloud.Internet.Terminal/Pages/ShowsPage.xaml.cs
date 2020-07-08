@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
+using SmartSolucionesCuba.XFToolKit.Mvvm.Extensions;
 using System.Linq;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
@@ -45,6 +46,11 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             DownloadShows();
         }
 
+        private void FlowListView_FlowItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+            this.NavigationPushPageAsync(new ShowDetailPage(e.Item as Cloud.Persistence.Entities.Show));
+        }
+
         private void LoadShows()
         {
             var stopwatch = new System.Diagnostics.Stopwatch();
@@ -74,7 +80,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    (BindingContext as Models.Page.ShowsPageModel).Shows.Repopulate(task.Result);
+                    (BindingContext as Models.Page.ShowsPageModel).Shows = new DLToolkit.Forms.Controls.FlowObservableCollection<Cloud.Persistence.Entities.Show>(task.Result);
 
                     (BindingContext as Models.Page.ShowsPageModel).IsBusy = false;
                 });

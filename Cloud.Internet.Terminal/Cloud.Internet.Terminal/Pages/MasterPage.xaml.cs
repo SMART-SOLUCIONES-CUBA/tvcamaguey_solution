@@ -97,18 +97,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     secoundaryNavigationGroup
                 }
             };
-
-            IsEnabled = false;
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (NavigationListView.SelectedItem == null)
-            {
-                PresentHomeSection();
-            }
         }
 
         internal void PresentHomeSection()
@@ -155,14 +143,10 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
         private void NavigationListView_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            if (!IsEnabled)
+            if ((Parent as Xamarin.Forms.MasterDetailPage).Detail is Xamarin.Forms.NavigationPage)
             {
-                IsEnabled = true;
-
-                return;
-            }
-
-            ((Parent as Xamarin.Forms.MasterDetailPage).Detail as Xamarin.Forms.NavigationPage).PopToRootAsync(false);
+                ((Parent as Xamarin.Forms.MasterDetailPage).Detail as Xamarin.Forms.NavigationPage).PopToRootAsync(false);
+            }            
 
             var outgoingPage = (Parent as Xamarin.Forms.MasterDetailPage).Detail;
 

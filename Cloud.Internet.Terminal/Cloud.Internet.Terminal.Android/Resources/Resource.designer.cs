@@ -9948,58 +9948,64 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Droid
 			public const int design_tab_indicator_anim_duration_ms = 2131296266;
 			
 			// aapt resource value: 0x7F09000B
-			public const int fluid_container_width = 2131296267;
+			public const int employ_overview_container_size = 2131296267;
 			
 			// aapt resource value: 0x7F09000C
-			public const int form_group_request_height = 2131296268;
+			public const int employ_overview_image_size = 2131296268;
 			
 			// aapt resource value: 0x7F09000D
-			public const int form_group_request_width = 2131296269;
+			public const int fluid_container_width = 2131296269;
 			
 			// aapt resource value: 0x7F09000E
-			public const int hide_password_duration = 2131296270;
+			public const int form_group_request_height = 2131296270;
 			
 			// aapt resource value: 0x7F09000F
-			public const int mr_controller_volume_group_list_animation_duration_ms = 2131296271;
+			public const int form_group_request_width = 2131296271;
 			
 			// aapt resource value: 0x7F090010
-			public const int mr_controller_volume_group_list_fade_in_duration_ms = 2131296272;
+			public const int hide_password_duration = 2131296272;
 			
 			// aapt resource value: 0x7F090011
-			public const int mr_controller_volume_group_list_fade_out_duration_ms = 2131296273;
+			public const int mr_controller_volume_group_list_animation_duration_ms = 2131296273;
 			
 			// aapt resource value: 0x7F090012
-			public const int mr_update_routes_delay_ms = 2131296274;
+			public const int mr_controller_volume_group_list_fade_in_duration_ms = 2131296274;
 			
 			// aapt resource value: 0x7F090013
-			public const int mtrl_btn_anim_delay_ms = 2131296275;
+			public const int mr_controller_volume_group_list_fade_out_duration_ms = 2131296275;
 			
 			// aapt resource value: 0x7F090014
-			public const int mtrl_btn_anim_duration_ms = 2131296276;
+			public const int mr_update_routes_delay_ms = 2131296276;
 			
 			// aapt resource value: 0x7F090015
-			public const int mtrl_chip_anim_duration = 2131296277;
+			public const int mtrl_btn_anim_delay_ms = 2131296277;
 			
 			// aapt resource value: 0x7F090016
-			public const int mtrl_tab_indicator_anim_duration_ms = 2131296278;
+			public const int mtrl_btn_anim_duration_ms = 2131296278;
 			
 			// aapt resource value: 0x7F090017
-			public const int overview_profile_image_size = 2131296279;
+			public const int mtrl_chip_anim_duration = 2131296279;
 			
 			// aapt resource value: 0x7F090018
-			public const int post_list_view_item_horizontal_template_height = 2131296280;
+			public const int mtrl_tab_indicator_anim_duration_ms = 2131296280;
 			
 			// aapt resource value: 0x7F090019
-			public const int post_list_view_item_textonly_template_height = 2131296281;
+			public const int overview_profile_image_size = 2131296281;
 			
 			// aapt resource value: 0x7F09001A
-			public const int post_list_view_item_vertical_template_height = 2131296282;
+			public const int post_list_view_item_horizontal_template_height = 2131296282;
 			
 			// aapt resource value: 0x7F09001B
-			public const int show_password_duration = 2131296283;
+			public const int post_list_view_item_textonly_template_height = 2131296283;
 			
 			// aapt resource value: 0x7F09001C
-			public const int status_bar_notification_info_maxnum = 2131296284;
+			public const int post_list_view_item_vertical_template_height = 2131296284;
+			
+			// aapt resource value: 0x7F09001D
+			public const int show_password_duration = 2131296285;
+			
+			// aapt resource value: 0x7F09001E
+			public const int status_bar_notification_info_maxnum = 2131296286;
 			
 			static Integer()
 			{

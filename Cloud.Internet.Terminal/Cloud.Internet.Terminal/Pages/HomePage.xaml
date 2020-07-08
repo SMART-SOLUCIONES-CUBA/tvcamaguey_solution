@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
-    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
     xmlns:providers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers"
     xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Rendered"
@@ -27,7 +27,7 @@
                         <pancake:DropShadow BlurRadius="2" />
                     </pancake:PancakeView.Shadow>
                     <pancake:PancakeView.GestureRecognizers>
-                        <ClickGestureRecognizer Clicked="PostsItemClickGesture_Recognized" />
+                        <TapGestureRecognizer Tapped="PostsItem_Tapped" />
                     </pancake:PancakeView.GestureRecognizers>
                     <Grid RowSpacing="0">
                         <Grid.RowDefinitions>
@@ -35,7 +35,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <BoxView Color="Black" Grid.Row="0" />
-                        <ffimageloadingforms:CachedImage
+                        <ffilforms:CachedImage
                             Grid.Row="0"
                             Aspect="AspectFill"
                             Source="{Binding Path=Post.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
@@ -75,7 +75,7 @@
                         <pancake:DropShadow BlurRadius="2" />
                     </pancake:PancakeView.Shadow>
                     <pancake:PancakeView.GestureRecognizers>
-                        <ClickGestureRecognizer Clicked="PostsItemClickGesture_Recognized" />
+                        <TapGestureRecognizer Tapped="PostsItem_Tapped" />
                     </pancake:PancakeView.GestureRecognizers>
                     <StackLayout 
                             Grid.Row="1"
@@ -240,7 +240,7 @@
                                             <pancake:DropShadow BlurRadius="2" />
                                         </pancake:PancakeView.Shadow>
                                         <pancake:PancakeView.GestureRecognizers>
-                                            <ClickGestureRecognizer Clicked="PresentationsItemClickGesture_Recognized" />
+                                            <TapGestureRecognizer Tapped="PresentationsItem_Tapped" />
                                         </pancake:PancakeView.GestureRecognizers>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -251,7 +251,7 @@
                                                 <RowDefinition Height="Auto" />
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
-                                            <ffimageloadingforms:CachedImage
+                                            <ffilforms:CachedImage
                                                 Grid.ColumnSpan="2" Grid.RowSpan="2"
                                                 Aspect="AspectFill"
                                                 Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}" />

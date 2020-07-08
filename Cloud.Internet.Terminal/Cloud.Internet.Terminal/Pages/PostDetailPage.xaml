@@ -2,15 +2,130 @@
 <sscxftoolkitmvvmpages:ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:jmci="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.PostDetailPage"
-    Title="Noticia">
+    x:Name="Page"
+    Title="Noticia"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PostDetailPageWidthToResponsivePosterViewConverter x:Key="PostDetailPageWidthToResponsivePosterView" Page="{x:Reference Page}" />
+            <converters:EmployToImageSourceConverter x:Key="EmployToImageSource" />
+            <converters:DateTimeToInvarianCultureRelativeDateTimeStringConverter x:Key="DateTimeToInvarianCultureRelativeDateTimeString" />
+            <sscxftoolkitpresentationconverters:NotNullToBooleanConverter x:Key="NotNullToBoolean" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="En construcción!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <ScrollView>
+                <StackLayout Spacing="0">
+                    <ContentView
+                        IsVisible="{Binding Path=Poster, Converter={StaticResource NotNullToBoolean}}"
+                        Content="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PostDetailPageWidthToResponsivePosterView}}"/>
+                    <StackLayout Margin="8">
+                        <Label
+                            Text="{Binding Path=Category.Name}"
+                            TextColor="{StaticResource BrandPrimaryColor}"
+                            FontFamily="Myriad Pro Bold Condensed Italic" />
+                        <Label
+                            Margin="0,8,0,6"
+                            Text="{Binding Path=Title}"
+                            TextColor="Black"
+                            FontSize="Title"
+                            FontFamily="Helvetica LT Std Condensed">                        
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                    <On Platform="iOS" Value="0,2,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
+                        <Label 
+                            Text="{Binding Path=PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
+                            TextColor="DimGray"
+                            FontFamily="Helvetica LT Std Compresed" />
+                        <Grid
+                            Margin="0,6"
+                            RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <jmci:CircleImage
+                                Grid.Column="0" Grid.RowSpan="2"
+                                VerticalOptions="Center"
+                                Source="{Binding Path=Author, Converter={StaticResource EmployToImageSource}}"
+                                BorderThickness="0.75"
+                                BorderColor="DimGray"
+                                WidthRequest="34"
+                                HeightRequest="34" />
+                            <Label
+                                Grid.Column="1" Grid.Row="0"
+                                Text="{Binding Path=Author.Identity.Name}"
+                                TextColor="Black"
+                                FontSize="Caption">
+                                <Label.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,2,0,0" />
+                                    </OnPlatform>
+                                </Label.Margin>
+                            </Label>
+                            <Label
+                                Grid.Column="1" Grid.Row="1"
+                                Text="{Binding Path=Author.Identity.LastName}"
+                                TextColor="Black"
+                                FontSize="Caption">
+                                <Label.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,0,0,2" />
+                                    </OnPlatform>
+                                </Label.Margin>
+                            </Label>
+                        </Grid>
+                        <Label
+                            Text="{Binding Path=Summary}"
+                            TextColor="Black"
+                            FontAttributes="Italic,Bold" />
+                        <Label
+                            Text="{Binding Path=Content}"
+                            TextColor="Black"
+                            TextType="Html"
+                            FontSize="16"/>
+                        <StackLayout IsVisible="{Binding Path=Tags, Converter={StaticResource NotNullToBoolean}}">
+                            <Label
+                                Margin="0,4,0,0"
+                                Text="En este artículo"
+                                TextColor="{StaticResource BrandPrimaryColor}"
+                                FontSize="Caption"
+                                FontAttributes="Bold"/>
+                            <FlexLayout
+                                Wrap="Wrap"
+                                AlignItems="Start"
+                                AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding Path=Tags}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label
+                                            Margin="2"
+                                            Padding="4,2"
+                                            BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                                            Text="{Binding Path=Name}"
+                                            TextColor="White" />
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <sscxftoolkitpresentationviews:BusyView />
+        </Grid>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

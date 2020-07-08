@@ -6,14 +6,19 @@
         {
             var datetime = (System.DateTime)value;
 
-            var dayDiff = System.DateTime.Today - datetime.Date;
+            var dayDiff = datetime.Date - System.DateTime.Today;
 
-            if (dayDiff.Days < 1 && dayDiff.Days > 0)
+            if ((dayDiff.Days < 1 && dayDiff.Days > 0) || (dayDiff.Days > -1 && dayDiff.Days < 0))
             {
                 return string.Format("Hoy, {0}", datetime.ToString("h:mm tt", System.Globalization.CultureInfo.InvariantCulture));
             }
 
-            if (dayDiff.Days < 2)
+            if (dayDiff.Days < 2 && dayDiff.Days > 0)
+            {
+                return string.Format("Mañana, {0}", datetime.ToString("h:mm tt", System.Globalization.CultureInfo.InvariantCulture));
+            }
+
+            if (dayDiff.Days > -2 && dayDiff.Days < 0)
             {
                 return string.Format("Ayer, {0}", datetime.ToString("h:mm tt", System.Globalization.CultureInfo.InvariantCulture));
             }

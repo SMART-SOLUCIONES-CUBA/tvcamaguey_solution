@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
+using SmartSolucionesCuba.XFToolKit.Mvvm.Extensions;
 using System.Linq;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
@@ -27,8 +28,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             if (IsEnabled) return;
 
             LoadSections();
-
-            IsEnabled = true;
         }
 
         private void ViewMoreBillboardButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -41,14 +40,14 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             ((Xamarin.Forms.Application.Current.MainPage as MainPage).Master as MasterPage).PresentNewsSection();
         }
 
-        private void PostsItemClickGesture_Recognized(object sender, System.EventArgs eventArgs)
+        private void PostsItem_Tapped(object sender, System.EventArgs eventArgs)
         {
-
+            this.NavigationPushPageAsync(new PostDetailPage(((sender as Xamarin.Forms.BindableObject).BindingContext as Models.View.BasePostViewModel).Post));
         }
 
-        private void PresentationsItemClickGesture_Recognized(object sender, System.EventArgs eventArgs)
+        private void PresentationsItem_Tapped(object sender, System.EventArgs eventArgs)
         {
-
+            this.NavigationPushPageAsync(new PresentationDetailPage((sender as Xamarin.Forms.BindableObject).BindingContext as Cloud.Persistence.Entities.Presentation));
         }
 
         private void LoadSections()
@@ -64,7 +63,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
                 {
-                    posts = dbContext.Posts.Include(e => e.Poster).OrderByDescending(e => e.PostedAt).Take(10).ToList();
+                    posts = dbContext.Posts.Include(e => e.Poster).OrderByDescending(e => e.PostedAt).Include(e => e.Category).Take(10).ToList();
                     presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At.Date >= System.DateTime.Now).OrderBy(e => e.At).Take(10).ToList();
                 }
 
@@ -84,6 +83,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     (BindingContext as Models.Page.HomePageModel).Presentations = presentations.Count > 0 ? presentations : new System.Collections.Generic.List<Cloud.Persistence.Entities.Presentation>();
 
                     (BindingContext as Models.Page.HomePageModel).IsBusy = false;
+
+                    IsEnabled = true;
                 });
             });
         }

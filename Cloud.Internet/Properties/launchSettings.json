@@ -15,13 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Kestrel Public": {
+    "SmartSolucionesCuba.TVCamaguey.Cloud.Internet": {
       "commandName": "Project",
-      "launchBrowser": false,
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://0.0.0.0:80"
+      "applicationUrl": "http://localhost:5001"
     }
   }
 }

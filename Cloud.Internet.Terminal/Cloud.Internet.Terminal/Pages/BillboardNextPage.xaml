@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sscxftoolkitmvvmpages:ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:viewmodels="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Models.View"
+    xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Rendered"
+    xmlns:selectors="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Cell.Selector"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.BillboardNextPage"
+    Title="Próximos">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
+            <sscxftoolkitpresentationconverters:FactorConverter x:Key="Factor" />
+            <sscxftoolkitpresentationconverters:EnumerableEmptyToBooleanConverter x:Key="EnumerableEmptyToBoolean" Inverse="True" />
+
+            <DataTemplate x:Key="FullPresentationTemplate">
+                <x:Arguments>
+                    <Type  TypeName="viewmodels:FullPresentationViewModel" />
+                </x:Arguments>
+                <ViewCell>
+                    <Grid HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewRowHeight}">
+                        <ffimageloadingforms:CachedImage
+                            Opacity="0.08"
+                            Aspect="AspectFill"
+                            Source="{Binding Path=Presentation.Show.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                        <Grid
+                            ColumnSpacing="0" RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <ffimageloadingforms:CachedImage
+                                Grid.Column="0"
+                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewRowHeight, Converter={StaticResource Factor}, ConverterParameter=1.777777777777778}"
+                                Source="{Binding Path=Presentation.Show.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                        </Grid>
+                        <Grid
+                            Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.Column="0" Grid.Row="0"
+                                Padding="8"
+                                BackgroundColor="{StaticResource BrandPrimaryOpaqueColor}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <renderedviews:FontStrechLabel
+                                    Grid.Column="0" Grid.RowSpan="2"
+                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
+                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
+                                    FontFamily="Helvetica LT Std Ultra Compresed"
+                                    Text="{Binding Path=Presentation.At, StringFormat='{0:hh}'}"
+                                    TextColor="White">
+                                    <Label.Margin>
+                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                            <On Platform="Android" Value="0,4,0,0" />
+                                            <On Platform="UWP" Value="0,2,0,0" />
+                                        </OnPlatform>
+                                    </Label.Margin>
+                                    <Label.Padding>
+                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                            <On Platform="iOS" Value="0,14,0,0" />
+                                        </OnPlatform>
+                                    </Label.Padding>
+                                </renderedviews:FontStrechLabel>
+                                <Label
+                                    Grid.Column="1" Grid.Row="0"
+                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                    FontFamily="Helvetica LT Std Ultra Compresed"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Path=Presentation.At, StringFormat='{0:mm}'}"
+                                    TextColor="White"
+                                    VerticalOptions="End" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="1"
+                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                    FontFamily="Helvetica LT Std Ultra Compresed"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Path=Presentation.At, StringFormat='{0:tt}'}"
+                                    TextColor="White"
+                                    VerticalOptions="End" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+
+            <DataTemplate x:Key="NullPresentationTemplate">
+                <x:Arguments>
+                    <Type TypeName="viewmodels:EmptyPresentationViewModel" />
+                </x:Arguments>
+                <ViewCell>
+                    <StackLayout>
+                        <Label
+                            Margin="20"
+                            Text="Sin elementos que mostrar"
+                            TextColor="DimGray" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+
+            <selectors:PresentationDataTemplateSelector 
+                x:Key="PresentationDataTemplate" 
+                DefaultDataTemplate="{StaticResource FullPresentationTemplate}" 
+                NullDataTemplate="{StaticResource NullPresentationTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.IconImageSource>
+        <FontImageSource 
+            FontFamily="Material Design Icons" 
+            Glyph="&#xf0f0;" />
+    </ContentPage.IconImageSource>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="UpdateToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="Material Design Icons" 
+                    Glyph="&#xf6ea;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <ListView
+                ItemsSource="{Binding Path=DayPresentations}"
+                ItemTemplate="{StaticResource PresentationDataTemplate}"
+                ItemSelected="ListView_ItemSelected"
+                CachingStrategy="RecycleElementAndDataTemplate"
+                HasUnevenRows="True"
+                IsGroupingEnabled="True"
+                GroupDisplayBinding="{Binding Date, StringFormat='{0:MMMM dd, dddd}'}"
+                IsRefreshing="{Binding IsBusy}"
+                IsPullToRefreshEnabled="True"
+                Refreshing="ListView_Refreshing">
+                <ListView.SeparatorVisibility>
+                    <OnPlatform x:TypeArguments="SeparatorVisibility" Default="Default">
+                        <On Platform="iOS" Value="None" />
+                    </OnPlatform>
+                </ListView.SeparatorVisibility>
+            </ListView>
+            <Label
+                IsVisible="{Binding Path=DayPresentations, Converter={StaticResource EnumerableEmptyToBoolean}}"
+                VerticalOptions="Start"
+                HorizontalTextAlignment="Center"
+                Margin="10"
+                Text="Sin elementos que mostrar"
+                TextColor="DimGray" />
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>
