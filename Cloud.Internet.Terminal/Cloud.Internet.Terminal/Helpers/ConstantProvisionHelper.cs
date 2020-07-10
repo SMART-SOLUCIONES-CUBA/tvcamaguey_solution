@@ -4,6 +4,9 @@
     {
         private const string UNSELECTABLE_ROW_FLOWLISTVIEW_STYLEID = "DE9F48B7-AADC-4952-9D71-D7965BADF68D";
 
+        internal const string ACTIONSHEET_PICKIMAGE_OPTION_CAMARA = "Captura con la Cámara";
+        internal const string ACTIONSHEET_PICKIMAGE_OPTION_GALLERY = "Galería de Imágenes";
+
         private static ConstantProvisionHelper instance;
 
         public static ConstantProvisionHelper Instance

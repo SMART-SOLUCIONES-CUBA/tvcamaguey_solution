@@ -10,48 +10,35 @@
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal {
     using System;
+    using System.Reflection;
     
     
-    /// <summary>
-    ///   Clase de recurso fuertemente tipado, para buscar cadenas traducidas, etc.
-    /// </summary>
-    // StronglyTypedResourceBuilder generó automáticamente esta clase
-    // a través de una herramienta como ResGen o Visual Studio.
-    // Para agregar o quitar un miembro, edite el archivo .ResX y, a continuación, vuelva a ejecutar ResGen
-    // con la opción /str o recompile su proyecto de VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class LocalizationResources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static System.Resources.ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static System.Globalization.CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal LocalizationResources() {
         }
         
-        /// <summary>
-        ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.LocalizationResources", typeof(LocalizationResources).Assembly);
+                if (object.Equals(null, resourceMan)) {
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.LocalizationResources", typeof(LocalizationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
         
-        /// <summary>
-        ///   Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
-        ///   búsquedas de recursos mediante esta clase de recurso fuertemente tipado.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,72 +47,48 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal {
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Divorciado(a).
-        /// </summary>
         internal static string Divorced {
             get {
                 return ResourceManager.GetString("Divorced", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Femenino.
-        /// </summary>
         internal static string Famale {
             get {
                 return ResourceManager.GetString("Famale", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Masculino.
-        /// </summary>
         internal static string Male {
             get {
                 return ResourceManager.GetString("Male", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Casado(a).
-        /// </summary>
         internal static string Married {
             get {
                 return ResourceManager.GetString("Married", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Soltero(a).
-        /// </summary>
         internal static string Single {
             get {
                 return ResourceManager.GetString("Single", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Desconocido.
-        /// </summary>
         internal static string Unknow {
             get {
                 return ResourceManager.GetString("Unknow", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Desconocido.
-        /// </summary>
         internal static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
             }
         }
         
-        /// <summary>
-        ///   Busca una cadena traducida similar a Viudo(a).
-        /// </summary>
         internal static string Widower {
             get {
                 return ResourceManager.GetString("Widower", resourceCulture);

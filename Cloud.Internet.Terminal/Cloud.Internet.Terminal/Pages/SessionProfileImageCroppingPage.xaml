@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sscxftoolkitmvvmpages:ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.SessionProfileImageCroppingPage">
+    <ContentPage.Title>
+        <OnIdiom x:TypeArguments="x:String" Default="Recortar Imagen de Perfil" Phone="Recortar Imagen" />
+    </ContentPage.Title>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Order="Primary"
+            Activated="ApplyToolbarItem_Activated">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    Glyph="&#xf12c;"
+                    FontFamily="Material Design Icons" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Order="Primary"
+            Activated="CancelToolbarItem_Activated">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    Glyph="&#xf156;"
+                    FontFamily="Material Design Icons" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid
+            ColumnSpacing="0" RowSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid
+                x:Name="CropCanvasWrapper"
+                Grid.ColumnSpan="3" Grid.RowSpan="2" />
+            <Button 
+                Grid.Column="1" Grid.Row="0"
+                Margin="10,10,0,10"
+                BackgroundColor="#99A9A9A9"
+                Text="&#xf465;"
+                TextColor="White"
+                FontFamily="Material Design Icons"
+                FontSize="Title"
+                Clicked="RotateToLeftButton_Clicked" />
+            <Button 
+                Grid.Column="2" Grid.Row="0"
+                Margin="10"
+                BackgroundColor="#99A9A9A9"
+                Text="&#xf467;"
+                TextColor="White"
+                FontFamily="Material Design Icons"
+                FontSize="Title"
+                Clicked="RotateToRightButton_Clicked" />
+        </Grid>
+    </ContentPage.Content>
+</sscxftoolkitmvvmpages:ContentPage>

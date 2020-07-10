@@ -7,6 +7,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
         public MainPage()
         {
             InitializeComponent();
+
+            IsEnabled = false;
         }
 
         protected override void OnAppearing()
@@ -16,6 +18,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             if (!Managers.SessionManager.Instance.IsAuthenticated)
             {
                 this.NavigationPushModalPageAsync(new SessionConfigurationPage());
+
+                IsEnabled = false;
             }
             else if (!Managers.SessionManager.Instance.IsCompleteProfiled)
             {
@@ -24,11 +28,15 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
                         this.NavigationPushModalPageAsync(new SessionConfigurationPage());
+
+                        IsEnabled = false;
                     });
                 });
             }
-            else
+            else if (!IsEnabled)
             {
+                IsEnabled = true;
+
                 (Master as MasterPage).InitializeContent(false);
 
                 (Master as MasterPage).PresentHomeSection();

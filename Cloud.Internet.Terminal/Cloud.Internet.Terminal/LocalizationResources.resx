@@ -133,10 +133,10 @@
     <value>Soltero(a)</value>
   </data>
   <data name="Unknow" xml:space="preserve">
-    <value>Desconocido</value>
+    <value>No Especificado</value>
   </data>
   <data name="Unknown" xml:space="preserve">
-    <value>Desconocido</value>
+    <value>No Especificado</value>
   </data>
   <data name="Widower" xml:space="preserve">
     <value>Viudo(a)</value>

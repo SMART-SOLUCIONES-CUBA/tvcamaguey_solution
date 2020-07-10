@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application 
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.App">
 
     <Application.Resources>
@@ -13,12 +12,9 @@
 
         <x:String x:Key="ProductConcept">Nuestra plataforma social creada para estar más cerca de ti.</x:String>
         
-        <Style x:Key="FormGroup" TargetType="StackLayout">
-            <Setter Property="WidthRequest" Value="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}" />
-        </Style>
         <Style x:Key="FormLabel" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource BrandPrimaryColor}" />
-            <Setter Property="FontSize" Value="Micro" />
+            <Setter Property="FontSize" Value="Caption" />
         </Style>
     </Application.Resources>
 

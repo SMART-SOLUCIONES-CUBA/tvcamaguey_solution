@@ -10,6 +10,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
     {
         private bool changesFlag;
 
+        private byte[] imagePickedData;
+
         private Models.Page.UserProfilePageModel reference;
 
         public SessionProfileEditPage(Models.Page.UserProfilePageModel reference)
@@ -70,51 +72,82 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             return true;
         }
 
-        private void PickImageButton_Clicked(object sender, System.EventArgs eventArgs)
+        private async void PickImageButton_Clicked(object sender, System.EventArgs eventArgs)
         {
-            string[] fileSelector = null;
+            var action = await DisplayActionSheet("Seleccionar Imágen de Perfil desde", "Cancelar", null, Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_CAMARA, Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_GALLERY);
 
-            switch (Xamarin.Forms.Device.RuntimePlatform)
+            if (action == Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_CAMARA)
             {
-                case Xamarin.Forms.Device.Android:
-                    fileSelector = new string[] { "image/*" };
-
-                    break;
-
-                case Xamarin.Forms.Device.UWP:
-                    fileSelector = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
-
-                    break;
-            }
-
-            (BindingContext as Models.Page.UserProfilePageModel).IsBusy = true;
-
-            Plugin.FilePicker.CrossFilePicker.Current.PickFile(fileSelector).ContinueWith((System.Threading.Tasks.Task<Plugin.FilePicker.Abstractions.FileData> pickFileTask) =>
-            {
-                if (pickFileTask.Result != null)
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    var newImageExtension = System.IO.Path.GetExtension(pickFileTask.Result.FileName);
+                    (BindingContext as Models.Page.UserProfilePageModel).IsBusy = true;
+                    (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Capturando imagen para el perfil ...";
+                });
 
-                    var newImageId = System.Guid.NewGuid();
+                await Plugin.Media.CrossMedia.Current.Initialize();
 
-                    using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, newImageExtension)))
+                if (!Plugin.Media.CrossMedia.Current.IsCameraAvailable || !Plugin.Media.CrossMedia.Current.IsTakePhotoSupported)
+                {
+                    await DisplayAlert("No Camera", ":( No camera available.", "OK");
+
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
-                        var pickImageFileStream = pickFileTask.Result.GetStream();
+                        (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                        (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                    });
 
-                        pickImageFileStream.Position = 0;
-
-                        pickImageFileStream.CopyTo(profileImageFileStream);
-                    }
-
-                    (BindingContext as Models.Page.UserProfilePageModel).ProfileImageExtension = newImageExtension;
-                    (BindingContext as Models.Page.UserProfilePageModel).ProfileImageId = newImageId;
+                    return;
                 }
 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                    System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1)).ContinueWith(delayTask =>
+                    {
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+                            (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Preparando imagen para recortar ...";
+                        });
+                    });
                 });
-            });
+
+                await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()).ContinueWith(PickedImageContinuationTask);
+            }
+            else if (action == Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_GALLERY)
+            {
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    (BindingContext as Models.Page.UserProfilePageModel).IsBusy = true;
+                    (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Seleccionando imagen para el perfil ...";
+                });
+
+                await Plugin.Media.CrossMedia.Current.Initialize();
+
+                if (!Plugin.Media.CrossMedia.Current.IsPickPhotoSupported)
+                {
+                    await DisplayAlert("Error", "This device is not supported to pick photo.", "OK");
+
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    {
+                        (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                        (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                    });
+
+                    return;
+                }
+
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1)).ContinueWith(delayTask =>
+                    {
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+                            (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Preparando imagen para recortar ...";
+                        });
+                    });
+                });
+
+                await Plugin.Media.CrossMedia.Current.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
+            }
         }
 
         private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -125,32 +158,45 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             }
             else
             {
-                var model = BindingContext as Models.Page.UserProfilePageModel;
+                var pageBindingContext = BindingContext as Models.Page.UserProfilePageModel;
 
                 System.Threading.Tasks.Task.Run(async () =>
                 {
+                    if (imagePickedData != null)
+                    {
+                        pageBindingContext.ProfileImageId = System.Guid.NewGuid();
+                        pageBindingContext.ProfileImageExtension = ".jpg";
+
+                        using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(pageBindingContext.ProfileImageId, pageBindingContext.ProfileImageExtension)))
+                        {
+                            await profileImageFileStream.WriteAsync(imagePickedData, 0, imagePickedData.Length);
+                        }
+
+                        imagePickedData = null;
+                    }
+
                     using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
                     {
                         var entity = dbContext.PersonIdentities.Include(e => e.Image).First(e => e.Id == Managers.SessionManager.Instance.IdentityId);
 
-                        entity.Name = model.Name;
-                        entity.LastName = model.LastName;
-                        entity.BornDate = model.BornDate;
-                        entity.Alias = model.Alias;
-                        entity.Sex = model.Sex;
-                        entity.CivilStatus = model.CivilStatus;
-                        entity.About = model.About;
+                        entity.Name = pageBindingContext.Name;
+                        entity.LastName = pageBindingContext.LastName;
+                        entity.BornDate = pageBindingContext.BornDate;
+                        entity.Alias = pageBindingContext.Alias;
+                        entity.Sex = pageBindingContext.Sex;
+                        entity.CivilStatus = pageBindingContext.CivilStatus;
+                        entity.About = pageBindingContext.About;
 
                         var entityImageId = entity.Image?.Id ?? System.Guid.Empty;
 
-                        if (model.ProfileImageId != System.Guid.Empty && model.ProfileImageId != entityImageId)
+                        if (pageBindingContext.ProfileImageId != System.Guid.Empty && pageBindingContext.ProfileImageId != entityImageId)
                         {
-                            var fileInfo = new System.IO.FileInfo(Helpers.LocalFileStorageHelper.GetImageFilePath(model.ProfileImageId, model.ProfileImageExtension));
+                            var fileInfo = new System.IO.FileInfo(Helpers.LocalFileStorageHelper.GetImageFilePath(pageBindingContext.ProfileImageId, pageBindingContext.ProfileImageExtension));
 
                             entity.Image = new SAPRESSC.Middleware.Media.Persistence.Entities.Image
                             {
-                                Id = model.ProfileImageId,
-                                ContentType = model.ProfileImageExtension.ToImageContentType(),
+                                Id = pageBindingContext.ProfileImageId,
+                                ContentType = pageBindingContext.ProfileImageExtension.ToImageContentType(),
                                 CreateAt = System.DateTime.Now,
                                 Length = fileInfo.Length,
                                 About = string.Format("Image for Identity : {0}", entity.Id)
@@ -161,7 +207,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                         string oldImageExtension = null;
 
-                        if (entityImageId != System.Guid.Empty && model.ProfileImageId != entityImageId)
+                        if (entityImageId != System.Guid.Empty && pageBindingContext.ProfileImageId != entityImageId)
                         {
                             var oldImage = dbContext.Images.First(e => e.Id == entityImageId);
 
@@ -172,25 +218,25 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                         await dbContext.SaveChangesAsync(string.Empty);
 
-                        if (entityImageId != System.Guid.Empty && model.ProfileImageId != entityImageId)
+                        if (entityImageId != System.Guid.Empty && pageBindingContext.ProfileImageId != entityImageId)
                         {
                             System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(entityImageId, oldImageExtension));
                         }
                     }
 
-                    reference.Name = model.Name;
-                    reference.LastName = model.LastName;
-                    reference.BornDate = model.BornDate;
-                    reference.Alias = model.Alias;
-                    reference.Sex = model.Sex;
-                    reference.CivilStatus = model.CivilStatus;
-                    reference.About = model.About;
-                    reference.ProfileImageExtension = model.ProfileImageExtension;
-                    reference.ProfileImageId = model.ProfileImageId;
+                    reference.Name = pageBindingContext.Name;
+                    reference.LastName = pageBindingContext.LastName;
+                    reference.BornDate = pageBindingContext.BornDate;
+                    reference.Alias = pageBindingContext.Alias;
+                    reference.Sex = pageBindingContext.Sex;
+                    reference.CivilStatus = pageBindingContext.CivilStatus;
+                    reference.About = pageBindingContext.About;
+                    reference.ProfileImageExtension = pageBindingContext.ProfileImageExtension;
+                    reference.ProfileImageId = pageBindingContext.ProfileImageId;
 
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
-                        model.IsBusy = false;
+                        pageBindingContext.IsBusy = false;
 
                         this.NavigationPopPageAsync();
 
@@ -231,6 +277,67 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
         private void PageModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             changesFlag = true;
+        }
+
+        private void PickedImageCroppingComplete__Callback(SkiaSharp.SKBitmap result)
+        {
+            if (result != null)
+            {
+                using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
+                {
+                    using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
+                    {
+                        imagePickedData = skData.ToArray();
+                    }
+                }
+
+                result.Dispose();
+
+                ProfileImage.Source = Xamarin.Forms.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            }
+
+            this.NavigationPopModalPageAsync();
+
+            (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+            (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+        }
+
+        private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Plugin.Media.Abstractions.MediaFile> task)
+        {
+            if (task.Result == null)
+            {
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                {
+                    (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                    (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                });
+
+                return;
+            }
+
+            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(100));
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Preparando imagen para recortar ...";
+            });
+
+            SkiaSharp.SKBitmap croppingImageTarget = null;
+
+            using (var imageFileStream = System.IO.File.OpenRead(task.Result.Path))
+            {
+                using (var skStream = new SkiaSharp.SKManagedStream(imageFileStream))
+                {
+                    croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
+                }
+            }
+
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = "Recortando imagen ...";
+
+                this.NavigationPushModalPageAsync(new Xamarin.Forms.NavigationPage(new SessionProfileImageCroppingPage(croppingImageTarget, PickedImageCroppingComplete__Callback)));
+            });
         }
 
         protected override void DisposeUnmanagementResources()

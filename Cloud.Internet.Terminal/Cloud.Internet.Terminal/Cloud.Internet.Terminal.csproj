@@ -81,6 +81,9 @@
     <PackageReference Include="Xamarin.Plugin.FilePicker" Version="2.1.41" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.3" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -159,5 +162,7 @@
     <Folder Include="Assets\Fonts\" />
     <Folder Include="Views\Custom\" />
     <Folder Include="Pages\Facade\" />
+    <Folder Include="Effects\" />
+    <Folder Include="Delegates\" />
   </ItemGroup>
 </Project>

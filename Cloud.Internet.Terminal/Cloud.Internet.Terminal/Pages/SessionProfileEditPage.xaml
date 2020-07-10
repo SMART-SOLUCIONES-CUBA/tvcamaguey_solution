@@ -8,17 +8,25 @@
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.SessionProfileEditPage"
     x:Name="Page"
+    ios:Page.UseSafeArea="True"
     Title="Modificar Perfil de Usuario">
     <ContentPage.Resources>
         <ResourceDictionary>
             <sscxftoolkitpresentationconverters:FactorConverter x:Key="Factor" />
             <sscxftoolkitpresentationconverters:FractionConverter x:Key="Fraction" />
             <converters:UserImageIdToRegularImageSourceConverter x:Key="UserImageIdToRegularImageSource" />
-            <converters:PageWidthToUserProfileInputFormGroupSetHeightConverter x:Key="PageWidthToUserProfileInputFormGroupSetHeight" />
-            <converters:PageWidthToNoFirstUserProfileFormGroupAlignSelfConverter x:Key="PageWidthToNoFirstUserProfileFormGroupAlignSelf" />
+            <converters:FlextLayoutToResponsiveItemWidthConverter x:Key="FlextLayoutToResponsiveItemWidth" ItemMinWidth="280" ItemHorizontalMargin="16" />
             <converters:StringToLocalizeStringConverter x:Key="StringToLocalizeString" />
+
+            <Style x:Key="FormGroup" TargetType="StackLayout">
+                <Setter Property="Margin" Value="8,0,8,16" />
+            </Style>
+            <Style x:Key="FlexFormGroup" TargetType="StackLayout" BasedOn="{StaticResource FormGroup}">
+                <Setter Property="WidthRequest" Value="{Binding Source={x:Reference ResponsiveWrapper}, Path=Width, Converter={StaticResource FlextLayoutToResponsiveItemWidth}}" />
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -44,126 +52,83 @@
     <ContentPage.Content>
         <Grid>
             <ScrollView>
-                <StackLayout
-                    Margin="20">
+                <StackLayout Spacing="0" Margin="8,0">                    
+                    <Grid
+                        Margin="0,48,0,40">
+                        <jmci:CircleImage
+                            x:Name="ProfileImage"
+                            HorizontalOptions="Center"
+                            BorderThickness="2"
+                            BorderColor="{StaticResource BrandPrimaryColor}"
+                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                            Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference Page}}" />
+                        <Button
+                            HorizontalOptions="Center"
+                            BackgroundColor="#33000000"                           
+                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
+                            BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
+                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
+                            FontFamily="Material Design Icons"
+                            Text="&#xf100;"
+                            TextColor="White"
+                            Clicked="PickImageButton_Clicked" />
+                    </Grid>
                     <FlexLayout
-                        Direction="Row"
-                        AlignItems="Center"
+                        x:Name="ResponsiveWrapper"
                         Wrap="Wrap">
-                        <Grid
-                            Margin="0,10,20,20">
-                            <jmci:CircleImage
-                                BorderThickness="2"
-                                BorderColor="{StaticResource BrandPrimaryColor}"
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                                Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference Page}}" />
-                            <Button
-                                BackgroundColor="#33000000"                           
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
-                                BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
-                                FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
-                                FontFamily="Material Design Icons"
-                                Text="&#xf100;"
-                                TextColor="White"
-                                Clicked="PickImageButton_Clicked" />
-                        </Grid>
-                        <FlexLayout
-                            Direction="Column"
-                            Wrap="Wrap"
-                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileInputFormGroupSetHeight}}"
-                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
-                            <StackLayout
-                                FlexLayout.AlignSelf="Start"
-                                Margin="0,0,20,20"
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label 
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Nombre(s)" />
-                                <Entry Text="{Binding Name}" />
-                            </StackLayout>
-                            <StackLayout
-                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
-                                Margin="0,0,20,20" 
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label  
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Apellidos" />
-                                <Entry Text="{Binding LastName}" />
-                            </StackLayout>
-                        </FlexLayout>
-                        <FlexLayout
-                            Direction="Column"
-                            Wrap="Wrap"
-                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileInputFormGroupSetHeight}}"
-                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
-                            <StackLayout
-                                FlexLayout.AlignSelf="Start"
-                                Margin="0,0,20,20"
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label 
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Fecha de Nacimiento" />
-                                <DatePicker Date="{Binding BornDate}" />
-                            </StackLayout>
-                            <StackLayout
-                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
-                                Margin="0,0,20,20" 
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label  
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Alias" />
-                                <Entry Text="{Binding Alias}" />
-                            </StackLayout>
-                        </FlexLayout>
-                        <FlexLayout
-                            Direction="Column"
-                            Wrap="Wrap"
-                            HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToUserProfileInputFormGroupSetHeight}}"
-                            WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth, Converter={StaticResource Factor}, ConverterParameter=2.5}">
-                            <StackLayout 
-                                FlexLayout.AlignSelf="Start"
-                                Margin="0,0,20,20"
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label 
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Sexo" />
-                                <Picker 
-                                    ItemsSource="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=Sex_All}"
-                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizeString}}"
-                                    SelectedItem="{Binding Sex}" />
-                            </StackLayout>
-                            <StackLayout
-                                FlexLayout.AlignSelf="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToNoFirstUserProfileFormGroupAlignSelf}}"
-                                Margin="0,0,20,20" 
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight}"
-                                WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestWidth}">
-                                <Label  
-                                    Style="{StaticResource FormLabel}"
-                                    Text="Estado Civil" />
-                                <Picker 
-                                    ItemsSource="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=CivilStatus_All}"
-                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizeString}}"
-                                    SelectedItem="{Binding CivilStatus}" />
-                            </StackLayout>
-                        </FlexLayout>
-                        <StackLayout
-                            Margin="0,0,0,20"
-                            FlexLayout.Basis="100%">
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
+                            <Label 
+                                Style="{StaticResource FormLabel}"
+                                Text="Nombre(s)" />
+                            <Entry Text="{Binding Name}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
                             <Label  
                                 Style="{StaticResource FormLabel}"
-                                Text="Acerca de" />
-                            <Editor 
-                                Text="{Binding About}"
-                                HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight, Converter={StaticResource Factor}, ConverterParameter=2}" />
+                                Text="Apellidos" />
+                            <Entry Text="{Binding LastName}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
+                            <Label 
+                                Style="{StaticResource FormLabel}"
+                                Text="Fecha de Nacimiento" />
+                            <DatePicker Date="{Binding BornDate}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
+                            <Label  
+                                Style="{StaticResource FormLabel}"
+                                Text="Alias" />
+                            <Entry Text="{Binding Alias}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
+                            <Label 
+                                Style="{StaticResource FormLabel}"
+                                Text="Sexo" />
+                            <Picker 
+                                ItemsSource="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=Sex_All}"
+                                ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizeString}}"
+                                SelectedItem="{Binding Sex}" />
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource FlexFormGroup}">
+                            <Label  
+                                Style="{StaticResource FormLabel}"
+                                Text="Estado Civil" />
+                            <Picker 
+                                ItemsSource="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=CivilStatus_All}"
+                                ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizeString}}"
+                                SelectedItem="{Binding CivilStatus}" />
                         </StackLayout>
                     </FlexLayout>
+                    <StackLayout Style="{StaticResource FormGroup}">
+                        <Label  
+                            Style="{StaticResource FormLabel}"
+                            Text="Acerca de" />
+                        <Editor
+                            Text="{Binding About}"
+                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FormGroupRequestHeight, Converter={StaticResource Factor}, ConverterParameter=2}" />
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
             <sscxftoolkitpresentationviews:BusyView />
