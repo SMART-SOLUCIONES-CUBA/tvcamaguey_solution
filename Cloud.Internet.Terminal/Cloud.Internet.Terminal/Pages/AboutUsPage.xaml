@@ -3,6 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftollkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.AboutUsPage"
@@ -22,12 +23,21 @@
         Title="Acerca de">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                FontFamily="Material Design Icons" 
-                Glyph="&#xf9f0;" />
+                FontFamily="IcoMoon" 
+                Glyph="&#xe900;" />
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
-                <WebView Source="{Binding About}" />
+                <ScrollView>
+                    <StackLayout>
+                        <Label
+                            Margin="10"
+                            Text="{Binding Path=About}"
+                            TextColor="Black"
+                            TextType="Html"
+                            FontSize="16" />
+                    </StackLayout>
+                </ScrollView>
                 <sscxftollkitpresentationviews:BusyView />
             </Grid>
         </ContentPage.Content>
@@ -41,8 +51,16 @@
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
-                <WebView Source="{Binding History}" />
-                <sscxftollkitpresentationviews:BusyView />
+                <ScrollView>
+                    <StackLayout>
+                        <Label
+                            Margin="10"
+                            Text="{Binding Path=History}"
+                            TextColor="Black"
+                            TextType="Html"
+                            FontSize="16" />
+                    </StackLayout>
+                </ScrollView><sscxftollkitpresentationviews:BusyView />
             </Grid>
         </ContentPage.Content>
     </sscxftoolkitmvvmpages:ContentPage>
@@ -53,6 +71,13 @@
                 FontFamily="Material Design Icons" 
                 Glyph="&#xf780;" />
         </ContentPage.IconImageSource>
+        <ContentPage.Resources>
+            <converters:FlextLayoutToResponsiveItemWidthConverter x:Key="FlextLayoutToResponsiveItemWidth" ItemMinWidth="280" ItemHorizontalMargin="16" />
+
+            <Style x:Key="FlexContactContainer" TargetType="StackLayout">
+                <Setter Property="WidthRequest" Value="{Binding Source={x:Reference ResponsiveWrapper}, Path=Width, Converter={StaticResource FlextLayoutToResponsiveItemWidth}}" />
+            </Style>
+        </ContentPage.Resources>
         <ContentPage.Content>
             <Grid>
                 <ScrollView>
@@ -65,12 +90,15 @@
                                     <OnPlatform x:TypeArguments="FileImageSource">
                                         <On Platform="Android" Value="vendor_logo.png" />
                                         <On Platform="UWP" Value="Assets/Images/VendorLogo.png" />
-                                        <On Platform="iOS" Value="ContractorLogo" />
+                                        <On Platform="iOS" Value="VendorLogo" />
                                     </OnPlatform>
                                 </Image.Source>
                             </Image>
-                            <FlexLayout Wrap="Wrap" JustifyContent="SpaceAround">
-                                <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FluidContainerWidth}">
+                            <FlexLayout
+                                x:Name="ResponsiveWrapper"
+                                Wrap="Wrap"
+                                JustifyContent="SpaceAround">
+                                <StackLayout Style="{StaticResource FlexContactContainer}">
                                     <Label
                                         HorizontalOptions="Center"
                                         Text="&#xf1c3;"
@@ -87,7 +115,7 @@
                                         Text="Puede contactanos vía telefónica en el horario de 9:00 am a 4:30 pm de lunes a viernes. Le atenderemos con gusto."
                                         TextColor="DimGray" />
                                 </StackLayout>
-                                <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FluidContainerWidth}">
+                                <StackLayout Style="{StaticResource FlexContactContainer}">
                                     <Label
                                         HorizontalOptions="Center"
                                         Text="&#xf1ee;"
@@ -104,7 +132,7 @@
                                         Text="Puede contactanos vía telefónica en el horario de 9:00 am a 4:30 pm de lunes a viernes. Le atenderemos con gusto."
                                         TextColor="DimGray" />
                                 </StackLayout>
-                                <StackLayout WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=FluidContainerWidth}">
+                                <StackLayout Style="{StaticResource FlexContactContainer}">
                                     <Label
                                         HorizontalOptions="Center"
                                         Text="&#xf352;"
@@ -123,12 +151,14 @@
                                 </StackLayout>
                             </FlexLayout>
                         </StackLayout>
-                        <Image VerticalOptions="EndAndExpand" HorizontalOptions="Start">
+                        <Image
+                            Margin="0,30,0,0"
+                            VerticalOptions="EndAndExpand" HorizontalOptions="Start">
                             <Image.Source>
                                 <OnPlatform x:TypeArguments="FileImageSource">
                                     <On Platform="Android" Value="vendor_tail.png" />
                                     <On Platform="UWP" Value="Assets/Images/VendorTail.png" />
-                                    <On Platform="iOS" Value="VendorSignature" />
+                                    <On Platform="iOS" Value="VendorTail" />
                                 </OnPlatform>
                             </Image.Source>
                         </Image>

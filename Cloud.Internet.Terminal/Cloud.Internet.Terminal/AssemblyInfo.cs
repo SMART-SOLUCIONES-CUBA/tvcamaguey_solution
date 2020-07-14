@@ -12,3 +12,4 @@
 [assembly: Xamarin.Forms.ExportFont("Souvenir-Medium.otf", Alias = "Souvenir Medium")]
 [assembly: Xamarin.Forms.ExportFont("SOUVNRD.ttf", Alias = "Souvenir Lt BT Bold")]
 [assembly: Xamarin.Forms.ExportFont("MyriadProBoldCondIt.otf", Alias = "Myriad Pro Bold Condensed Italic")]
+[assembly: Xamarin.Forms.ExportFont("icomoon.ttf", Alias = "IcoMoon")]

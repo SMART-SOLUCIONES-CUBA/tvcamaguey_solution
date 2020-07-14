@@ -22,7 +22,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                 Summary = post.Summary,
                 PostedAt = post.PostedAt,
                 Category = post.Category,
-                Content = Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android ? post.Content : post.Content.ToStandarizedHtmlPostContent(),
+                Content = Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android ? post.Content : post.Content.ToStandarizedHtmlContent(),
                 Poster = post.Poster
 			};
         }

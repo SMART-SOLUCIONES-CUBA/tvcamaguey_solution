@@ -156,7 +156,7 @@
                                     <OnPlatform x:TypeArguments="FileImageSource">
                                         <On Platform="Android" Value="app_logo.png" />
                                         <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
-                                        <On Platform="iOS" Value="AppLogo" />
+                                        <On Platform="iOS" Value="AppLogoSmall" />
                                     </OnPlatform>
                                 </Image.Source>
                             </Image>

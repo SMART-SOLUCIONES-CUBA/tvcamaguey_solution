@@ -2,7 +2,14 @@
 {
     public class NavigationSectionModel
     {
+        public NavigationSectionModel()
+        {
+            FontFamily = "Material Design Icons";
+        }
+
         public string Glyph { get; set; }
+
+        public string FontFamily { get; set; }
 
         public string Title { get; set; }
 

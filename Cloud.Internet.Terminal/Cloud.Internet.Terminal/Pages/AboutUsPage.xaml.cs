@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Extensions;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 {
@@ -36,10 +37,10 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             {
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    var model = (BindingContext as Models.Page.AboutUsPageModel);
+                    var model = BindingContext as Models.Page.AboutUsPageModel;
 
-                    model.About = new Xamarin.Forms.HtmlWebViewSource { Html = string.Format("<html><body style=\"margin: 10pt;\">{0}</body></html>", task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.AboutUs).Value) };
-                    model.History = new Xamarin.Forms.HtmlWebViewSource { Html = string.Format("<html><body style=\"margin: 10pt;\">{0}</body></html>", task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.History).Value) };
+                    model.About = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.AboutUs).Value.ToStandarizedHtmlContent();
+                    model.History = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.History).Value.ToStandarizedHtmlContent();
                     model.ContactPhoneNumber = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactPhoneNumber).Value;
                     model.ContactEmailAddress = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactEmailAddress).Value;
                     model.ContactPostalAddress = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactPostalAddress).Value;
@@ -83,7 +84,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             {
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    var model = (BindingContext as Models.Page.AboutUsPageModel);
+                    var model = BindingContext as Models.Page.AboutUsPageModel;
 
                     if (task.Exception != null || task.IsCanceled)
                     {
@@ -91,8 +92,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     }
                     else
                     {
-                        model.About = new Xamarin.Forms.HtmlWebViewSource { Html = string.Format("<html><body style=\"margin: 10pt;\">{0}</body></html>", task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.AboutUs).Value) };
-                        model.History = new Xamarin.Forms.HtmlWebViewSource { Html = string.Format("<html><body style=\"margin: 10pt;\">{0}</body></html>", task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.History).Value) };
+                        model.About = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.AboutUs).Value.ToStandarizedHtmlContent();
+                        model.History = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.History).Value.ToStandarizedHtmlContent();
                         model.ContactPhoneNumber = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactPhoneNumber).Value;
                         model.ContactEmailAddress = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactEmailAddress).Value;
                         model.ContactPostalAddress = task.Result.First(e => e.Id == Internet.Persistence.Enumerators.InstitutionInfoKind.ContactPostalAddress).Value;

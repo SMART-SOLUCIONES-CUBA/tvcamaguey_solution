@@ -49,7 +49,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
             primaryNavigationGroup.Add(new Models.NavigationSectionModel
             {
-                Glyph = "\uf9f0",
+                Glyph = "\ue900",
+                FontFamily = "IcoMoon",
                 Title = "Acerca de",
                 SelectionFunc = () => new AboutUsPage()
             });

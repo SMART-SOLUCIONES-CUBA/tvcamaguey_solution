@@ -99,7 +99,7 @@
                             <ImageCell.ImageSource>
                                 <FontImageSource 
                                     Glyph="{Binding Glyph}"
-                                    FontFamily="Material Design Icons"
+                                    FontFamily="{Binding FontFamily}"
                                     Color="Black" />
                             </ImageCell.ImageSource>
                         </renderedviews:ResponsiveImageCell>
@@ -107,13 +107,14 @@
                 </ListView.ItemTemplate>
                 <ListView.Footer>
                     <Grid>
-                        <Image 
+                        <Image
+                            Margin="0,80,0,0"
                             VerticalOptions="End" HorizontalOptions="Start">
                             <Image.Source>
                                 <OnPlatform x:TypeArguments="FileImageSource">
                                     <On Platform="Android" Value="vendor_tail.png" />
                                     <On Platform="UWP" Value="Assets/Images/VendorTail.png" />
-                                    <On Platform="iOS" Value="VendorSignature" />
+                                    <On Platform="iOS" Value="VendorTail" />
                                 </OnPlatform>
                             </Image.Source>
                         </Image>

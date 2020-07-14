@@ -2,15 +2,15 @@
 {
     public class AboutUsPageModel : XFToolKit.Mvvm.Models.Page.BasePageModel
     {
-        private Xamarin.Forms.HtmlWebViewSource about;
-        private Xamarin.Forms.HtmlWebViewSource history;
+        private string about;
+        private string history;
         private string contactPhoneNumber;
         private string contactEmailAddress;
         private string contactPostalAddress;
 
-        public Xamarin.Forms.HtmlWebViewSource About { get => about; set => SetProperty(ref about, value); }
+        public string About { get => about; set => SetProperty(ref about, value); }
 
-        public Xamarin.Forms.HtmlWebViewSource History { get => history; set => SetProperty(ref history, value); }
+        public string History { get => history; set => SetProperty(ref history, value); }
 
         public string ContactPhoneNumber { get => contactPhoneNumber; set => SetProperty(ref contactPhoneNumber, value); }
 

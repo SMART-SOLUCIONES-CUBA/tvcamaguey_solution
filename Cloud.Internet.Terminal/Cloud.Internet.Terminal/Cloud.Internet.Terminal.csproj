@@ -35,6 +35,7 @@
     <None Remove="Assets\Fonts\Souvenir-Medium.otf" />
     <None Remove="Assets\Fonts\SOUVNRD.ttf" />
     <None Remove="Assets\Fonts\MyriadProBoldCondIt.otf" />
+    <None Remove="Assets\Fonts\icomoon.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +51,7 @@
     <EmbeddedResource Include="Assets\Fonts\Souvenir-Medium.otf" />
     <EmbeddedResource Include="Assets\Fonts\SOUVNRD.ttf" />
     <EmbeddedResource Include="Assets\Fonts\MyriadProBoldCondIt.otf" />
+    <EmbeddedResource Include="Assets\Fonts\icomoon.ttf" />
   </ItemGroup>
 
   <ItemGroup>

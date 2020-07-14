@@ -95,7 +95,10 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
 
                 System.Threading.Tasks.Task.Run(async () =>
                 {
-                    if (!Managers.SessionManager.Instance.IsAuthenticated) return;
+                    if (!Managers.SessionManager.Instance.IsAuthenticated)
+                    {
+                        return;
+                    }
 
                     var syncReceptionApiClient = new SAPRESSC.Syncronization.Api.Connect.Reception.Clients.SyncronizationOrdersReceptionApiClient(Providers.HttpClientHelperProvider.Instance);
                     var mediaFileUploadClient = new Api.Connect.Clients.MediFileUploadApiClient(Providers.HttpClientHelperProvider.Instance);
@@ -103,6 +106,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
                     using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
                     {
                         var entities = dbContext.SyncronizationOrders.Include(e => e.Changes).ToArray();
+
+                        System.Diagnostics.Debug.WriteLine("########======>>>>>> SyncronizationOrders.Count: {0}", entities.Length);
 
                         if (entities.Length > 0)
                         {
