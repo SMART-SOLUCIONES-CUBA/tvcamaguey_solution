@@ -23,7 +23,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             }
             else if (!Managers.SessionManager.Instance.IsCompleteProfiled)
             {
-                Managers.SessionManager.Instance.CloseAsync().ContinueWith((System.Threading.Tasks.Task task) =>
+                Managers.SessionManager.Instance.CloseAsync().ContinueWith(_ =>
                 {
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
@@ -37,9 +37,15 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             {
                 IsEnabled = true;
 
-                (Master as MasterPage).InitializeContent(false);
+                Managers.SessionManager.Instance.TryUpdateSessionIdentity().ContinueWith(_ =>
+                {
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    {
+                        (Master as MasterPage).InitializeContent(false);
 
-                (Master as MasterPage).PresentHomeSection();
+                        (Master as MasterPage).PresentHomeSection();
+                    });
+                });
             }
         }
 

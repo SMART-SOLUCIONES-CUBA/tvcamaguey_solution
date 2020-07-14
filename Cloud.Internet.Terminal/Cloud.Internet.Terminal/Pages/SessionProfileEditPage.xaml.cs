@@ -213,7 +213,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                             oldImageExtension = oldImage.ContentType.ToImageExtension();
 
-                            dbContext.Images.Remove(dbContext.Images.First(e => e.Id == entityImageId));
+                            dbContext.Images.Remove(oldImage);
                         }
 
                         await dbContext.SaveChangesAsync(string.Empty);

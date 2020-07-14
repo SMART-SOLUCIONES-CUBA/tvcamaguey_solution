@@ -23,22 +23,40 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
 
         protected override void OnStart()
         {
-            if (!stopwatch.IsRunning)
-            {
-                stopwatch.Start();
-            }
+            Xamarin.Forms.Device.StartTimer(System.TimeSpan.FromSeconds(1), SyncronizationTimer__Callback);
 
-            Xamarin.Forms.Device.StartTimer(System.TimeSpan.FromSeconds(1), OnSyncronizationTimerCallback);
+            Connectivity_ConnectivityChanged(this, new Xamarin.Essentials.ConnectivityChangedEventArgs(Xamarin.Essentials.Connectivity.NetworkAccess, Xamarin.Essentials.Connectivity.ConnectionProfiles));
+
+            Xamarin.Essentials.Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs args)
+        {
+            if (args.NetworkAccess == Xamarin.Essentials.NetworkAccess.None)
+            {
+                if (stopwatch.IsRunning) stopwatch.Stop();
+            }
+            else
+            {
+                if (!stopwatch.IsRunning)
+                {
+                    stopwatch.Restart();
+                }
+            }
         }
 
         protected override void OnSleep()
         {
             stopwatch.Stop();
+
+            Xamarin.Essentials.Connectivity.ConnectivityChanged -= Connectivity_ConnectivityChanged;
         }
 
         protected override void OnResume()
         {
-            stopwatch.Restart();
+            Connectivity_ConnectivityChanged(this, new Xamarin.Essentials.ConnectivityChangedEventArgs(Xamarin.Essentials.Connectivity.NetworkAccess, Xamarin.Essentials.Connectivity.ConnectionProfiles));
+
+            Xamarin.Essentials.Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
         public void HandleException(System.Exception exception)
@@ -87,7 +105,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal
             MainPage.DisplayAlert("Error", message, "Aceptar").ContinueWith(alertContinueAction);
         }
 
-        private bool OnSyncronizationTimerCallback()
+        private bool SyncronizationTimer__Callback()
         {
             if (stopwatch.IsRunning && stopwatch.Elapsed.Seconds >= 15)
             {

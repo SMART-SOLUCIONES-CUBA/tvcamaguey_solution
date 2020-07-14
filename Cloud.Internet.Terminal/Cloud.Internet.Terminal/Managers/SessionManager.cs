@@ -158,5 +158,87 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
                 System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(image.Id, image.ContentType.ToImageExtension()));
             }
         }
+
+        public async System.Threading.Tasks.Task<bool> TryUpdateSessionIdentity()
+        {
+            var identity = Instance.Identity;
+
+            var hasRemoteChanges = false;
+
+            if (Xamarin.Essentials.Connectivity.NetworkAccess != Xamarin.Essentials.NetworkAccess.None)
+            {
+                try
+                {
+                    var personIdentityApiClient = new Api.Connect.Clients.PersonIdentitiesApiClient(Providers.HttpClientHelperProvider.Instance);
+
+                    var identityModel = await personIdentityApiClient.GetAsync(identity.Id);
+
+                    if (identity.Name != identityModel.Name) hasRemoteChanges = true;
+                    if (identity.LastName != identityModel.LastName) hasRemoteChanges = true;
+                    if (identity.Alias != identityModel.Alias) hasRemoteChanges = true;
+                    if (identity.BornDate != identityModel.BornDate) hasRemoteChanges = true;
+                    if (identity.CivilStatus != identityModel.CivilStatus) hasRemoteChanges = true;
+                    if (identity.Sex != identityModel.Sex) hasRemoteChanges = true;
+                    if (identity.About != identityModel.About) hasRemoteChanges = true;
+                    if (identity.ImageId != identityModel.Image.Id) hasRemoteChanges = true;
+
+                    if (hasRemoteChanges)
+                    {
+                        var currentImage = identity.Image;
+
+                        using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
+                        {
+                            if (identityModel.Image != null)
+                            {
+                                await Helpers.ImageHandlingHelper.FetchRemoteImageFileAsync(identityModel.Image.Id, identityModel.Image.ContentType);
+                            }
+
+                            identity.Name = identityModel.Name;
+                            identity.LastName = identityModel.LastName;
+                            identity.Alias = identityModel.Alias;
+                            identity.BornDate = identityModel.BornDate;
+                            identity.CivilStatus = identityModel.CivilStatus;
+                            identity.Sex = identityModel.Sex;
+                            identity.About = identityModel.About;
+
+                            if (identityModel.Image != null && identity.ImageId != identityModel.Image.Id)
+                            {
+                                dbContext.Images.Add(new SAPRESSC.Middleware.Media.Persistence.Entities.Image
+                                {
+                                    Id = identityModel.Image.Id,
+                                    CreateAt = identityModel.Image.CreateAt,
+                                    ContentType = identityModel.Image.ContentType,
+                                    Length = identityModel.Image.Length,
+                                    Width = identityModel.Image.Width,
+                                    Height = identityModel.Image.Height,
+                                    About = identityModel.Image.About
+                                });
+
+                                identity.ImageId = identityModel.Image.Id;
+                            }
+
+                            dbContext.PersonIdentities.Update(identity);
+
+                            await dbContext.SaveChangesAsync(string.Empty, syncronize: false);
+
+                            if (currentImage != null && identity.ImageId != currentImage.Id)
+                            {
+                                dbContext.Images.Remove(currentImage);
+                            }
+
+                            await dbContext.SaveChangesAsync(string.Empty, syncronize: false);
+
+                            if (currentImage != null && identity.ImageId != currentImage.Id)
+                            {
+                                System.IO.File.Delete(Helpers.LocalFileStorageHelper.GetImageFilePath(currentImage.Id, currentImage.ContentType.ToImageExtension()));
+                            }
+                        }
+                    }
+                }
+                catch { }
+            }
+
+            return hasRemoteChanges;
+        }
     }
 }
