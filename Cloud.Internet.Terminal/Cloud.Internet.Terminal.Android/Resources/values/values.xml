@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <integer name="fluid_container_width">320</integer>
+  <integer name="presentation_overview_height">124</integer>
   <integer name="overview_profile_image_size">72</integer>
   <integer name="form_group_request_width">296</integer>
   <integer name="form_group_request_height">60</integer>

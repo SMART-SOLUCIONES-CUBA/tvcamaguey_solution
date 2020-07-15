@@ -6,6 +6,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS.Providers
     {
         public int FluidContainerWidth => 320;
 
+        public int PresentationOverviewHeight => 112;
+
         public int RegularProfileImageSize => FluidContainerWidth / 3;
 
         public int OverviewProfileImageSize => 72;

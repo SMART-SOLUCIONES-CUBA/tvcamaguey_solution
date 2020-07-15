@@ -4,25 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
+    xmlns:providers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Providers"
+    xmlns:renderedviews="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Views.Rendered"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
+    xmlns:sscxftoolkitviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.ShowDetailPage"
     x:Name="Page"
     Title="Programa">
     <ContentPage.Resources>
         <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
         <converters:PageWidthToPreservedImageAspectRatioHeightConverter x:Key="PageWidthToPreservedImageAspectRatioHeight" ImageContextBindingPage="{x:Reference Page}" />
+        <converters:DateTimeToInvarianCultureRelativeDayStringConverter x:Key="DateTimeToInvarianCultureRelativeDayString" />
+        <sscxftoolkitpresentationconverters:FactorConverter x:Key="Factor" />
+        <sscxftoolkitpresentationconverters:IfNullOrEmptyToStringConverter x:Key="IfNullOrEmptyToString" StringReplacement="Temática no especificada" />
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <ffilforms:CachedImage
-                    Source="{Binding Path=Poster, Converter={StaticResource ImageEntityToImageSource}}"
-                    CacheType="All"
-                    CacheDuration="8760:00:00"
-                    HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToPreservedImageAspectRatioHeight}}"/>
-                <StackLayout Margin="8">
+        <Grid>
+            <ScrollView>
+                <StackLayout>
+                    <ffilforms:CachedImage
+                        Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
+                        CacheType="All"
+                        CacheDuration="8760:00:00"
+                        HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToPreservedImageAspectRatioHeight}}"/>
+                    <StackLayout Margin="8">
                         <Label
-                            Text="{Binding Path=Name}"
+                            Text="{Binding Path=Show.Name}"
                             TextColor="{StaticResource BrandPrimaryColor}"
                             FontSize="Title"
                             FontFamily="Helvetica LT Std Condensed">
@@ -33,10 +42,207 @@
                             </Label.Padding>
                         </Label>
                         <Label
-                            Text="{Binding Path=About}"
+                            Text="{Binding Path=Show.About}"
                             TextColor="Black" />
+                        <Label
+                            Margin="0,16,0,0"
+                            Text="Próximas Presentaciones"
+                            TextColor="{StaticResource BrandPrimaryColor}"
+                            FontSize="Caption"
+                            FontAttributes="Bold"/>
                     </StackLayout>
-            </StackLayout>
-        </ScrollView>
+                    <StackLayout
+                        BindableLayout.ItemsSource="{Binding Path=NextPresentations}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                Margin="8,0"
+                                Text="Sin elementos que mostrar"
+                                TextColor="DimGray" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    BackgroundColor="#EFEFEF"
+                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=PresentationOverviewHeight}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid
+                                        Grid.Column="0"
+                                        Padding="8"
+                                        BackgroundColor="{StaticResource BrandPrimaryColor}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Label
+                                            Grid.ColumnSpan="2" Grid.Row="0"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
+                                            TextColor="White"
+                                            HorizontalTextAlignment="Center" />
+                                        <renderedviews:FontStrechLabel
+                                            Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            Text="{Binding Path=At, StringFormat='{0:hh}'}"
+                                            TextColor="White">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                    <On Platform="Android" Value="0,4,0,0" />
+                                                    <On Platform="UWP" Value="0,2,0,0" />
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                            <Label.Padding>
+                                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                    <On Platform="iOS" Value="0,14,0,0" />
+                                                </OnPlatform>
+                                            </Label.Padding>
+                                        </renderedviews:FontStrechLabel>
+                                        <Label
+                                            Grid.Column="1" Grid.Row="1"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Path=At, StringFormat='{0:mm}'}"
+                                            TextColor="White"
+                                            VerticalOptions="End" />
+                                        <Label
+                                            Grid.Column="1" Grid.Row="2"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Path=At, StringFormat='{0:tt}'}"
+                                            TextColor="White"
+                                            VerticalOptions="Start" />
+                                    </Grid>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="0,4,4,4"
+                                        Text="{Binding Path=About, Converter={StaticResource IfNullOrEmptyToString}}"
+                                        TextColor="Black"
+                                        LineBreakMode="TailTruncation">
+                                        <Label.MaxLines>
+                                            <OnPlatform x:TypeArguments="x:Int32">
+                                                <On Platform="Android" Value="6" />
+                                                <On Platform="iOS" Value="5" />
+                                                <On Platform="UWP" Value="6" />
+                                            </OnPlatform>
+                                        </Label.MaxLines>
+                                    </Label>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    <Label
+                        Margin="8,16,8,8"
+                        Text="Presentaciones Anteriores"
+                        TextColor="{StaticResource BrandPrimaryColor}"
+                        FontSize="Caption"
+                        FontAttributes="Bold"/>
+                    <StackLayout
+                        Margin="0,0,0,8"
+                        BindableLayout.ItemsSource="{Binding Path=OldPresentations}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                Margin="8,0"
+                                Text="Sin elementos que mostrar"
+                                TextColor="DimGray" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    BackgroundColor="#EFEFEF"
+                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=PresentationOverviewHeight}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid
+                                        Grid.Column="0"
+                                        Padding="8"
+                                        BackgroundColor="{StaticResource BrandPrimaryColor}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Label
+                                            Grid.ColumnSpan="2" Grid.Row="0"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
+                                            TextColor="White"
+                                            HorizontalTextAlignment="Center" />
+                                        <renderedviews:FontStrechLabel
+                                            Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                                            HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            Text="{Binding Path=At, StringFormat='{0:hh}'}"
+                                            TextColor="White">
+                                            <Label.Margin>
+                                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                    <On Platform="Android" Value="0,4,0,0" />
+                                                    <On Platform="UWP" Value="0,2,0,0" />
+                                                </OnPlatform>
+                                            </Label.Margin>
+                                            <Label.Padding>
+                                                <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                    <On Platform="iOS" Value="0,14,0,0" />
+                                                </OnPlatform>
+                                            </Label.Padding>
+                                        </renderedviews:FontStrechLabel>
+                                        <Label
+                                            Grid.Column="1" Grid.Row="1"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Path=At, StringFormat='{0:mm}'}"
+                                            TextColor="White"
+                                            VerticalOptions="End" />
+                                        <Label
+                                            Grid.Column="1" Grid.Row="2"
+                                            FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                            FontFamily="Helvetica LT Std Ultra Compresed"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Path=At, StringFormat='{0:tt}'}"
+                                            TextColor="White"
+                                            VerticalOptions="Start" />
+                                    </Grid>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="0,4,4,4"
+                                        Text="{Binding Path=About, Converter={StaticResource IfNullOrEmptyToString}}"
+                                        TextColor="Black"
+                                        LineBreakMode="TailTruncation">
+                                        <Label.MaxLines>
+                                            <OnPlatform x:TypeArguments="x:Int32">
+                                                <On Platform="Android" Value="6" />
+                                                <On Platform="iOS" Value="5" />
+                                                <On Platform="UWP" Value="6" />
+                                            </OnPlatform>
+                                        </Label.MaxLines>
+                                    </Label>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <sscxftoolkitviews:BusyView />
+        </Grid>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

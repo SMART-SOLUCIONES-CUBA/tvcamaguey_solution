@@ -1,6 +1,7 @@
 ﻿
 using Foundation;
 using UIKit;
+using UserNotifications;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS
 {

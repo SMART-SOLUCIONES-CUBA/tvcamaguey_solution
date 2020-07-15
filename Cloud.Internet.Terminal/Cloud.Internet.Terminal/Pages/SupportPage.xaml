@@ -6,10 +6,74 @@
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.SupportPage"
     Title="Información y Ayuda">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Spacing="0">
+                <Grid
+                    BackgroundColor="{StaticResource BrandPrimaryColor}">
+                    <StackLayout 
+                        Margin="10,50"
+                        VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image HorizontalOptions="Center">
+                            <Image.Source>
+                                <OnPlatform x:TypeArguments="FileImageSource">
+                                    <On Platform="Android" Value="app_logo.png" />
+                                    <On Platform="UWP" Value="Assets/Images/AppLogo.png" />
+                                    <On Platform="iOS" Value="AppLogoSmall" />
+                                </OnPlatform>
+                            </Image.Source>
+                        </Image>
+                        <Label 
+                            HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span 
+                                        Text="TuTV" 
+                                        TextColor="#c3c3c3"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                    <Span 
+                                        Text="Camagüey"
+                                        TextColor="#f2f2f2"
+                                        FontFamily="Souvenir Lt BT Bold"
+                                        FontSize="Subtitle" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                </Grid>
+                <StackLayout Padding="20,8,20,20">
+                    <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Versión:" />
+                    <Label HorizontalTextAlignment="Center" Text="0.1.0" />
+                    <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Acerca de:" />
+                    <Label TextColor="Black" Text="Esta aplicación permite a Televisión Camagüey divulgar la información relacionada con la cartelera, programas y noticias, así como información de la institución, sus trabajadores y datos de contacto." />
+                    <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Creada por:" />
+                    <Image>
+                        <Image.Source>
+                            <FileImageSource>
+                                <FileImageSource.File>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="iOS" Value="OwnerLogo" />
+                                        <On Platform="Android" Value="owner_logo" />
+                                    </OnPlatform>
+                                </FileImageSource.File>
+                            </FileImageSource>
+                        </Image.Source>
+                    </Image>
+                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="SMART SOLUCIONES CUBA (SSC), © 2020." />
+                    <Label TextColor="Black" HorizontalTextAlignment="Center" Text="www.smartsolucionescuba.com" />
+                    <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Sobre esta versión de prueba:" />
+                    <Label TextColor="Black" Text="Esta versión ha sido creada con el objetivo de realizar pruebas iniciales de funcionamiento por múltiples usuarios del sistema. Es una versión en estado de desarrollo, por lo que puede ser inestable en algún momento, contener pequeños errores, elementos incompletos, además de no contar con un diseño completamente refinado." />
+                    <Label TextColor="Black" Text="Recomendamos a los usuarios que prueban esta versión, que continúen atentos a nuevas actualizaciones de la aplicación mediante los distintos medios informativos que tienen a su alcance, tanto de Televisión Camagüey como de los desarrolladores de la aplicación." />
+                    <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Contacto:" />
+                    <Label TextColor="Black" Text="Si tienes cualquier pregunta, comentario o sugerencia que quieras realizarnos, ideas que desees compartir con nosotros, ¡estaremos siempre complacidos de escucharte!" />
+                    <Label TextColor="Black" Text="Puedes contactarnos por las siguientes vías:" />
+                    <Label TextColor="Black" Text="• Correo electrónico: contacto@smartsolucionescuba.com" />
+                    <Label TextColor="Black" Text="• Teléfono: (+53) 58641304" />
+                    <Label TextColor="Black" Text="También puedes seguirnos en internet:" />
+                    <Label TextColor="Black" Text="• Web Oficial: www.smartsolucionescuba.com" />
+                    <Label TextColor="Black" Text="• Facebook: www.facebook.com/smartsolucionescuba" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

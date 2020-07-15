@@ -55,7 +55,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             {
                 if ((Detail as Xamarin.Forms.NavigationPage).CurrentPage is HomePage)
                 {
-                    DisplayAlert("Aviso", "Está seguro que desea salir de la aplicación?", "Salir", "Cancelar").ContinueWith((System.Threading.Tasks.Task<bool> task) =>
+                    DisplayAlert("Confirmar", "Está seguro que desea salir de la aplicación?", "Salir", "Cancelar").ContinueWith((System.Threading.Tasks.Task<bool> task) =>
                     {
                         if (task.Result)
                         {

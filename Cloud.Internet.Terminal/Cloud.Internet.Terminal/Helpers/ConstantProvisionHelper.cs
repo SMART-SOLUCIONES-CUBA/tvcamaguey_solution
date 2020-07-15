@@ -26,6 +26,8 @@
 
         public int FluidContainerWidth => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().FluidContainerWidth;
 
+        public int PresentationOverviewHeight => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().PresentationOverviewHeight;
+
         public int RegularProfileImageSize => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().RegularProfileImageSize;
 
         public int OverviewProfileImageSize => Xamarin.Forms.DependencyService.Get<Providers.Facade.IConstantProviderFacade>().OverviewProfileImageSize;

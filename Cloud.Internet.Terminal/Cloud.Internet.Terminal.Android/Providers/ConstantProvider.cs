@@ -6,6 +6,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Droid.Providers
     {
         public int FluidContainerWidth => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.fluid_container_width);
 
+        public int PresentationOverviewHeight => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.presentation_overview_height);
+
         public int RegularProfileImageSize => FluidContainerWidth / 3;
 
         public int OverviewProfileImageSize => Android.App.Application.Context.Resources.GetInteger(Resource.Integer.overview_profile_image_size);

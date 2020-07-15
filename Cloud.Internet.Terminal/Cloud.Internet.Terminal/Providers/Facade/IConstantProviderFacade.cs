@@ -8,6 +8,8 @@
 
         int OverviewProfileImageSize { get; }
 
+        int PresentationOverviewHeight { get; }
+
         int FormGroupRequestWidth { get; }
 
         int FormGroupRequestHeight { get; }

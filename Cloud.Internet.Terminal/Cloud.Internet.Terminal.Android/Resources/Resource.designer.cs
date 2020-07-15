@@ -12949,10 +12949,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Droid
 			public const int post_list_view_item_vertical_template_height = 2131296284;
 			
 			// aapt resource value: 0x7F09001D
-			public const int show_password_duration = 2131296285;
+			public const int presentation_overview_height = 2131296285;
 			
 			// aapt resource value: 0x7F09001E
-			public const int status_bar_notification_info_maxnum = 2131296286;
+			public const int show_password_duration = 2131296286;
+			
+			// aapt resource value: 0x7F09001F
+			public const int status_bar_notification_info_maxnum = 2131296287;
 			
 			static Integer()
 			{
