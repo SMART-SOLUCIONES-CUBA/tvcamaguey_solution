@@ -51,16 +51,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
         private void ListView_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            var target = (e.SelectedItem as Models.View.BasePresentationViewModel).Presentation;
+            var target = (e.SelectedItem as Models.View.BasePresentationViewModel)?.Presentation;
 
-            if (target == null)
-            {
-                (sender as Xamarin.Forms.ListView).SelectedItem = null;
-
-                return;
-            }
+            if (target == null) return;
 
             this.NavigationPushPageAsync(new PresentationDetailPage(target));
+
+            (sender as Xamarin.Forms.ListView).SelectedItem = null;
         }
 
         private void LoadLocalDayPresentations()
@@ -79,7 +76,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
                 {
-                    presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At.Date >= startAt).OrderBy(e => e.At).ToList();
+                    presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At >= startAt).OrderBy(e => e.At).ToList();
 
                     if (presentations.Count > 0)
                     {
@@ -105,21 +102,15 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                    if ((BindingContext as Models.Page.BillboardNextPageModel).DayPresentations == null)
-                    {
-                        (BindingContext as Models.Page.BillboardNextPageModel).DayPresentations = new System.Collections.ObjectModel.ObservableCollection<Models.View.DayPresentationsViewModel>();
-                    }
-
                     if (task.Result.Count > 0)
                     {
-                        var dayPresentationsStack = new System.Collections.Generic.Stack<Models.View.DayPresentationsViewModel>(task.Result.ToDayPresentationsViewModels(startAt.Date, endAt.Date));
+                        var dayPresentationsStack = new System.Collections.Generic.Queue<Models.View.DayPresentationsViewModel>(task.Result.ToDayPresentationsViewModels(startAt.Date, endAt.Date));
 
-                        while (dayPresentationsStack.Count > 0)
-                        {
-                            var dayPresentation = dayPresentationsStack.Pop();
-
-                            (BindingContext as Models.Page.BillboardNextPageModel).DayPresentations.Insert(0, dayPresentation);
-                        }
+                        (BindingContext as Models.Page.BillboardNextPageModel).DayPresentations = new System.Collections.ObjectModel.ObservableCollection<Models.View.DayPresentationsViewModel>(dayPresentationsStack.ToArray());
+                    }
+                    else
+                    {
+                        (BindingContext as Models.Page.BillboardNextPageModel).DayPresentations = new System.Collections.ObjectModel.ObservableCollection<Models.View.DayPresentationsViewModel>();
                     }
 
                     (BindingContext as Models.Page.BillboardNextPageModel).IsBusy = false;
@@ -147,8 +138,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     remoteEntitiesQueue.Enqueue(model.ToPersistenceEntity());
                 }
 
-                var presentations = new System.Collections.Generic.List<Cloud.Persistence.Entities.Presentation>();
-
                 var deleteImageEntities = new System.Collections.Generic.List<SAPRESSC.Middleware.Media.Persistence.Entities.Image>();
 
                 using (var dbContext = Providers.DbContextProvider.Instance.GetDbContext())
@@ -172,8 +161,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     }
 
                     dbContext.SaveChanges(string.Empty, syncronize: false);
-
-                    presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At.Date >= System.DateTime.Now.Date).OrderBy(e => e.At).ToList();
                 }
 
                 try
@@ -184,10 +171,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                     }
                 }
                 catch { }
-
-                return presentations;
-            }).ContinueWith((System.Threading.Tasks.Task<System.Collections.Generic.List<Cloud.Persistence.Entities.Presentation>> task) =>
+            }).ContinueWith(async task =>
             {
+                if (task.Exception != null)
+                {
+                    await Managers.SessionManager.Instance.SaveUpdatedDateTimeAsync();
+                }
+
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     if (task.Exception != null || task.IsCanceled)

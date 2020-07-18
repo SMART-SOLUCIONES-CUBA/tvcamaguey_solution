@@ -21,6 +21,10 @@
             <converters:FlextLayoutToResponsiveItemWidthConverter x:Key="FlextLayoutToResponsiveItemWidth" ItemMinWidth="280" ItemHorizontalMargin="16" />
             <converters:StringToLocalizeStringConverter x:Key="StringToLocalizeString" />
 
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
             <Style x:Key="FormGroup" TargetType="StackLayout">
                 <Setter Property="Margin" Value="8,0,8,16" />
             </Style>

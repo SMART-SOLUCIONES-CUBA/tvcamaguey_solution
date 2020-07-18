@@ -28,8 +28,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.iOS
 
             SQLitePCL.raw.SetProvider(new SQLitePCL.SQLite3Provider_sqlite3());
 
-            Xamarin.Forms.Forms.SetFlags("MediaElement_Experimental");
-
             Xamarin.Forms.Forms.Init();
 
             Xamarin.Forms.PancakeView.iOS.PancakeViewRenderer.Init();

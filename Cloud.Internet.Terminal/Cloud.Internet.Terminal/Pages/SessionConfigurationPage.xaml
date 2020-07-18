@@ -132,7 +132,8 @@
                             TextColor="White" />
                         <renderedviews:HighContrastEntry
                             Margin="0,20,0,0"
-                            Text="{Binding Login}">
+                            Text="{Binding Login}"
+                            Keyboard="Email">
                             <Entry.TextColor>
                                 <OnPlatform x:TypeArguments="Color">
                                     <On Platform="Android" Value="WhiteSmoke" />
@@ -210,7 +211,8 @@
                             TextColor="{StaticResource BrandSecoundaryColor}"
                             FontAttributes="Bold" />
                         <renderedviews:HighContrastEntry
-                            Text="{Binding Token}">
+                            Text="{Binding Token}"
+                            Keyboard="Numeric">
                             <Entry.TextColor>
                                 <OnPlatform x:TypeArguments="Color">
                                     <On Platform="Android" Value="WhiteSmoke" />
@@ -284,7 +286,7 @@
                                 Source="{Binding ProfileImageId, Converter={StaticResource UserImageIdToRegularImageSource}, ConverterParameter={x:Reference ProfilePage}}"
                                 HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                                 WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
-                            <Button
+                            <!--<Button
                                 HorizontalOptions="Center"
                                 BackgroundColor="#33000000"
                                 BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
@@ -294,7 +296,7 @@
                                 FontFamily="Material Design Icons"
                                 Text="&#xf100;"
                                 TextColor="White"
-                                Clicked="PickImageButton_Clicked" />
+                                Clicked="PickImageButton_Clicked" />-->
                         </Grid>
                         <renderedviews:HighContrastEntry
                             PlaceholderColor="LightGray"

@@ -40,8 +40,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                 {
                     var now = System.DateTime.Now;
 
-                    oldPresentations = dbContext.Presentations.Include(e => e.ProductionTeam).ThenInclude(e => e.EmployBridges).ThenInclude(b => b.Employ).ThenInclude(e => e.Identity).ThenInclude(e => e.Image).Where(e => e.ShowId == pageBindingContext.Show.Id && e.At.Date < now).OrderBy(e => e.At).ToList();
-                    nextPresentations = dbContext.Presentations.Include(e => e.ProductionTeam).ThenInclude(e => e.EmployBridges).ThenInclude(b => b.Employ).ThenInclude(e => e.Identity).ThenInclude(e => e.Image).Where(e => e.ShowId == pageBindingContext.Show.Id && e.At.Date >= now).OrderBy(e => e.At).ToList();
+                    oldPresentations = dbContext.Presentations.Include(e => e.ProductionTeam).ThenInclude(e => e.EmployBridges).ThenInclude(b => b.Employ).ThenInclude(e => e.Identity).ThenInclude(e => e.Image).Where(e => e.ShowId == pageBindingContext.Show.Id && e.At < now).OrderBy(e => e.At).ToList();
+                    nextPresentations = dbContext.Presentations.Include(e => e.ProductionTeam).ThenInclude(e => e.EmployBridges).ThenInclude(b => b.Employ).ThenInclude(e => e.Identity).ThenInclude(e => e.Image).Where(e => e.ShowId == pageBindingContext.Show.Id && e.At >= now).OrderBy(e => e.At).ToList();
                 }
 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>

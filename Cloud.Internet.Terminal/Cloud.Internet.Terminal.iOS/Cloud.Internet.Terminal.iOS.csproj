@@ -95,9 +95,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.smartsolucionescuba.*</CodesignProvision>
+    <CodesignKey>Apple Development: SMART SOLUCIONES CUBA (6YLN5N5FG7)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -208,10 +209,7 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.7.0.1080</Version>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Plugin.FilePicker">
-      <Version>2.1.41</Version>
+      <Version>4.7.0.1142</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>1.4.2</Version>
@@ -242,9 +240,6 @@
     <Folder Include="Assets.xcassets\VendorTail.imageset\" />
     <Folder Include="Assets.xcassets\AppLogoSmall.imageset\" />
     <Folder Include="Assets.xcassets\OwnerLogo.imageset\" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

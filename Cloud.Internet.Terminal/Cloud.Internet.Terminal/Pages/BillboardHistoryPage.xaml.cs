@@ -59,7 +59,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                     startAt = startAt.AddDays(-6);
 
-                    presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At.Date >= startAt && e.At.Date <= endAt).OrderBy(e => e.At).ToList();
+                    presentations = dbContext.Presentations.Include(e => e.Show).ThenInclude(e => e.Poster).Where(e => e.At >= startAt && e.At <= endAt).OrderBy(e => e.At).ToList();
                 }
 
                 return presentations;
@@ -100,18 +100,15 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             });
         }
 
-        private void ListView_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs args)
+        private void ListView_ItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            var target = (args.SelectedItem as Models.View.BasePresentationViewModel).Presentation;
+            var target = (e.SelectedItem as Models.View.BasePresentationViewModel)?.Presentation;
 
-            if (target == null)
-            {
-                (sender as Xamarin.Forms.ListView).SelectedItem = null;
-
-                return;
-            }
+            if (target == null) return;
 
             this.NavigationPushPageAsync(new PresentationDetailPage(target));
+
+            (sender as Xamarin.Forms.ListView).SelectedItem = null;
         }
     }
 }

@@ -45,7 +45,13 @@
                         TextColor="Black"
                         FontFamily="Helvetica LT Std Light"
                         MaxLines="5"
-                        LineBreakMode="TailTruncation" />
+                        LineBreakMode="TailTruncation">
+                        <Label.Padding>
+                            <OnPlatform x:TypeArguments="Thickness">
+                                <On Platform="iOS" Value="0,1,0,0" />
+                            </OnPlatform>
+                        </Label.Padding>
+                    </Label>
                     <Label 
                         Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                         TextColor="DarkGray"
@@ -96,7 +102,13 @@
                             TextColor="Black"
                             FontFamily="Helvetica LT Std Light"
                             MaxLines="6"
-                            LineBreakMode="TailTruncation" />
+                            LineBreakMode="TailTruncation">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="0,1,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                             TextColor="DarkGray"
@@ -142,7 +154,13 @@
                             TextColor="Black"
                             FontFamily="Helvetica LT Std Light"
                             MaxLines="4"
-                            LineBreakMode="TailTruncation" />
+                            LineBreakMode="TailTruncation">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="0,1,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                             TextColor="DarkGray"

@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using SmartSolucionesCuba.SAPRESSC.Middleware.Media.Persistence.Entities;
 
 namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 {
 	[Xamarin.Forms.Xaml.XamlCompilation(Xamarin.Forms.Xaml.XamlCompilationOptions.Compile)]
-	public partial class PresentationDetailPage : XFToolKit.Mvvm.Pages.ContentPage
+	public partial class PresentationDetailPage : XFToolKit.Mvvm.Pages.ContentPage, Facade.IImageContextBindingPageFacade
     {
 		public PresentationDetailPage(Cloud.Persistence.Entities.Presentation presentation)
 		{
@@ -22,6 +23,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                 IsBusy = true
 			};
 		}
+
+        public Image BindingContextImage => (BindingContext as Models.Page.PresentationDetailPageModel)?.Show.Poster;
 
         protected override void OnAppearing()
         {

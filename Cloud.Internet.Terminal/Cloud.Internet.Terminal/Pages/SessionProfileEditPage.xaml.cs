@@ -78,6 +78,26 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
             if (action == Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_CAMARA)
             {
+                var permission = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.Camera>();
+
+                if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    permission = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Camera>();
+                }
+
+                if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                {
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    {
+                        DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
+
+                        (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                        (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                    });
+
+                    return;
+                }
+
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     (BindingContext as Models.Page.UserProfilePageModel).IsBusy = true;
@@ -114,6 +134,51 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             }
             else if (action == Helpers.ConstantProvisionHelper.ACTIONSHEET_PICKIMAGE_OPTION_GALLERY)
             {
+                if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+                {
+                    var permission = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.Photos>();
+
+                    if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        permission = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.Photos>();
+                    }
+
+                    if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+                            DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
+
+                            (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                            (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                        });
+
+                        return;
+                    }
+                }
+                else
+                {
+                    var permission = await Xamarin.Essentials.Permissions.CheckStatusAsync<Xamarin.Essentials.Permissions.StorageRead>();
+
+                    if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        permission = await Xamarin.Essentials.Permissions.RequestAsync<Xamarin.Essentials.Permissions.StorageRead>();
+                    }
+
+                    if (permission != Xamarin.Essentials.PermissionStatus.Granted)
+                    {
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+                            DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
+
+                            (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;
+                            (BindingContext as Models.Page.UserProfilePageModel).BusyProgressMessage = string.Empty;
+                        });
+
+                        return;
+                    }
+                }
+
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     (BindingContext as Models.Page.UserProfilePageModel).IsBusy = true;
@@ -124,8 +189,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
 
                 if (!Plugin.Media.CrossMedia.Current.IsPickPhotoSupported)
                 {
-                    await DisplayAlert("Error", "This device is not supported to pick photo.", "OK");
-
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
                         (BindingContext as Models.Page.UserProfilePageModel).IsBusy = false;

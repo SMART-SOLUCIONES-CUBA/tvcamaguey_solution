@@ -14,6 +14,17 @@
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.HomePage"
     Title="Portada"
     x:Name="Page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="UpdateToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    FontFamily="Material Design Icons" 
+                    Glyph="&#xf6ea;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="HasPosterPostDataTemplate">
@@ -99,7 +110,13 @@
                             TextColor="Black"
                             FontFamily="Helvetica LT Std Light"
                             MaxLines="7"
-                            LineBreakMode="TailTruncation" />
+                            LineBreakMode="TailTruncation">
+                            <Label.Padding>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="0,1,0,0" />
+                                </OnPlatform>
+                            </Label.Padding>
+                        </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
                             TextColor="DarkGray"
@@ -125,31 +142,20 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="0,0,0,8" BackgroundColor="#30D3D3D3">
-                <FlexLayout Wrap="Wrap">
+        <RefreshView
+            IsRefreshing="{Binding Path=IsBusy}"
+            Refreshing="RefreshView_Refreshing">
+            <ScrollView>
+                <StackLayout Spacing="0" Padding="0,0,0,8">
                     <Grid
-                        x:Name="AnimationVideoClipContainer"
-                        WidthRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource HomePageWidthToHomeHeaderSectionWidth}}"
-                        HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource HomePageWidthToHomeHeaderSectionHeight}}">
-                        <!--<MediaElement                    
-                            AutoPlay="True"
-                            IsLooping="True"
-                            ShowsPlaybackControls="False"
-                            Aspect="Fill"
-                            Source="ms-appx:///home.mp4" />-->
-                        <BoxView Color="{StaticResource BrandPrimaryColor}" Opacity="0.5" />
-                    </Grid>
-                    <Grid
-                        BackgroundColor="{StaticResource BrandPrimaryColor}"
-                        WidthRequest="{Binding Source={x:Reference AnimationVideoClipContainer}, Path=Width, Mode=OneWay}"
-                        HeightRequest="{Binding Source={x:Reference AnimationVideoClipContainer}, Path=Height, Mode=OneWay}">
+                        Margin="0,0,0,8"
+                        BackgroundColor="{StaticResource BrandPrimaryColor}">
                         <Image
                             Opacity="0.20"
                             Aspect="AspectFill"
                             Source="{Binding Source={x:Static providers:ImageSourceProvider.Instance}, Path=RandomOfficeImageSource}" />
-                        <StackLayout 
-                            Margin="10"
+                        <StackLayout                        
+                            Margin="10,50"
                             VerticalOptions="Center" HorizontalOptions="Center">
                             <Image HorizontalOptions="Center">
                                 <Image.Source>
@@ -189,190 +195,196 @@
                                 FontSize="Title" />
                         </StackLayout>
                     </Grid>
-                </FlexLayout>
-                <StackLayout Padding="8" Spacing="8" Margin="0,16,0,0">
-                    <Grid ColumnSpacing="8" RowSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="1" />
-                        </Grid.RowDefinitions>
-                        <Label 
-                            Grid.Column="0" Grid.Row="0"
-                            Text="&#xfdfa;"
-                            TextColor="Black"
-                            VerticalTextAlignment="Center"
-                            FontFamily="Material Design Icons"
-                            FontSize="Medium" />
-                        <Label 
-                            Grid.Column="1" Grid.Row="0"
-                            Text="Cartelera"
-                            TextColor="Black"
-                            VerticalTextAlignment="Center"
-                            FontFamily="Souvenir Medium"
-                            FontSize="Subtitle" />
-                        <Button
-                            Grid.Column="2" Grid.Row="0"
-                            VerticalOptions="Center"
-                            Text="Ver más"
-                            TextColor="{StaticResource BrandSecoundaryColor}"
-                            BackgroundColor="Transparent"
-                            Clicked="ViewMoreBillboardButton_Clicked" />
-                        <BoxView
-                            Grid.ColumnSpan="3" Grid.Row="1"
-                            Color="DimGray" />
-                    </Grid>
-                    <ScrollView Orientation="Horizontal">
-                        <FlexLayout
-                            BindableLayout.ItemsSource="{Binding Presentations}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <pancake:PancakeView 
-                                        WidthRequest="320" HeightRequest="180"
-                                        Padding="0"
-                                        Margin="8"
-                                        CornerRadius="4">
-                                        <pancake:PancakeView.Shadow>
-                                            <pancake:DropShadow BlurRadius="2" />
-                                        </pancake:PancakeView.Shadow>
-                                        <pancake:PancakeView.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="PresentationsItem_Tapped" />
-                                        </pancake:PancakeView.GestureRecognizers>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition />
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition />
-                                            </Grid.RowDefinitions>
-                                            <ffilforms:CachedImage
-                                                Grid.ColumnSpan="2" Grid.RowSpan="2"
-                                                Aspect="AspectFill"
-                                                Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
-                                            <Grid
-                                                Grid.Column="0" Grid.Row="0"
-                                                Padding="8"
-                                                BackgroundColor="{StaticResource BrandPrimaryOpaqueColor}">
+                    <StackLayout Padding="8,8,8,0" Spacing="8">
+                        <Grid ColumnSpacing="8" RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Label 
+                                Grid.Column="0" Grid.Row="0"
+                                Text="&#xfdfa;"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center"
+                                FontFamily="Material Design Icons"
+                                FontSize="Medium" />
+                            <Label 
+                                Grid.Column="1" Grid.Row="0"
+                                Text="Cartelera"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center"
+                                FontFamily="Souvenir Medium"
+                                FontSize="Subtitle" />
+                            <Button
+                                Grid.Column="2" Grid.Row="0"
+                                VerticalOptions="Center"
+                                Text="Ver más"
+                                TextColor="{StaticResource BrandSecoundaryColor}"
+                                BackgroundColor="Transparent"
+                                Clicked="ViewMoreBillboardButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="3" Grid.Row="1"
+                                Color="DimGray" />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout Spacing="0">
+                        <ScrollView Orientation="Horizontal">
+                            <FlexLayout
+                                Padding="8"
+                                BindableLayout.ItemsSource="{Binding Presentations}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <pancake:PancakeView 
+                                            WidthRequest="320" HeightRequest="180"
+                                            Padding="0"
+                                            Margin="8"
+                                            CornerRadius="4">
+                                            <pancake:PancakeView.Shadow>
+                                                <pancake:DropShadow BlurRadius="2" />
+                                            </pancake:PancakeView.Shadow>
+                                            <pancake:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="PresentationsItem_Tapped" />
+                                            </pancake:PancakeView.GestureRecognizers>
+                                            <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition />
                                                     <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
-                                                    <RowDefinition Height="Auto" />
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
-                                                <Label
-                                                    Grid.ColumnSpan="2" Grid.Row="0"
-                                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="Helvetica LT Std Ultra Compresed"
-                                                    Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
-                                                    TextColor="White"
-                                                    HorizontalTextAlignment="Center" />
-                                                <renderedviews:FontStrechLabel
-                                                    Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
-                                                    HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
-                                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
-                                                    FontFamily="Helvetica LT Std Ultra Compresed"
-                                                    Text="{Binding Path=At, StringFormat='{0:hh}'}"
-                                                    TextColor="White">
-                                                    <Label.Margin>
-                                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
-                                                            <On Platform="Android" Value="0,4,0,0" />
-                                                            <On Platform="UWP" Value="0,2,0,0" />
-                                                        </OnPlatform>
-                                                    </Label.Margin>
-                                                    <Label.Padding>
-                                                        <OnPlatform x:TypeArguments="Thickness" Default="0">
-                                                            <On Platform="iOS" Value="0,14,0,0" />
-                                                        </OnPlatform>
-                                                    </Label.Padding>
-                                                </renderedviews:FontStrechLabel>
-                                                <Label
-                                                    Grid.Column="1" Grid.Row="1"
-                                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="Helvetica LT Std Ultra Compresed"
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Path=At, StringFormat='{0:mm}'}"
-                                                    TextColor="White"
-                                                    VerticalOptions="End" />
-                                                <Label
-                                                    Grid.Column="1" Grid.Row="2"
-                                                    FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                    FontFamily="Helvetica LT Std Ultra Compresed"
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Path=At, StringFormat='{0:tt}'}"
-                                                    TextColor="White"
-                                                    VerticalOptions="Start" />
+                                                <ffilforms:CachedImage
+                                                    Grid.ColumnSpan="2" Grid.RowSpan="2"
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}" />
+                                                <Grid
+                                                    Grid.Column="0" Grid.Row="0"
+                                                    Padding="8"
+                                                    BackgroundColor="{StaticResource BrandPrimaryOpaqueColor}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.ColumnSpan="2" Grid.Row="0"
+                                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                                        FontFamily="Helvetica LT Std Ultra Compresed"
+                                                        Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
+                                                        TextColor="White"
+                                                        HorizontalTextAlignment="Center" />
+                                                    <renderedviews:FontStrechLabel
+                                                        Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
+                                                        HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
+                                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
+                                                        FontFamily="Helvetica LT Std Ultra Compresed"
+                                                        Text="{Binding Path=At, StringFormat='{0:hh}'}"
+                                                        TextColor="White">
+                                                        <Label.Margin>
+                                                            <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                                <On Platform="Android" Value="0,4,0,0" />
+                                                                <On Platform="UWP" Value="0,2,0,0" />
+                                                            </OnPlatform>
+                                                        </Label.Margin>
+                                                        <Label.Padding>
+                                                            <OnPlatform x:TypeArguments="Thickness" Default="0">
+                                                                <On Platform="iOS" Value="0,14,0,0" />
+                                                            </OnPlatform>
+                                                        </Label.Padding>
+                                                    </renderedviews:FontStrechLabel>
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                                        FontFamily="Helvetica LT Std Ultra Compresed"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Path=At, StringFormat='{0:mm}'}"
+                                                        TextColor="White"
+                                                        VerticalOptions="End" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="2"
+                                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
+                                                        FontFamily="Helvetica LT Std Ultra Compresed"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Path=At, StringFormat='{0:tt}'}"
+                                                        TextColor="White"
+                                                        VerticalOptions="Start" />
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </pancake:PancakeView>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </FlexLayout>
-                    </ScrollView>
-                    <ActivityIndicator IsRunning="True" IsVisible="{Binding Presentations, Converter={StaticResource NullToBoolean}}" />
-                    <Label 
-                        Margin="8"
-                        IsVisible="{Binding Presentations, Converter={StaticResource EnumerableEmptyToBoolean}}"
-                        Text="Sin elementos que mostrar"
-                        TextColor="DimGray" />
-                </StackLayout>
-                <StackLayout Padding="8" Spacing="8">
-                    <Grid ColumnSpacing="8" RowSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="1" />
-                        </Grid.RowDefinitions>
+                                        </pancake:PancakeView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </ScrollView>
+                        <ActivityIndicator IsRunning="True" IsVisible="{Binding Presentations, Converter={StaticResource NullToBoolean}}" />
                         <Label 
-                            Grid.Column="0" Grid.Row="0"
-                            Text="&#xf395;"
-                            TextColor="Black"
-                            VerticalTextAlignment="Center"
-                            FontFamily="Material Design Icons"
-                            FontSize="Medium" />
+                            Margin="16,0,16,8"
+                            IsVisible="{Binding Presentations, Converter={StaticResource EnumerableEmptyToBoolean}}"
+                            Text="Sin elementos que mostrar"
+                            TextColor="DimGray" />
+                    </StackLayout>
+                    <StackLayout Padding="8,8,8,0" Spacing="8">
+                        <Grid ColumnSpacing="8" RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Label 
+                                Grid.Column="0" Grid.Row="0"
+                                Text="&#xf395;"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center"
+                                FontFamily="Material Design Icons"
+                                FontSize="Medium" />
+                            <Label 
+                                Grid.Column="1" Grid.Row="0"
+                                Text="Noticias"
+                                TextColor="Black"
+                                VerticalTextAlignment="Center"
+                                FontFamily="Souvenir Medium"
+                                FontSize="Subtitle" />
+                            <Button
+                                Grid.Column="2" Grid.Row="0"
+                                VerticalOptions="Center"
+                                Text="Ver más"
+                                TextColor="{StaticResource BrandSecoundaryColor}"
+                                BackgroundColor="Transparent"
+                                Clicked="ViewMoreNewsButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="3" Grid.Row="1"
+                                Color="DimGray" />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout Spacing="0">
+                        <ScrollView Orientation="Horizontal">
+                            <FlexLayout
+                                Padding="8"
+                                BindableLayout.ItemsSource="{Binding Posts}"
+                                BindableLayout.ItemTemplateSelector="{StaticResource PostCardDataTemplateSelector}"/>
+                        </ScrollView>
+                        <ActivityIndicator IsRunning="True" IsVisible="{Binding Posts, Converter={StaticResource NullToBoolean}}" />
                         <Label 
-                            Grid.Column="1" Grid.Row="0"
-                            Text="Noticias"
-                            TextColor="Black"
-                            VerticalTextAlignment="Center"
-                            FontFamily="Souvenir Medium"
-                            FontSize="Subtitle" />
-                        <Button
-                            Grid.Column="2" Grid.Row="0"
-                            VerticalOptions="Center"
-                            Text="Ver más"
-                            TextColor="{StaticResource BrandSecoundaryColor}"
-                            BackgroundColor="Transparent"
-                            Clicked="ViewMoreNewsButton_Clicked" />
-                        <BoxView
-                            Grid.ColumnSpan="3" Grid.Row="1"
-                            Color="DimGray" />
-                    </Grid>
-                    <ScrollView Orientation="Horizontal">
-                        <FlexLayout
-                            BindableLayout.ItemsSource="{Binding Posts}"
-                            BindableLayout.ItemTemplateSelector="{StaticResource PostCardDataTemplateSelector}"/>
-                    </ScrollView>
-                    <ActivityIndicator IsRunning="True" IsVisible="{Binding Posts, Converter={StaticResource NullToBoolean}}" />
-                    <Label 
-                        Margin="8"
-                        IsVisible="{Binding Posts, Converter={StaticResource EnumerableEmptyToBoolean}}"
-                        Text="Sin elementos que mostrar"
-                        TextColor="DimGray" />
+                            Margin="16,0,16,8"
+                            IsVisible="{Binding Posts, Converter={StaticResource EnumerableEmptyToBoolean}}"
+                            Text="Sin elementos que mostrar"
+                            TextColor="DimGray" />
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </ScrollView>
+            </ScrollView>
+        </RefreshView>
     </ContentPage.Content>
 </sscxftoolkitmvvmpages:ContentPage>

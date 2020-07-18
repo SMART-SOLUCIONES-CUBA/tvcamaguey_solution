@@ -71,9 +71,6 @@
     <PackageReference Include="SSCXFToolKit.Presentation">
       <Version>0.4.5-alpha</Version>
     </PackageReference>
-    <PackageReference Include="Xam.Plugins.Android.ExoPlayer.UI">
-      <Version>2.8.8</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
@@ -83,7 +80,7 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.7.0.1080</Version>
+      <Version>4.7.0.1142</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>1.4.2</Version>
@@ -122,10 +119,6 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\raw\home.mp4">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\xml\file_paths.xml">
       <SubType></SubType>
       <Generator></Generator>
@@ -175,6 +168,26 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable-xxxhdpi\app_splash_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\owner_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-mdpi\owner_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xhdpi\owner_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxhdpi\owner_logo.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\owner_logo.png">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -307,7 +320,6 @@
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\raw\" />
     <Folder Include="Effects\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

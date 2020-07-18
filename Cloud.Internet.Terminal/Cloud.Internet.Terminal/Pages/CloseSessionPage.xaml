@@ -22,9 +22,12 @@
                     <Label
                         Text="En esta sección podrá cerrar su sesión y con ella eliminar localmente los datos especificados en su perfil, configuraciones realizadas a la aplicación, las actualizaciones acumuladas, así como los comentarios, valoraciones, denuncias y otros cambios no sincronizados." />
                     <Button
-                        Text="Cerrar Sesión"
                         HorizontalOptions="Center"
-                        Clicked="CloseSessionButton_Clicked"/>
+                        Padding="16,0"
+                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                        Text="Cerrar Sesión"
+                        TextColor="White"
+                        Clicked="CloseSessionButton_Clicked" />
                 </StackLayout>
             </ScrollView>
             <sscxftoolkitpresentationviews:BusyView />

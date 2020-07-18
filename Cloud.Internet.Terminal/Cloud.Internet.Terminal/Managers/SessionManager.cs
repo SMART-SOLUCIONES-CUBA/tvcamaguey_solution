@@ -10,6 +10,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
         private const string IDENTITY_ID_KEY = "session-identity-id";
         private const string AUTHENTICATION_TYPE_KEY = "session-authentication-type";
         private const string AUTHENTICATION_TOKEN_KEY = "session-authentication-token";
+        private const string LAST_UPDATE_DATETIME_KEY = "last-update-datetime";
+        private const string UPDATE_REQUESTED_FLAG_KEY = "update-requested-flag";
 
         private static SessionManager instance;
 
@@ -51,6 +53,32 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
             }
         }
 
+        public System.DateTime LastUpdateDateTime
+        {
+            get
+            {
+                if (!Xamarin.Forms.Application.Current.Properties.ContainsKey(LAST_UPDATE_DATETIME_KEY))
+                {
+                    return default;
+                }
+
+                return (System.DateTime) Xamarin.Forms.Application.Current.Properties[LAST_UPDATE_DATETIME_KEY];
+            }
+        }
+
+        public bool IsUpdateRequested
+        {
+            get
+            {
+                if (!Xamarin.Forms.Application.Current.Properties.ContainsKey(UPDATE_REQUESTED_FLAG_KEY))
+                {
+                    return false;
+                }
+
+                return (bool) Xamarin.Forms.Application.Current.Properties[UPDATE_REQUESTED_FLAG_KEY];
+            }
+        }
+
         public string Login => Xamarin.Forms.Application.Current.Properties[LOGIN_KEY]?.ToString();
 
         public System.Guid IdentityId => System.Guid.Parse(Xamarin.Forms.Application.Current.Properties[IDENTITY_ID_KEY]?.ToString());
@@ -58,6 +86,20 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Managers
         public string AuthenticationType => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TYPE_KEY]?.ToString();
 
         public string AuthenticationToken => Xamarin.Forms.Application.Current.Properties[AUTHENTICATION_TOKEN_KEY]?.ToString();
+
+        public async System.Threading.Tasks.Task SaveUpdatedDateTimeAsync()
+        {
+            Xamarin.Forms.Application.Current.Properties[LAST_UPDATE_DATETIME_KEY] = System.DateTime.Now;
+
+            await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+        }
+
+        public async System.Threading.Tasks.Task SaveUpdateRequestedAsync()
+        {
+            Xamarin.Forms.Application.Current.Properties[UPDATE_REQUESTED_FLAG_KEY] = true;
+
+            await Xamarin.Forms.Application.Current.SavePropertiesAsync();
+        }
 
         public async System.Threading.Tasks.Task<string> RegisterAsync(string login)
         {

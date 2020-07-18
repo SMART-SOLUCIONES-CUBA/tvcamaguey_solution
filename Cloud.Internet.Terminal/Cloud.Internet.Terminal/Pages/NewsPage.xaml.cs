@@ -163,8 +163,13 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
                 catch { }
 
                 return posts;
-            }).ContinueWith((System.Threading.Tasks.Task<System.Collections.Generic.List<Internet.Persistence.Entities.Post>> task) =>
+            }).ContinueWith(async task =>
             {
+                if (task.Exception != null)
+                {
+                    await Managers.SessionManager.Instance.SaveUpdatedDateTimeAsync();
+                }
+
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
                     if (task.Exception != null || task.IsCanceled)

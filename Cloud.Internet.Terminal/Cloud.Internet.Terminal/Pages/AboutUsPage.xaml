@@ -75,6 +75,7 @@
             <converters:FlextLayoutToResponsiveItemWidthConverter x:Key="FlextLayoutToResponsiveItemWidth" ItemMinWidth="280" ItemHorizontalMargin="16" />
 
             <Style x:Key="FlexContactContainer" TargetType="StackLayout">
+                <Setter Property="Padding" Value="0,20" />
                 <Setter Property="WidthRequest" Value="{Binding Source={x:Reference ResponsiveWrapper}, Path=Width, Converter={StaticResource FlextLayoutToResponsiveItemWidth}}" />
             </Style>
         </ContentPage.Resources>
@@ -114,6 +115,13 @@
                                         HorizontalTextAlignment="Center"
                                         Text="Puede contactanos vía telefónica en el horario de 9:00 am a 4:30 pm de lunes a viernes. Le atenderemos con gusto."
                                         TextColor="DimGray" />
+                                    <Button
+                                        HorizontalOptions="Center"
+                                        Padding="16,0"
+                                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                                        Text="Llamar"
+                                        TextColor="White"
+                                        Clicked="VendorPhoneButton_Clicked" />
                                 </StackLayout>
                                 <StackLayout Style="{StaticResource FlexContactContainer}">
                                     <Label
@@ -131,6 +139,13 @@
                                         HorizontalTextAlignment="Center"
                                         Text="Puede contactanos vía telefónica en el horario de 9:00 am a 4:30 pm de lunes a viernes. Le atenderemos con gusto."
                                         TextColor="DimGray" />
+                                    <Button
+                                        HorizontalOptions="Center"
+                                        Padding="16,0"
+                                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                                        Text="Escribir"
+                                        TextColor="White"
+                                        Clicked="VendorEmailButton_Clicked" />
                                 </StackLayout>
                                 <StackLayout Style="{StaticResource FlexContactContainer}">
                                     <Label
@@ -148,6 +163,13 @@
                                         HorizontalTextAlignment="Center"
                                         Text="Puede contactanos vía telefónica en el horario de 9:00 am a 4:30 pm de lunes a viernes. Le atenderemos con gusto."
                                         TextColor="DimGray" />
+                                    <Button
+                                        HorizontalOptions="Center"
+                                        Padding="16,0"
+                                        BackgroundColor="{StaticResource BrandSecoundaryColor}"
+                                        Text="Ubicar"
+                                        TextColor="White"
+                                        Clicked="VendorMapButton_Clicked" />
                                 </StackLayout>
                             </FlexLayout>
                         </StackLayout>

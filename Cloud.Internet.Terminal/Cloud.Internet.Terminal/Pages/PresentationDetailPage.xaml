@@ -6,15 +6,16 @@
     xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:helpers="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Helpers"
     xmlns:ffilforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:ffiltransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftoolkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     xmlns:sscxftoolkitpresentationconverters="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Converters;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.PresentationDetailPage"
+    x:Name="Page"
     Title="Presentación">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:EmployToImageSourceConverter x:Key="EmployToImageSource" />
+            <converters:PageWidthToPreservedImageAspectRatioHeightConverter x:Key="PageWidthToPreservedImageAspectRatioHeight" ImageContextBindingPage="{x:Reference Page}" />
             <converters:DateTimeToInvarianCultureRelativeDateTimeStringConverter x:Key="DateTimeToInvarianCultureRelativeDateTimeString" />
             <converters:ImageEntityToImageSourceConverter x:Key="ImageEntityToImageSource" />
             <sscxftoolkitpresentationconverters:NotNullToBooleanConverter x:Key="NotNullToBoolean" />
@@ -24,24 +25,11 @@
         <Grid>
             <ScrollView>
                 <StackLayout>
-                    <Grid>
-                        <ffilforms:CachedImage
-                            WidthRequest="{Binding Source={x:Reference PosterImageView}, Path=Width}"
-                            Aspect="AspectFill"
-                            Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
-                            CacheType="All"
-                            CacheDuration="8760:00:00">
-                            <ffilforms:CachedImage.Transformations>
-                                <ffiltransformations:BlurredTransformation />
-                            </ffilforms:CachedImage.Transformations>
-                        </ffilforms:CachedImage>
-                        <ffilforms:CachedImage
-                            x:Name="PosterImageView"
-                            HorizontalOptions="Center"
-                            Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
-                            CacheType="All"
-                            CacheDuration="8760:00:00" />
-                    </Grid>
+                    <ffilforms:CachedImage
+                        Source="{Binding Path=Show.Poster, Converter={StaticResource ImageEntityToImageSource}}"
+                        CacheType="All"
+                        CacheDuration="8760:00:00"
+                        HeightRequest="{Binding Source={x:Reference Page}, Path=Width, Converter={StaticResource PageWidthToPreservedImageAspectRatioHeight}}"/>
                     <Label
                         Margin="8"
                         HorizontalTextAlignment="Center"

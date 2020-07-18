@@ -64,8 +64,7 @@
                                 Source="{Binding Path=Author, Converter={StaticResource EmployToImageSource}}"
                                 BorderThickness="0.75"
                                 BorderColor="DimGray"
-                                WidthRequest="34"
-                                HeightRequest="34" />
+                                HeightRequest="72" />
                             <Label
                                 Grid.Column="1" Grid.Row="0"
                                 Text="{Binding Path=Author.Identity.Name}"
@@ -73,7 +72,7 @@
                                 FontSize="Caption">
                                 <Label.Margin>
                                     <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="iOS" Value="0,2,0,0" />
+                                        <On Platform="iOS" Value="0,2,0,1" />
                                     </OnPlatform>
                                 </Label.Margin>
                             </Label>
@@ -84,7 +83,7 @@
                                 FontSize="Caption">
                                 <Label.Margin>
                                     <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="iOS" Value="0,0,0,2" />
+                                        <On Platform="iOS" Value="0,1,0,2" />
                                     </OnPlatform>
                                 </Label.Margin>
                             </Label>

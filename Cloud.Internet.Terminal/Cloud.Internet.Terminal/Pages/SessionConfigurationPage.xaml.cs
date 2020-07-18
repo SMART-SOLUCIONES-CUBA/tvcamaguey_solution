@@ -181,54 +181,55 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             });            
         }
 
-        private void PickImageButton_Clicked(object sender, System.EventArgs eventArgs)
-        {
-            string[] fileSelector = null;
+        //private void PickImageButton_Clicked(object sender, System.EventArgs eventArgs)
+        //{
+        //    string[] fileSelector = null;
 
-            switch (Xamarin.Forms.Device.RuntimePlatform)
-            {
-                case Xamarin.Forms.Device.Android:
-                    fileSelector = new string[] { "image/*" };
+        //    switch (Xamarin.Forms.Device.RuntimePlatform)
+        //    {
+        //        case Xamarin.Forms.Device.Android:
+        //            fileSelector = new string[] { "image/*" };
 
-                    break;
+        //            break;
 
-                case Xamarin.Forms.Device.UWP:
-                    fileSelector = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
+        //        case Xamarin.Forms.Device.UWP:
+        //            fileSelector = new string[] { ".jpg", ".jpeg", ".png", ".bmp" };
 
-                    break;
-            }
+        //            break;
+        //    }
 
-            var userEssentialProfileEditionPageModel = (sender as Xamarin.Forms.BindableObject).BindingContext as Models.Page.UserEssentialProfileEditionPageModel;
+        //    var userEssentialProfileEditionPageModel = (sender as Xamarin.Forms.BindableObject).BindingContext as Models.Page.UserEssentialProfileEditionPageModel;
 
-            userEssentialProfileEditionPageModel.IsBusy = true;
+        //    userEssentialProfileEditionPageModel.IsBusy = true;
 
-            Plugin.FilePicker.CrossFilePicker.Current.PickFile(fileSelector).ContinueWith((System.Threading.Tasks.Task<Plugin.FilePicker.Abstractions.FileData> pickFileTask) =>
-            {
-                if (pickFileTask.Result != null)
-                {
-                    var newImageExtension = System.IO.Path.GetExtension(pickFileTask.Result.FileName);
+        //    // TODO Replace width new implementation from EditSessionProfilePage
+        //    //Plugin.FilePicker.CrossFilePicker.Current.PickFile(fileSelector).ContinueWith((System.Threading.Tasks.Task<Plugin.FilePicker.Abstractions.FileData> pickFileTask) =>
+        //    //{
+        //    //    if (pickFileTask.Result != null)
+        //    //    {
+        //    //        var newImageExtension = System.IO.Path.GetExtension(pickFileTask.Result.FileName);
 
-                    var newImageId = System.Guid.NewGuid();
+        //    //        var newImageId = System.Guid.NewGuid();
 
-                    using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, newImageExtension)))
-                    {
-                        var pickImageFileStream = pickFileTask.Result.GetStream();
+        //    //        using (var profileImageFileStream = System.IO.File.OpenWrite(Helpers.LocalFileStorageHelper.GetImageFilePath(newImageId, newImageExtension)))
+        //    //        {
+        //    //            var pickImageFileStream = pickFileTask.Result.GetStream();
 
-                        pickImageFileStream.Position = 0;
+        //    //            pickImageFileStream.Position = 0;
 
-                        pickImageFileStream.CopyTo(profileImageFileStream);
-                    }
+        //    //            pickImageFileStream.CopyTo(profileImageFileStream);
+        //    //        }
 
-                    userEssentialProfileEditionPageModel.ProfileImageExtension = newImageExtension;
-                    userEssentialProfileEditionPageModel.ProfileImageId = newImageId;
-                }
+        //    //        userEssentialProfileEditionPageModel.ProfileImageExtension = newImageExtension;
+        //    //        userEssentialProfileEditionPageModel.ProfileImageId = newImageId;
+        //    //    }
 
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                {
-                    userEssentialProfileEditionPageModel.IsBusy = false;
-                });
-            });
-        }
+        //    //    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+        //    //    {
+        //    //        userEssentialProfileEditionPageModel.IsBusy = false;
+        //    //    });
+        //    //});
+        //}
 
         private void CarouselPage_CurrentPageChanged(object sender, System.EventArgs e)
         {
