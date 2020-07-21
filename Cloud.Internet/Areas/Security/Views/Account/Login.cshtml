@@ -93,7 +93,9 @@
 
     @Html.ValidationSummary(true)
 
-    <h1 class="h3 mb-3 font-weight-normal">Control de Acceso</h1>
+    <h2 class="h2 mb-5 font-weight-normal">TuTV Camagüey</h2>
+
+    <h5 class="h5 mb-3 font-weight-normal">Control de Acceso</h5>
 
     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Usuario" })
 
@@ -115,5 +117,4 @@
         </label>
     </div>
     <button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 }

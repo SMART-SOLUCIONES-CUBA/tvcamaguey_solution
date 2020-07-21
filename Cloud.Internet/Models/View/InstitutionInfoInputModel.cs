@@ -10,10 +10,10 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Models.View
         [Required, Display(Name = "History")]
         public string History { get; set; }
 
-        [Required, Display(Name = "Phone")]
+        [Required, Phone, Display(Name = "Phone")]
         public string ContactPhoneNumber { get; set; }
 
-        [Required, Display(Name = "Email")]
+        [Required, EmailAddress, Display(Name = "Email")]
         public string ContactEmailAddress { get; set; }
 
         [Required, Display(Name = "PostalAddress")]

@@ -8,7 +8,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Controllers.Frontend
     {
         public Microsoft.AspNetCore.Mvc.IActionResult Index()
         {
-            return RedirectToAction("index", "dashboard");
+            return View();
         }
     }
 }

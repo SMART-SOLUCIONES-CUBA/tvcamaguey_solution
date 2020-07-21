@@ -420,4 +420,7 @@
   <data name="PostedAt" xml:space="preserve">
     <value>Fecha y Hora de Publicación</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
 </root>

@@ -1,0 +1,361 @@
+﻿@model SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Models.View.InstitutionInfoDisplayModel
+
+@{
+    ViewData["Title"] = GlobalViewLocalizationHelper.Localize("Home", ViewLocalizer);
+}
+
+@section styles {
+    <style type="text/css">
+        @@font-face {
+            font-family: 'Souvenir Lt BT';
+            font-style: normal;
+            font-weight: 400;
+            font-display: auto;
+            src: url("/fonts/SOUVNRD.ttf");
+        }
+
+        .container {
+            max-width: 960px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /*
+         * Custom translucent site header
+         */
+
+        .site-header, .site-footer {
+            background-color: #eea055;
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            backdrop-filter: saturate(180%) blur(20px);
+        }
+
+            .site-header a, .site-footer a {
+                color: #fff;
+                transition: ease-in-out color .15s;
+            }
+
+                .site-header a:hover, .site-footer a:hover {
+                    color: #800000;
+                    text-decoration: none;
+                }
+
+        /*
+         * Dummy devices (replace them with your own or something else entirely!)
+         */
+
+        .product-device {
+            position: absolute;
+            right: 10%;
+            bottom: -30%;
+            width: 300px;
+            height: 540px;
+            background-color: #333;
+            border-radius: 21px;
+            -webkit-transform: rotate(30deg);
+            transform: rotate(30deg);
+        }
+
+            .product-device::before {
+                position: absolute;
+                top: 10%;
+                right: 10px;
+                bottom: 10%;
+                left: 10px;
+                content: "";
+                background-color: rgba(255, 255, 255, .1);
+                border-radius: 5px;
+            }
+
+        .product-device-2 {
+            top: -25%;
+            right: auto;
+            bottom: 0;
+            left: 5%;
+            background-color: #e5e5e5;
+        }
+
+
+        /*
+         * Extra utilities
+         */
+
+        .flex-equal > * {
+            -ms-flex: 1;
+            flex: 1;
+        }
+
+        @@media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+
+            .flex-md-equal > * {
+                -ms-flex: 1;
+                flex: 1;
+            }
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+    </style>
+}
+
+<nav id="start" class="site-header sticky-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="#start" aria-label="Product">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10" /><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" href="#about">Acerca de</a>
+        <a class="py-2 d-none d-md-inline-block" href="#tour">Recorrido</a>
+        <a class="py-2 d-none d-md-inline-block" href="#features">Características</a>
+        <a class="py-2 d-none d-md-inline-block" href="#download">Descarga</a>
+        <a class="py-2 d-none d-md-inline-block" href="#support">Soporte</a>
+    </div>
+</nav>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center" style="background-color: #800000;">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <img src="~/img/app-splash-logo.png" class="mb-3" />
+        <h1 class="display-5 font-weight-normal" style="font-family: Souvenir Lt BT;"><span style="color: lightgray;">TuTV</span> <span style="color: white;">Camagüey</span></h1>
+        <p class="lead font-weight-normal" style="color: white;">Nuestra plataforma social creada para estar más cerca de ti.</p>
+        <a class="btn btn-primary" href="#download">Descargar</a>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
+
+<div id="about" class="pl-3 pr-3 pt-5">
+    <h1>Acerca de</h1>
+    <hr class="mt-0" />
+</div>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3">
+    <div class="row">
+        <div class="col-lg-6 d-flex justify-content-center align-items-center">
+            <img src="~/img/vendor-logo.png" class="m-3" />
+        </div>
+        <div class="col-lg-6">
+            <div class="m-3">
+                <p class="lead">Esta aplicación permite a Televisión Camagüey divulgar la información relacionada con la cartelera, programas y noticias, así como información de la institución, sus trabajadores y datos de contacto.</p>
+                <p class="lead">Satisfacer necesidades informativas, culturales, educativas de entretenimiento de la comunidad camagüeyana, a través de una programación competitiva y participativa en correspondencia con los valores tradicionales y los principios de la Revolución Socialista, contribuyendo a proyectar al pueblo la verdadera imagen de la provincia.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tour" class="pl-3 pr-3 pt-5">
+    <h1>Recorrido</h1>
+    <hr class="mt-0" />
+</div>
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div id="features" class="pl-3 pr-3 pt-5">
+    <h1>Características</h1>
+    <hr class="mt-0" />
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 py-3">
+            <h2 class="display-5">Another headline</h2>
+            <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<div id="download" class="pl-3 pr-3 pt-5">
+    <h1>Descarga</h1>
+    <hr class="mt-0" />
+</div>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-3 mb-sm-0 shadow-sm">
+                <div style="background-color: #55595c;">
+                    <span class="fab fa-5x fa-apple text-light mx-auto my-5"></span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Versión 0.1.0-beta</p>
+                    <p class="card-text">(68.23 MB)</p>
+                    <a href="https://itunes.apple.com/32asd1231asdasdas"><img src="~/img/appstore-link.png" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-3 mb-sm-0 shadow-sm">
+                <div style="background-color: #55595c;">
+                    <span class="fab fa-5x fa-android text-light mx-auto my-5"></span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Versión 0.1.0-beta</p>
+                    <p class="card-text">(68.23 MB)</p>
+                    <a href="https://apklis.cu/32asd1231asdasdas"><img src="~/img/apklist-link.png" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div style="background-color: #55595c;">
+                    <span class="fab fa-5x fa-windows text-light mx-auto my-5"></span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Versión 0.1.0-beta</p>
+                    <p class="card-text">(68.23 MB)</p>
+                    <a href="#" class="btn btn-lg btn-outline-primary"><span class="fas fa-download mr-2"></span>Instalador</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="support" class="pl-3 pr-3 pt-5">
+    <h1>Soporte</h1>
+    <hr class="mt-0" />
+</div>
+
+<div class="pl-3 pr-3">
+    <p class="lead">Si tienes cualquier pregunta, comentario o sugerencia que quieras realizarnos, ideas que desees compartir con nosotros, ¡estaremos siempre complacidos de escucharte!</p>
+    <p>Puedes contactarnos por las siguientes vías:</p>
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <img src="~/img/vendor-logo.png" class="mb-3" />
+            <p class="lead"><b>Televisión Camagüey</b> es la entidad rectora de la aplicación y de los contenidos que son distribuidos mediante la plataforma.</p>
+            <a class="btn btn-link" href="http://www.tvcamaguey.icrt.cu"><span class="fas fa-globe mr-2"></span>Sitio Web</a>
+            <a class="btn btn-link" href="mailto:contacto@tvcamaguey.icrt.cu"><span class="fas fa-mail-bulk mr-2"></span>Email</a>
+            <a class="btn btn-link" href="https://www.youtube.com/user/tvcamaguey"><span class="fab fa-youtube mr-2"></span>Youtube</a>
+            <a class="btn btn-link" href="https://www.facebook.com/camagueytv"><span class="fab fa-facebook mr-2"></span>Facebook</a>
+            <a class="btn btn-link" href="https://www.instagram.com/tvcamaguey/"><span class="fab fa-instagram mr-2"></span>Instagram</a>
+            <a class="btn btn-link" href="https://twitter.com/tvcamaguey"><span class="fab fa-twitter mr-2"></span>Twitter</a>
+        </div>
+    </div>
+    <div class="mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 py-3">
+            <img src="~/img/owner-logo.png" class="mb-3" />
+            <p class="lead"><b>SMART SOLUCIONES CUBA</b> representa al equipo de desarrollo encargado de la realización, mantenimiento y actualización del sistema.</p>
+            <a class="btn btn-link" href="http://www.smartsolucionescuba.com"><span class="fas fa-globe mr-2"></span>Sitio Web</a>
+            <a class="btn btn-link" href="mailto:contacto@smartsolucionescuba.com"><span class="fas fa-mail-bulk mr-2"></span>Email</a>
+            <a class="btn btn-link" href="https://www.facebook.com/smartsolucionescuba"><span class="fab fa-facebook mr-2"></span>Facebook</a>
+            <a class="btn btn-link" href="https://t.me/smartsolucionescuba"><span class="fab fa-telegram mr-2"></span>Telegram</a>
+            <a class="btn btn-link" href="https://twitter.com/smartSoluc_cuba"><span class="fab fa-twitter mr-2"></span>Twitter</a>
+        </div>
+    </div>
+</div>
+
+@*<footer class="site-footer">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10" /><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
+                <small class="d-block mb-3">&copy; 2019-2020</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a href="#">Cool stuff</a></li>
+                    <li><a href="#">Random feature</a></li>
+                    <li><a href="#">Team feature</a></li>
+                    <li><a href="#">Stuff for developers</a></li>
+                    <li><a href="#">Another one</a></li>
+                    <li><a href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a href="#">Resource</a></li>
+                    <li><a href="#">Resource name</a></li>
+                    <li><a href="#">Another resource</a></li>
+                    <li><a href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Government</a></li>
+                    <li><a href="#">Gaming</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>*@

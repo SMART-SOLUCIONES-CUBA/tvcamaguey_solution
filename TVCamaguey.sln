@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.102
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Persistence", "Cloud.Persistence\Cloud.Persistence.csproj", "{E5BEBD51-3860-4C5A-912F-5F70A25EF114}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Common", "Cloud.Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Internet.Persistence.EF", "Cloud.Internet.Persistence.EF\Cloud.Internet.Persistence.EF.csproj", "{00F54115-6E14-4346-86B3-39464F717DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloud.Syncronization.Handling.Common", "Cloud.Syncronization.Handling.Common\Cloud.Syncronization.Handling.Common.csproj", "{869273AA-AEA1-45F8-85CE-A2F052E5367C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloud.Syncronization.Handling.Common", "Cloud.Syncronization.Handling.Common\Cloud.Syncronization.Handling.Common.csproj", "{869273AA-AEA1-45F8-85CE-A2F052E5367C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

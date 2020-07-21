@@ -93,7 +93,11 @@
 
     @Html.ValidationSummary(true)
 
-    <h1 class="h3 mb-3 font-weight-normal">Control de Acceso</h1>
+    <img src="~/img/vendor-logo.png" class="mb-4" />
+
+    <h2 class="h2 mb-5 font-weight-normal">Sistema de Gestión Interna</h2>
+
+    <h5 class="h5 mb-3 font-weight-normal">Control de Acceso</h5>
 
     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Usuario" })
 
@@ -101,12 +105,12 @@
 
     @if (Context.Session.Keys.Contains(SmartSolucionesCuba.SAPRESSC.Core.Web.Security.HttpSessionMapKeys.CaptchaCodeKey))
     {
-    <div style="margin:20px 0; text-align: left;">
-        @Html.LabelFor(model => model.CaptchaCode, new { @class = "control-label", style = "text-align: left;" })
-        <img class="img-thumbnail mb-2" src="@Url.Action("captcha")" width="180" height="60" />
-        @Html.TextBoxFor(model => model.CaptchaCode, new { @class = "form-control", placeholder="Entre aquí las 8 letras en la imagen" })
-        @Html.ValidationMessageFor(model => model.CaptchaCode, null, new { @class = "text-danger" })
-    </div>
+        <div style="margin:20px 0; text-align: left;">
+            @Html.LabelFor(model => model.CaptchaCode, new { @class = "control-label", style = "text-align: left;" })
+            <img class="img-thumbnail mb-2" src="@Url.Action("captcha")" width="180" height="60" />
+            @Html.TextBoxFor(model => model.CaptchaCode, new { @class = "form-control", placeholder = "Entre aquí las 8 letras en la imagen" })
+            @Html.ValidationMessageFor(model => model.CaptchaCode, null, new { @class = "text-danger" })
+        </div>
     }
 
     <div class="checkbox mb-3">
@@ -115,5 +119,4 @@
         </label>
     </div>
     <button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 }
