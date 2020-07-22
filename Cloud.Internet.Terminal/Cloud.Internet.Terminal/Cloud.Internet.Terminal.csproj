@@ -70,7 +70,7 @@
     
   <ItemGroup>
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
     <PackageReference Include="SAPRESSC.Middleware.Identity.Syncronization.Handling.Persistence.EF" Version="0.0.3-alpha" />
     <PackageReference Include="SAPRESSC.Syncronization.Api.Connect.Reception" Version="0.0.2-alpha" />
     <PackageReference Include="SAPRESSC.Syncronization.Persistence.EF" Version="0.0.6-alpha" />
@@ -160,7 +160,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Fonts\" />
     <Folder Include="Views\Custom\" />
     <Folder Include="Pages\Facade\" />
     <Folder Include="Effects\" />

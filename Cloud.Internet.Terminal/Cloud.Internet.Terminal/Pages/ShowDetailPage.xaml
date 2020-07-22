@@ -33,8 +33,12 @@
                         <Label
                             Text="{Binding Path=Show.Name}"
                             TextColor="{StaticResource BrandPrimaryColor}"
-                            FontSize="Title"
-                            FontFamily="Helvetica LT Std Condensed">
+                            FontSize="Title">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                     <On Platform="iOS" Value="0,4,0,0" />
@@ -84,17 +88,26 @@
                                         <Label
                                             Grid.ColumnSpan="2" Grid.Row="0"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
                                             TextColor="White"
-                                            HorizontalTextAlignment="Center" />
+                                            HorizontalTextAlignment="Center">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                         <renderedviews:FontStrechLabel
                                             Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
                                             HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             Text="{Binding Path=At, StringFormat='{0:hh}'}"
                                             TextColor="White">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
                                             <Label.Margin>
                                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                                     <On Platform="Android" Value="0,4,0,0" />
@@ -110,19 +123,29 @@
                                         <Label
                                             Grid.Column="1" Grid.Row="1"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             FontAttributes="Bold"
                                             Text="{Binding Path=At, StringFormat='{0:mm}'}"
                                             TextColor="White"
-                                            VerticalOptions="End" />
+                                            VerticalOptions="End">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                         <Label
                                             Grid.Column="1" Grid.Row="2"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             FontAttributes="Bold"
                                             Text="{Binding Path=At, StringFormat='{0:tt}'}"
                                             TextColor="White"
-                                            VerticalOptions="Start" />
+                                            VerticalOptions="Start">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                     </Grid>
                                     <Label
                                         Grid.Column="1"
@@ -182,17 +205,26 @@
                                         <Label
                                             Grid.ColumnSpan="2" Grid.Row="0"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
                                             TextColor="White"
-                                            HorizontalTextAlignment="Center" />
+                                            HorizontalTextAlignment="Center">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                         <renderedviews:FontStrechLabel
                                             Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
                                             HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             Text="{Binding Path=At, StringFormat='{0:hh}'}"
                                             TextColor="White">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
                                             <Label.Margin>
                                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                                     <On Platform="Android" Value="0,4,0,0" />
@@ -208,19 +240,29 @@
                                         <Label
                                             Grid.Column="1" Grid.Row="1"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             FontAttributes="Bold"
                                             Text="{Binding Path=At, StringFormat='{0:mm}'}"
                                             TextColor="White"
-                                            VerticalOptions="End" />
+                                            VerticalOptions="End">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                         <Label
                                             Grid.Column="1" Grid.Row="2"
                                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                            FontFamily="Helvetica LT Std Ultra Compresed"
                                             FontAttributes="Bold"
                                             Text="{Binding Path=At, StringFormat='{0:tt}'}"
                                             TextColor="White"
-                                            VerticalOptions="Start" />
+                                            VerticalOptions="Start">
+                                            <Label.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                </OnPlatform>
+                                            </Label.FontFamily>
+                                        </Label>
                                     </Grid>
                                     <Label
                                         Grid.Column="1"

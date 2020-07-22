@@ -39,8 +39,12 @@
                         <Label
                             Text="{Binding Path=Show.Name}"
                             TextColor="{StaticResource BrandPrimaryColor}"
-                            FontSize="Title"
-                            FontFamily="Helvetica LT Std Condensed">
+                            FontSize="Title">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                     <On Platform="iOS" Value="0,4,0,0" />

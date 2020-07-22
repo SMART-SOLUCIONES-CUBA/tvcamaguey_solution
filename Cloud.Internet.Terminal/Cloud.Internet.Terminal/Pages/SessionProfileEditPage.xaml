@@ -35,8 +35,18 @@
             Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf12c;" />
+                    Glyph="&#xf12c;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
@@ -44,8 +54,18 @@
             Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf156;" />
+                    Glyph="&#xf156;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -70,10 +90,15 @@
                             WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                             BorderRadius="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=2}"
                             FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
-                            FontFamily="Material Design Icons"
                             Text="&#xf100;"
                             TextColor="White"
-                            Clicked="PickImageButton_Clicked" />
+                            Clicked="PickImageButton_Clicked">
+                            <Button.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                    <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                </OnPlatform>
+                            </Button.FontFamily>
+                        </Button>
                     </Grid>
                     <FlexLayout
                         x:Name="ResponsiveWrapper"

@@ -30,9 +30,13 @@
                         Text="{Binding  Path=Post.Title}"
                         TextColor="Black"
                         FontSize="Title"
-                        FontFamily="Helvetica LT Std Condensed"
                         MaxLines="2"
                         LineBreakMode="TailTruncation">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                            </OnPlatform>
+                        </Label.FontFamily>
                         <Label.Padding>
                             <OnPlatform x:TypeArguments="Thickness" Default="0">
                                 <On Platform="iOS" Value="0,4,0,0" />
@@ -43,9 +47,13 @@
                         VerticalOptions="StartAndExpand"
                         Text="{Binding Path=Post.Summary}"
                         TextColor="Black"
-                        FontFamily="Helvetica LT Std Light"
                         MaxLines="5"
                         LineBreakMode="TailTruncation">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Light">
+                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Light.otf#Helvetica LT Std" />
+                            </OnPlatform>
+                        </Label.FontFamily>
                         <Label.Padding>
                             <OnPlatform x:TypeArguments="Thickness">
                                 <On Platform="iOS" Value="0,1,0,0" />
@@ -54,8 +62,13 @@
                     </Label>
                     <Label 
                         Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                        TextColor="DarkGray"
-                        FontFamily="Helvetica LT Std Compresed" />
+                        TextColor="DarkGray">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
                 </StackLayout>
             </DataTemplate>
             <DataTemplate x:Key="HasHorizontalPosterPostDataTemplate">
@@ -81,9 +94,13 @@
                         Text="{Binding Path=Post.Title}"
                         TextColor="Black"
                         FontSize="Title"
-                        FontFamily="Helvetica LT Std Condensed"
                         MaxLines="2"
-                        LineBreakMode="TailTruncation">                        
+                        LineBreakMode="TailTruncation">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                            </OnPlatform>
+                        </Label.FontFamily>
                         <Label.Padding>
                             <OnPlatform x:TypeArguments="Thickness" Default="0">
                                 <On Platform="iOS" Value="0,4,0,0" />
@@ -100,9 +117,13 @@
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="Helvetica LT Std Light"
                             MaxLines="6"
                             LineBreakMode="TailTruncation">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Light">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Light.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="iOS" Value="0,1,0,0" />
@@ -111,8 +132,13 @@
                         </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                            TextColor="DarkGray"
-                            FontFamily="Helvetica LT Std Compresed" />
+                            TextColor="DarkGray">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -139,9 +165,13 @@
                             Text="{Binding Path=Post.Title}"
                             TextColor="Black"
                             FontSize="Title"
-                            FontFamily="Helvetica LT Std Condensed"
                             MaxLines="3"
                             LineBreakMode="TailTruncation">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                     <On Platform="iOS" Value="0,4,0,0" />
@@ -152,9 +182,13 @@
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="Helvetica LT Std Light"
                             MaxLines="4"
                             LineBreakMode="TailTruncation">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Light">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Light.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="iOS" Value="0,1,0,0" />
@@ -163,8 +197,13 @@
                         </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                            TextColor="DarkGray"
-                            FontFamily="Helvetica LT Std Compresed" />
+                            TextColor="DarkGray">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
                     </StackLayout>
                 </Grid>
             </DataTemplate>
@@ -181,8 +220,18 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf6ea;" />
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

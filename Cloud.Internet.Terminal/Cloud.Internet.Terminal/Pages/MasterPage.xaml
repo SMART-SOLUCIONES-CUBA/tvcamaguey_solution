@@ -22,8 +22,18 @@
     </ContentPage.Resources>
     <ContentPage.IconImageSource>
         <FontImageSource
-            Glyph="&#xf35c;"
-            FontFamily="Material Design Icons" />
+            Glyph="&#xf35c;">
+            <FontImageSource.Color>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="UWP" Value="Black" />
+                </OnPlatform>
+            </FontImageSource.Color>
+            <FontImageSource.FontFamily>
+                <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                    <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                </OnPlatform>
+            </FontImageSource.FontFamily>
+        </FontImageSource>
     </ContentPage.IconImageSource>
     <ContentPage.Content>
         <Grid
@@ -92,18 +102,41 @@
                     </DataTemplate>
                 </ListView.HeaderTemplate>
                 <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <renderedviews:ResponsiveImageCell 
-                            Text="{Binding Title}"
-                            TextColor="Black">
-                            <ImageCell.ImageSource>
-                                <FontImageSource 
-                                    Glyph="{Binding Glyph}"
-                                    FontFamily="{Binding FontFamily}"
-                                    Color="Black" />
-                            </ImageCell.ImageSource>
-                        </renderedviews:ResponsiveImageCell>
-                    </DataTemplate>
+                    <OnPlatform x:TypeArguments="DataTemplate">
+                        <On Platform="UWP">
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" Margin="10">
+                                        <Label 
+                                            Text="{Binding Glyph}" 
+                                            TextColor="Black"
+                                            VerticalOptions="CenterAndExpand"
+                                            FontSize="Medium"
+                                            FontFamily="{Binding FontFamily}"
+                                            Margin="0,0,4,0" />
+                                        <Label 
+                                            Text="{Binding Title}" 
+                                            TextColor="Black"
+                                            VerticalOptions="CenterAndExpand" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </On>
+                        <On Platform="Android,iOS">
+                            <DataTemplate>
+                                <renderedviews:ResponsiveImageCell 
+                                    Text="{Binding Title}"
+                                    TextColor="Black">
+                                    <ImageCell.ImageSource>
+                                        <FontImageSource 
+                                            Glyph="{Binding Glyph}"
+                                            FontFamily="{Binding FontFamily}"
+                                            Color="Black" />
+                                    </ImageCell.ImageSource>
+                                </renderedviews:ResponsiveImageCell>
+                            </DataTemplate>
+                        </On>
+                    </OnPlatform>                    
                 </ListView.ItemTemplate>
                 <ListView.Footer>
                     <Grid>

@@ -22,8 +22,18 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf6ea;" />
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>    

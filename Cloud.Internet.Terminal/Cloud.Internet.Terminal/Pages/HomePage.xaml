@@ -20,8 +20,18 @@
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf6ea;" />
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -35,7 +45,13 @@
                     WidthRequest="240" HeightRequest="360"
                     CornerRadius="4">
                     <pancake:PancakeView.Shadow>
-                        <pancake:DropShadow BlurRadius="2" />
+                        <pancake:DropShadow>
+                            <pancake:DropShadow.BlurRadius>
+                                <OnPlatform x:TypeArguments="x:Single" Default="2">
+                                    <On Platform="UWP" Value="6" />
+                                </OnPlatform>
+                            </pancake:DropShadow.BlurRadius>
+                        </pancake:DropShadow>
                     </pancake:PancakeView.Shadow>
                     <pancake:PancakeView.GestureRecognizers>
                         <TapGestureRecognizer Tapped="PostsItem_Tapped" />
@@ -58,9 +74,13 @@
                                 Text="{Binding Path=Post.Title}"
                                 TextColor="Black"
                                 FontSize="Title"
-                                FontFamily="Helvetica LT Std Condensed"
                                 MaxLines="4"
                                 LineBreakMode="TailTruncation">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                        <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
                                 <Label.Padding>
                                     <OnPlatform x:TypeArguments="Thickness" Default="0">
                                         <On Platform="iOS" Value="0,4,0,0" />
@@ -69,8 +89,13 @@
                             </Label>
                             <Label 
                                 Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                                TextColor="DarkGray"
-                                FontFamily="Helvetica LT Std Compresed" />
+                                TextColor="DarkGray">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                        <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                         </StackLayout>
                     </Grid>
                 </pancake:PancakeView>
@@ -83,7 +108,13 @@
                     WidthRequest="240" HeightRequest="360"
                     CornerRadius="4">
                     <pancake:PancakeView.Shadow>
-                        <pancake:DropShadow BlurRadius="2" />
+                        <pancake:DropShadow>
+                            <pancake:DropShadow.BlurRadius>
+                                <OnPlatform x:TypeArguments="x:Single" Default="2">
+                                    <On Platform="UWP" Value="6" />
+                                </OnPlatform>
+                            </pancake:DropShadow.BlurRadius>
+                        </pancake:DropShadow>
                     </pancake:PancakeView.Shadow>
                     <pancake:PancakeView.GestureRecognizers>
                         <TapGestureRecognizer Tapped="PostsItem_Tapped" />
@@ -95,9 +126,13 @@
                             Text="{Binding Path=Post.Title}"
                             TextColor="Black"
                             FontSize="Title"
-                            FontFamily="Helvetica LT Std Condensed"
                             MaxLines="5"
                             LineBreakMode="TailTruncation">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness" Default="0">
                                     <On Platform="iOS" Value="0,4,0,0" />
@@ -108,9 +143,13 @@
                             VerticalOptions="StartAndExpand"
                             Text="{Binding Path=Post.Summary}"
                             TextColor="Black"
-                            FontFamily="Helvetica LT Std Light"
                             MaxLines="7"
                             LineBreakMode="TailTruncation">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Light">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Light.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
                             <Label.Padding>
                                 <OnPlatform x:TypeArguments="Thickness">
                                     <On Platform="iOS" Value="0,1,0,0" />
@@ -119,8 +158,13 @@
                         </Label>
                         <Label 
                             Text="{Binding Path=Post.PostedAt, Converter={StaticResource DateTimeToInvarianCultureRelativeDateTimeString}}"
-                            TextColor="DarkGray"
-                            FontFamily="Helvetica LT Std Compresed" />
+                            TextColor="DarkGray">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
                     </StackLayout>
                 </pancake:PancakeView>
             </DataTemplate>
@@ -173,13 +217,23 @@
                                         <Span 
                                             Text="TuTV" 
                                             TextColor="#c3c3c3"
-                                            FontFamily="Souvenir Lt BT Bold"
-                                            FontSize="Subtitle" />
+                                            FontSize="Subtitle">
+                                            <Span.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                                </OnPlatform>
+                                            </Span.FontFamily>
+                                        </Span>
                                         <Span 
                                             Text="Camagüey"
                                             TextColor="#f2f2f2"
-                                            FontFamily="Souvenir Lt BT Bold"
-                                            FontSize="Subtitle" />
+                                            FontSize="Subtitle">
+                                            <Span.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                                </OnPlatform>
+                                            </Span.FontFamily>
+                                        </Span>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -191,8 +245,13 @@
                                 Text="Bienvenido"
                                 TextColor="White"
                                 HorizontalTextAlignment="Center"
-                                FontFamily="Souvenir Medium"
-                                FontSize="Title" />
+                                FontSize="Title">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Souvenir Medium">
+                                        <On Platform="UWP" Value="/Assets/Fonts/Souvenir-Medium.otf#ITC Souvenir" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                         </StackLayout>
                     </Grid>
                     <StackLayout Padding="8,8,8,0" Spacing="8">
@@ -211,15 +270,25 @@
                                 Text="&#xfdfa;"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center"
-                                FontFamily="Material Design Icons"
-                                FontSize="Medium" />
+                                FontSize="Medium">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                        <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                             <Label 
                                 Grid.Column="1" Grid.Row="0"
                                 Text="Cartelera"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center"
-                                FontFamily="Souvenir Medium"
-                                FontSize="Subtitle" />
+                                FontSize="Subtitle">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Souvenir Medium">
+                                        <On Platform="UWP" Value="/Assets/Fonts/Souvenir-Medium.otf#ITC Souvenir" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                             <Button
                                 Grid.Column="2" Grid.Row="0"
                                 VerticalOptions="Center"
@@ -245,7 +314,13 @@
                                             Margin="8"
                                             CornerRadius="4">
                                             <pancake:PancakeView.Shadow>
-                                                <pancake:DropShadow BlurRadius="2" />
+                                                <pancake:DropShadow>
+                                                    <pancake:DropShadow.BlurRadius>
+                                                        <OnPlatform x:TypeArguments="x:Single" Default="2">
+                                                            <On Platform="UWP" Value="6" />
+                                                        </OnPlatform>
+                                                    </pancake:DropShadow.BlurRadius>
+                                                </pancake:DropShadow>
                                             </pancake:PancakeView.Shadow>
                                             <pancake:PancakeView.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="PresentationsItem_Tapped" />
@@ -279,17 +354,26 @@
                                                     <Label
                                                         Grid.ColumnSpan="2" Grid.Row="0"
                                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                        FontFamily="Helvetica LT Std Ultra Compresed"
                                                         Text="{Binding Path=At, Converter={StaticResource DateTimeToInvarianCultureRelativeDayString}}"
                                                         TextColor="White"
-                                                        HorizontalTextAlignment="Center" />
+                                                        HorizontalTextAlignment="Center">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
                                                     <renderedviews:FontStrechLabel
                                                         Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"
                                                         HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize, Converter={StaticResource Factor}, ConverterParameter=0.8}"
                                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtHourFontSize}"
-                                                        FontFamily="Helvetica LT Std Ultra Compresed"
                                                         Text="{Binding Path=At, StringFormat='{0:hh}'}"
                                                         TextColor="White">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
                                                         <Label.Margin>
                                                             <OnPlatform x:TypeArguments="Thickness" Default="0">
                                                                 <On Platform="Android" Value="0,4,0,0" />
@@ -305,19 +389,29 @@
                                                     <Label
                                                         Grid.Column="1" Grid.Row="1"
                                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                        FontFamily="Helvetica LT Std Ultra Compresed"
                                                         FontAttributes="Bold"
                                                         Text="{Binding Path=At, StringFormat='{0:mm}'}"
                                                         TextColor="White"
-                                                        VerticalOptions="End" />
+                                                        VerticalOptions="End">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
                                                     <Label
                                                         Grid.Column="1" Grid.Row="2"
                                                         FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=BillboardListViewItemAtOthersFontSize}"
-                                                        FontFamily="Helvetica LT Std Ultra Compresed"
                                                         FontAttributes="Bold"
                                                         Text="{Binding Path=At, StringFormat='{0:tt}'}"
                                                         TextColor="White"
-                                                        VerticalOptions="Start" />
+                                                        VerticalOptions="Start">
+                                                        <Label.FontFamily>
+                                                            <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Compresed">
+                                                                <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Compressed.otf#Helvetica LT Std" />
+                                                            </OnPlatform>
+                                                        </Label.FontFamily>
+                                                    </Label>
                                                 </Grid>
                                             </Grid>
                                         </pancake:PancakeView>
@@ -348,15 +442,25 @@
                                 Text="&#xf395;"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center"
-                                FontFamily="Material Design Icons"
-                                FontSize="Medium" />
+                                FontSize="Medium">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                        <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                             <Label 
                                 Grid.Column="1" Grid.Row="0"
                                 Text="Noticias"
                                 TextColor="Black"
                                 VerticalTextAlignment="Center"
-                                FontFamily="Souvenir Medium"
-                                FontSize="Subtitle" />
+                                FontSize="Subtitle">
+                                <Label.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Default="Souvenir Medium">
+                                        <On Platform="UWP" Value="/Assets/Fonts/Souvenir-Medium.otf#ITC Souvenir" />
+                                    </OnPlatform>
+                                </Label.FontFamily>
+                            </Label>
                             <Button
                                 Grid.Column="2" Grid.Row="0"
                                 VerticalOptions="Center"

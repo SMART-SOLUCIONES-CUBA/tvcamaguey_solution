@@ -50,7 +50,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages
             primaryNavigationGroup.Add(new Models.NavigationSectionModel
             {
                 Glyph = "\ue900",
-                FontFamily = "IcoMoon",
+                FontFamily = Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP ? "IcoMoon" : "/Assets/Fonts/icomoon.ttf#icomoon",
                 Title = "Acerca de",
                 SelectionFunc = () => new AboutUsPage()
             });

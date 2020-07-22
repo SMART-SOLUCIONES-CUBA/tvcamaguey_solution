@@ -16,14 +16,19 @@
                         Margin="0,20"
                         HorizontalOptions="Center"
                         Text="&#xf5fd;"
-                        TextColor="Black"
-                        FontFamily="Material Design Icons"
-                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}" />
+                        TextColor="Black"                        
+                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
                     <Label
                         Text="En esta sección podrá cerrar su sesión y con ella eliminar localmente los datos especificados en su perfil, configuraciones realizadas a la aplicación, las actualizaciones acumuladas, así como los comentarios, valoraciones, denuncias y otros cambios no sincronizados." />
                     <Button
                         HorizontalOptions="Center"
-                        Padding="16,0"
+                        Padding="16,6"
                         BackgroundColor="{StaticResource BrandSecoundaryColor}"
                         Text="Cerrar Sesión"
                         TextColor="White"

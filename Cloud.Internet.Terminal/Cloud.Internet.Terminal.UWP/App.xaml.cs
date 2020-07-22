@@ -43,6 +43,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.UWP
 
                 Xamarin.Forms.Forms.Init(e);
 
+                Xamarin.Forms.PancakeView.UWP.PancakeViewRenderer.Init();
+
                 FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
                 Windows.UI.ViewManagement.ApplicationView.PreferredLaunchViewSize = new Windows.Foundation.Size(1020, 700);

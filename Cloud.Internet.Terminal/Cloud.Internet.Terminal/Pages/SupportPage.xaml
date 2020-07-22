@@ -39,13 +39,23 @@
                                         <Span 
                                             Text="TuTV" 
                                             TextColor="#c3c3c3"
-                                            FontFamily="Souvenir Lt BT Bold"
-                                            FontSize="Subtitle" />
+                                            FontSize="Subtitle">
+                                            <Span.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                                </OnPlatform>
+                                            </Span.FontFamily>
+                                        </Span>
                                         <Span 
                                             Text="Camagüey"
                                             TextColor="#f2f2f2"
-                                            FontFamily="Souvenir Lt BT Bold"
-                                            FontSize="Subtitle" />
+                                            FontSize="Subtitle">
+                                            <Span.FontFamily>
+                                                <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                    <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                                </OnPlatform>
+                                            </Span.FontFamily>
+                                        </Span>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -66,9 +76,21 @@
                         </StackLayout>
                     </Grid>
                     <StackLayout Padding="20,8,20,20">
-                        <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Acerca de:" />
+                        <Label Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Acerca de:">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
                         <Label TextColor="Black" Text="Esta aplicación permite a Televisión Camagüey divulgar la información relacionada con la cartelera, programas y noticias, así como información de la institución, sus trabajadores y datos de contacto." />
-                        <Label FontFamily="Helvetica LT Std Bold Condensed" Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Sobre esta versión de prueba:" />
+                        <Label Padding="0,20,0,0" TextColor="Black" HorizontalTextAlignment="Center" Text="Sobre esta versión de prueba:">
+                            <Label.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String" Default="Helvetica LT Std Condensed">
+                                    <On Platform="UWP" Value="/Assets/Fonts/HelveticaLTStd-Cond.otf#Helvetica LT Std" />
+                                </OnPlatform>
+                            </Label.FontFamily>
+                        </Label>
                         <Label TextColor="Black" Text="Esta versión ha sido creada con el objetivo de realizar pruebas iniciales de funcionamiento por múltiples usuarios del sistema. Es una versión en estado de desarrollo, por lo que puede ser inestable en algún momento, contener pequeños errores, elementos incompletos, además de no contar con un diseño completamente refinado." />
                         <Label TextColor="Black" Text="Recomendamos a los usuarios que prueban esta versión, que continúen atentos a nuevas actualizaciones de la aplicación mediante los distintos medios informativos que tienen a su alcance, tanto de Televisión Camagüey como de los desarrolladores de la aplicación." />
                         <Label TextColor="Black" Text="Si tienes cualquier pregunta, comentario o sugerencia que quieras realizarnos, ideas que desees compartir con nosotros, ¡estaremos siempre complacidos de escucharte!" />
@@ -80,6 +102,7 @@
                                         <OnPlatform x:TypeArguments="x:String">
                                             <On Platform="iOS" Value="VendorLogo" />
                                             <On Platform="Android" Value="vendor_logo" />
+                                            <On Platform="UWP" Value="Assets/Images/VendorLogo.png" />
                                         </OnPlatform>
                                     </FileImageSource.File>
                                 </FileImageSource>
@@ -96,8 +119,12 @@
                                 Clicked="VendorWebSiteButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
                                         <FontImageSource.Glyph>
                                             <OnPlatform x:TypeArguments="x:String">
                                                 <On Platform="Android" Value="&#xf2af;" />
@@ -114,9 +141,14 @@
                                 Clicked="VendorPhoneButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf1c3;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -125,9 +157,14 @@
                                 Clicked="VendorEmailButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf1ee;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -136,9 +173,14 @@
                                 Clicked="VendorMapButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf352;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -147,9 +189,14 @@
                                 Clicked="VendorFacebookButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf20d;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -158,9 +205,14 @@
                                 Clicked="VendorTwitterButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf544;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -169,9 +221,14 @@
                                 Clicked="VendorInstagramButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf2fe;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -180,9 +237,14 @@
                                 Clicked="VendorYoutubeButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf5c3;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                         </FlexLayout>
@@ -193,6 +255,7 @@
                                         <OnPlatform x:TypeArguments="x:String">
                                             <On Platform="iOS" Value="OwnerLogo" />
                                             <On Platform="Android" Value="owner_logo" />
+                                            <On Platform="UWP" Value="Assets/Images/OwnerLogo.png" />
                                         </OnPlatform>
                                     </FileImageSource.File>
                                 </FileImageSource>
@@ -209,8 +272,12 @@
                                 Clicked="OwnerWebSiteButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
                                         <FontImageSource.Glyph>
                                             <OnPlatform x:TypeArguments="x:String">
                                                 <On Platform="Android" Value="&#xf2af;" />
@@ -227,9 +294,14 @@
                                 Clicked="OwnerPhoneButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf1c3;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -238,9 +310,14 @@
                                 Clicked="OwnerEmailButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf1ee;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -249,9 +326,14 @@
                                 Clicked="OwnerFacebookButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf20d;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -260,9 +342,14 @@
                                 Clicked="OwnerTelegramButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf501;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                             <Button
@@ -271,9 +358,14 @@
                                 Clicked="OwnerTwitterButton_Clicked">
                                 <Button.ImageSource>
                                     <FontImageSource 
-                                        FontFamily="Material Design Icons" 
                                         Glyph="&#xf544;"
-                                        Color="CornflowerBlue" />
+                                        Color="CornflowerBlue">
+                                        <FontImageSource.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </FontImageSource.FontFamily>
+                                    </FontImageSource>
                                 </Button.ImageSource>
                             </Button>
                         </FlexLayout>

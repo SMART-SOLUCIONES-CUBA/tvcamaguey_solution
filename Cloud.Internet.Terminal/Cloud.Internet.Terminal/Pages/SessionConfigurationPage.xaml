@@ -52,13 +52,23 @@
                                 <Span 
                                     Text="TuTV" 
                                     TextColor="#c3c3c3"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
+                                    FontSize="Subtitle">
+                                    <Span.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                            <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                        </OnPlatform>
+                                    </Span.FontFamily>
+                                </Span>
                                 <Span 
                                     Text="Camagüey"
                                     TextColor="#f2f2f2"
-                                    FontFamily="Souvenir Lt BT Bold"
-                                    FontSize="Subtitle" />
+                                    FontSize="Subtitle">
+                                    <Span.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                            <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                        </OnPlatform>
+                                    </Span.FontFamily>
+                                </Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -71,8 +81,13 @@
                         Text="Bienvenido"
                         TextColor="White"
                         HorizontalTextAlignment="Center"
-                        FontFamily="Souvenir Medium"
-                        FontSize="Title" />
+                        FontSize="Title">
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Medium">
+                                <On Platform="UWP" Value="/Assets/Fonts/Souvenir-Medium.otf#ITC Souvenir" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
                     <Button
                         BackgroundColor="{StaticResource BrandSecoundaryColor}"
                         Text="Comenzar"
@@ -117,13 +132,23 @@
                                     <Span 
                                         Text="TuTV" 
                                         TextColor="#c3c3c3"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                     <Span 
                                         Text="Camagüey"
                                         TextColor="#f2f2f2"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -187,13 +212,23 @@
                                     <Span 
                                         Text="TuTV" 
                                         TextColor="#c3c3c3"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                     <Span 
                                         Text="Camagüey"
                                         TextColor="#f2f2f2"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -265,13 +300,23 @@
                                     <Span 
                                         Text="TuTV" 
                                         TextColor="#c3c3c3"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                     <Span 
                                         Text="Camagüey"
                                         TextColor="#f2f2f2"
-                                        FontFamily="Souvenir Lt BT Bold"
-                                        FontSize="Subtitle" />
+                                        FontSize="Subtitle">
+                                        <Span.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Souvenir Lt BT Bold">
+                                                <On Platform="UWP" Value="/Assets/Fonts/SOUVNRD.ttf#Souvenir Lt BT" />
+                                            </OnPlatform>
+                                        </Span.FontFamily>
+                                    </Span>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -293,7 +338,6 @@
                                 HeightRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                                 WidthRequest="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize}"
                                 FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=RegularProfileImageSize, Converter={StaticResource Fraction}, ConverterParameter=3}"
-                                FontFamily="Material Design Icons"
                                 Text="&#xf100;"
                                 TextColor="White"
                                 Clicked="PickImageButton_Clicked" />-->

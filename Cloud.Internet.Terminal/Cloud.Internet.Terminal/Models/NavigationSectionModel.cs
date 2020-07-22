@@ -4,7 +4,7 @@
     {
         public NavigationSectionModel()
         {
-            FontFamily = "Material Design Icons";
+            FontFamily = Xamarin.Forms.Device.RuntimePlatform != Xamarin.Forms.Device.UWP ? "Material Design Icons" : "/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons";
         }
 
         public string Glyph { get; set; }

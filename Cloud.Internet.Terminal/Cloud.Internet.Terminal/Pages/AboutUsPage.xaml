@@ -6,16 +6,36 @@
     xmlns:converters="clr-namespace:SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Converters"
     xmlns:sscxftoolkitmvvmpages="clr-namespace:SmartSolucionesCuba.XFToolKit.Mvvm.Pages;assembly=SmartSolucionesCuba.XFToolKit.Mvvm"
     xmlns:sscxftollkitpresentationviews="clr-namespace:SmartSolucionesCuba.XFToolKit.Presentation.Views;assembly=SmartSolucionesCuba.XFToolKit.Presentation"
+    xmlns:uwp="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
     x:Class="SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Terminal.Pages.AboutUsPage"
+    uwp:TabbedPage.HeaderIconsEnabled="true"
     Title="Televisión Camagüey">
+    <uwp:TabbedPage.HeaderIconsSize>
+        <Size>
+            <x:Arguments>
+                <x:Double>48</x:Double>
+                <x:Double>48</x:Double>
+            </x:Arguments>
+        </Size>
+    </uwp:TabbedPage.HeaderIconsSize>
     <TabbedPage.ToolbarItems>
         <ToolbarItem 
             Text="Actualizar"
             Clicked="UpdateToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    FontFamily="Material Design Icons" 
-                    Glyph="&#xf6ea;" />
+                    Glyph="&#xf6ea;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                    <FontImageSource.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                            <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                        </OnPlatform>
+                    </FontImageSource.FontFamily>
+                </FontImageSource>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </TabbedPage.ToolbarItems>
@@ -23,8 +43,18 @@
         Title="Acerca de">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                FontFamily="IcoMoon" 
-                Glyph="&#xe900;" />
+                Glyph="&#xe900;">
+                <FontImageSource.Color>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="UWP" Value="Black" />
+                    </OnPlatform>
+                </FontImageSource.Color>
+                <FontImageSource.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Default="IcoMoon">
+                        <On Platform="UWP" Value="/Assets/Fonts/icomoon.ttf#icomoon" />
+                    </OnPlatform>
+                </FontImageSource.FontFamily>
+            </FontImageSource>
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
@@ -46,8 +76,18 @@
         Title="Historia">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                FontFamily="Material Design Icons" 
-                Glyph="&#xfbaf;" />
+                Glyph="&#xfbaf;">
+                <FontImageSource.Color>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="UWP" Value="Black" />
+                    </OnPlatform>
+                </FontImageSource.Color>
+                <FontImageSource.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                        <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                    </OnPlatform>
+                </FontImageSource.FontFamily>
+            </FontImageSource>
         </ContentPage.IconImageSource>
         <ContentPage.Content>
             <Grid>
@@ -68,8 +108,18 @@
         Title="Contacto">
         <ContentPage.IconImageSource>
             <FontImageSource 
-                FontFamily="Material Design Icons" 
-                Glyph="&#xf780;" />
+                Glyph="&#xf780;">
+                <FontImageSource.Color>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="UWP" Value="Black" />
+                    </OnPlatform>
+                </FontImageSource.Color>
+                <FontImageSource.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                        <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                    </OnPlatform>
+                </FontImageSource.FontFamily>
+            </FontImageSource>
         </ContentPage.IconImageSource>
         <ContentPage.Resources>
             <converters:FlextLayoutToResponsiveItemWidthConverter x:Key="FlextLayoutToResponsiveItemWidth" ItemMinWidth="280" ItemHorizontalMargin="16" />
@@ -104,8 +154,13 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf1c3;"
                                         TextColor="Black"
-                                        FontFamily="Material Design Icons"
-                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
+                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
                                     <Label
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
@@ -117,7 +172,7 @@
                                         TextColor="DimGray" />
                                     <Button
                                         HorizontalOptions="Center"
-                                        Padding="16,0"
+                                        Padding="16,6"
                                         BackgroundColor="{StaticResource BrandSecoundaryColor}"
                                         Text="Llamar"
                                         TextColor="White"
@@ -128,8 +183,13 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf1ee;"
                                         TextColor="Black"
-                                        FontFamily="Material Design Icons"
-                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
+                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
                                     <Label
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
@@ -141,7 +201,7 @@
                                         TextColor="DimGray" />
                                     <Button
                                         HorizontalOptions="Center"
-                                        Padding="16,0"
+                                        Padding="16,6"
                                         BackgroundColor="{StaticResource BrandSecoundaryColor}"
                                         Text="Escribir"
                                         TextColor="White"
@@ -152,8 +212,13 @@
                                         HorizontalOptions="Center"
                                         Text="&#xf352;"
                                         TextColor="Black"
-                                        FontFamily="Material Design Icons"
-                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}" />
+                                        FontSize="{Binding Source={x:Static helpers:ConstantProvisionHelper.Instance}, Path=OverviewProfileImageSize}">
+                                        <Label.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String" Default="Material Design Icons">
+                                                <On Platform="UWP" Value="/Assets/Fonts/materialdesignicons-webfont.ttf#Material Design Icons" />
+                                            </OnPlatform>
+                                        </Label.FontFamily>
+                                    </Label>
                                     <Label
                                         HorizontalOptions="Center"
                                         HorizontalTextAlignment="Center"
@@ -165,7 +230,7 @@
                                         TextColor="DimGray" />
                                     <Button
                                         HorizontalOptions="Center"
-                                        Padding="16,0"
+                                        Padding="16,6"
                                         BackgroundColor="{StaticResource BrandSecoundaryColor}"
                                         Text="Ubicar"
                                         TextColor="White"
