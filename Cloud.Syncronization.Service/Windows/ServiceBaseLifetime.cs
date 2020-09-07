@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace SmartSolucionesCuba.TVCamaguey.Cloud.Syncronization.Service.Windows
+﻿namespace SmartSolucionesCuba.TVCamaguey.Cloud.Syncronization.Service.Windows
 {
-    public class ServiceBaseLifetime : System.ServiceProcess.ServiceBase, IHostLifetime
+    public class ServiceBaseLifetime : System.ServiceProcess.ServiceBase, Microsoft.Extensions.Hosting.IHostLifetime
     {
         private readonly System.Threading.Tasks.TaskCompletionSource<object> _delayStart = new System.Threading.Tasks.TaskCompletionSource<object>();
 
-        public ServiceBaseLifetime(IApplicationLifetime applicationLifetime)
+        public ServiceBaseLifetime(Microsoft.Extensions.Hosting.IApplicationLifetime applicationLifetime)
         {
             ApplicationLifetime = applicationLifetime ?? throw new System.ArgumentNullException(nameof(applicationLifetime));
         }
 
-        private IApplicationLifetime ApplicationLifetime { get; }
+        private Microsoft.Extensions.Hosting.IApplicationLifetime ApplicationLifetime { get; }
 
         public System.Threading.Tasks.Task WaitForStartAsync(System.Threading.CancellationToken cancellationToken)
         {

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Mailer.Api.Common</AssemblyName>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Mailer.Api.Common</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SAPRESSC.Core.Api.Common" Version="2.0.0-apha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Internet.Mailer.Persistence\Cloud.Internet.Mailer.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -52,6 +52,23 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Controllers.Backend
             return base.Edit(modelInput);
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        [RequiresRoleBasePermission(Security.Authorization.Roles.ProductionTeamEditor)]
+        public IActionResult Duplicate(System.Guid key)
+        {
+            return base.Edit(key);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        [ValidateAntiForgeryToken]
+        [RequiresRoleBasePermission(Security.Authorization.Roles.ProductionTeamCreator)]
+        public IActionResult Duplicate(ProductionTeamInputViewModel modelInput)
+        {
+            return base.Create(modelInput);
+        }
+
         [RequiresRoleBasePermission(Security.Authorization.Roles.ProductionTeamRemover)]
         public override IActionResult Delete(System.Guid key)
         {
@@ -62,6 +79,31 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Intranet.Controllers.Backend
         public override IActionResult Delete(ProductionTeamDisplayViewModel displayModel)
         {
             return base.Delete(displayModel);
+        }
+
+        protected override void ValidateCreate(ProductionTeamInputViewModel modelInput)
+        {
+            base.ValidateCreate(modelInput);
+
+            if (Repository.FindOneBy(entity => entity.Name == modelInput.Name) != null)
+            {
+                ModelState.AddModelError("Name", "El valor especificado en el campo Nombre ya está en uso. Este valor debe ser único para cada Equipo de Realización.");
+            }
+        }
+
+        protected override void PreCreate(ProductionTeam entity, ProductionTeamInputViewModel modelInput)
+        {
+            base.PreCreate(entity, modelInput);
+
+            if (modelInput.Id != System.Guid.Empty)
+            {
+                var duplicationTargetEntity = Repository.Get(modelInput.Id);
+
+                foreach (var item in duplicationTargetEntity.EmployBridges)
+                {
+                    entity.EmployBridges.Add(new ProductionTeamEmployBridge { ProductionTeamId = entity.Id, EmployId = item.EmployId, ProductionRole = item.ProductionRole });
+                }
+            }
         }
 
         #region ProductionTeam Members Management

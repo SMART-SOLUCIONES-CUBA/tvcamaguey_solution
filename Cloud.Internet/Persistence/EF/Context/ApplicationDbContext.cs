@@ -72,5 +72,7 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Persistence.EF.Context
         public DbSet<GroupRoleBridge> BackendGroupBackendRoleBridges { get; set; }
         public DbSet<User> BackendUsers { get; set; }
         public DbSet<Role> BackendRoles { get; set; }
+
+        public DbSet<Mailer.Persistence.Entities.UserVerificationMailSendOrder> UserVerificationMailSendOrders { get; set; }
     }
 }

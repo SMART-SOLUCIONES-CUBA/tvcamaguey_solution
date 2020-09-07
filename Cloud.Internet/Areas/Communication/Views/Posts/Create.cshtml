@@ -4,22 +4,22 @@
     ViewData["Title"] = "Agregar " + GlobalViewLocalizationHelper.Localize("Post", ViewLocalizer);
 
     ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
-{
-new BreadcrumbViewModel
-{
-    Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-    Url = "/"
-},
-new BreadcrumbViewModel
-{
-    Caption = GlobalViewLocalizationHelper.Localize("Posts", ViewLocalizer),
-    Url = Url.Action("index")
-},
-new BreadcrumbViewModel
-{
-    Caption = ViewData["Title"].ToString()
-}
-};
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
+            Url = Url.Action("index", "dashboard", new { area = string.Empty, key = string.Empty })
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = GlobalViewLocalizationHelper.Localize("Posts", ViewLocalizer),
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = ViewData["Title"].ToString()
+        }
+    };
 
     Layout = "_BackendLayout";
 }

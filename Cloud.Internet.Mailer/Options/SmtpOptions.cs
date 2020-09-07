@@ -1,12 +1,12 @@
-﻿namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Options
+﻿namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Mailer.Options
 {
-    public class MailSendOptions
+    public class SmtpOptions
     {
         public string Host { get; set; }
 
         public int Port { get; set; }
 
-        public bool UseSSL { get; set; }
+        public MailKit.Security.SecureSocketOptions Security { get; set; }
 
         public string User { get; set; }
 

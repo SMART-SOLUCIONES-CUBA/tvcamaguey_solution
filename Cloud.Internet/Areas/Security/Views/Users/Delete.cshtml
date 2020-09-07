@@ -10,7 +10,7 @@
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { area = string.Empty, key = string.Empty })
         },
         new BreadcrumbViewModel
         {

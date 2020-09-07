@@ -37,7 +37,6 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Options.JwtOptions>(configuration.GetSection("JWT"));
-            services.Configure<Options.MailSendOptions>(configuration.GetSection("MailSend"));
 
             services.AddDbContext<Persistence.EF.Context.ApplicationDbContext>(options => options.UseMySql(configuration.GetConnectionString("DefaultConnection"), mySqlOptions =>
             {
@@ -86,6 +85,8 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet
             services.AddScoped<IEntityRepository<Persistence.Entities.Post, string>, Persistence.EF.Repositories.PostRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Category, string>, Persistence.EF.Repositories.CategoryRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Tag, string>, Persistence.EF.Repositories.TagRepository>();
+
+            services.AddScoped<IEntityRepository<Mailer.Persistence.Entities.UserVerificationMailSendOrder, System.Guid>, Persistence.EF.Repositories.UserVerificationMailSendOrderRepository>();
 
             #region Syncronization Reception Services Configuration
 
@@ -231,7 +232,14 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet
                 app.UseHsts();
             }
 
-            app.UseStaticFiles();
+            var fileExtensionContentTypeProvider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+
+            fileExtensionContentTypeProvider.Mappings[".apk"] = "application/vnd.adnroid.package-archive";
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = fileExtensionContentTypeProvider
+            });
             app.UseAuthentication();
             app.UseSession();
 

@@ -8,7 +8,7 @@
 
     for (int i = 0; i < productionTeamEnumValues.Length; i++)
     {
-        availableProductionRoleSelectionListItems.Add(new SelectListItem(productionTeamEnumValues.GetValue(i).ToString(), GlobalViewLocalizationHelper.Localize(productionTeamEnumNames[i], ViewLocalizer)));
+        availableProductionRoleSelectionListItems.Add(new SelectListItem(GlobalViewLocalizationHelper.Localize(productionTeamEnumNames[i], ViewLocalizer), productionTeamEnumValues.GetValue(i).ToString()));
     }
 }
 

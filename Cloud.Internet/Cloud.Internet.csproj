@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.App">
       <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
       <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
@@ -41,6 +42,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Cloud.Common\Cloud.Common.csproj" />
     <ProjectReference Include="..\Cloud.Internet.Api.Common\Cloud.Internet.Api.Common.csproj" />
+    <ProjectReference Include="..\Cloud.Internet.Mailer.Api.Common\Cloud.Internet.Mailer.Api.Common.csproj" />
+    <ProjectReference Include="..\Cloud.Internet.Mailer.Persistence\Cloud.Internet.Mailer.Persistence.csproj" />
     <ProjectReference Include="..\Cloud.Internet.Persistence.EF\Cloud.Internet.Persistence.EF.csproj" />
     <ProjectReference Include="..\Cloud.Persistence.EF\Cloud.Persistence.EF.csproj" />
     <ProjectReference Include="..\Cloud.Syncronization.Handling.Common\Cloud.Syncronization.Handling.Common.csproj" />

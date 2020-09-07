@@ -10,7 +10,7 @@
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"fas fa-cogs\"></span> Inicio",
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { area = string.Empty, key = string.Empty })
         },
         new BreadcrumbViewModel
         {

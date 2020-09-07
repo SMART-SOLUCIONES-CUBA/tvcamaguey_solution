@@ -331,10 +331,10 @@
     <value>Es Institucional</value>
   </data>
   <data name="ProductionTeam" xml:space="preserve">
-    <value>Equipo de Producción</value>
+    <value>Equipo de Realización</value>
   </data>
   <data name="ProductionTeams" xml:space="preserve">
-    <value>Equipos de Producción</value>
+    <value>Equipos de Realización</value>
   </data>
   <data name="Member" xml:space="preserve">
     <value>Integrante</value>
@@ -343,7 +343,7 @@
     <value>Integrantes</value>
   </data>
   <data name="ProductionRole" xml:space="preserve">
-    <value>Rol de Producción</value>
+    <value>Rol de Realización</value>
   </data>
   <data name="Presentation" xml:space="preserve">
     <value>Presentación</value>
@@ -371,5 +371,269 @@
   </data>
   <data name="Login" xml:space="preserve">
     <value>Control de Acceso</value>
+  </data>
+  <data name="business-award-creator" xml:space="preserve">
+    <value>Crear Galardones</value>
+  </data>
+  <data name="business-award-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear galardones</value>
+  </data>
+  <data name="business-award-editor" xml:space="preserve">
+    <value>Modificar Galardones</value>
+  </data>
+  <data name="business-award-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar galardones</value>
+  </data>
+  <data name="business-award-remover" xml:space="preserve">
+    <value>Eliminar Galardones</value>
+  </data>
+  <data name="business-award-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar galardones</value>
+  </data>
+  <data name="business-award-viewer" xml:space="preserve">
+    <value>Visualizar Galardones</value>
+  </data>
+  <data name="business-award-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar galardones</value>
+  </data>
+  <data name="business-employ-creator" xml:space="preserve">
+    <value>Crear Trabajadores</value>
+  </data>
+  <data name="business-employ-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear trabajadores</value>
+  </data>
+  <data name="business-employ-editor" xml:space="preserve">
+    <value>Modificar Trabajadores</value>
+  </data>
+  <data name="business-employ-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar trabajadores</value>
+  </data>
+  <data name="business-employ-remover" xml:space="preserve">
+    <value>Eliminar Trabajadores</value>
+  </data>
+  <data name="business-employ-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar trabajadores</value>
+  </data>
+  <data name="business-employ-viewer" xml:space="preserve">
+    <value>Visualizar Trabajadores</value>
+  </data>
+  <data name="business-employ-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar trabajadores</value>
+  </data>
+  <data name="business-presentation-creator" xml:space="preserve">
+    <value>Crear Presentaciones</value>
+  </data>
+  <data name="business-presentation-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear presentaciones</value>
+  </data>
+  <data name="business-presentation-editor" xml:space="preserve">
+    <value>Modificar Presentaciones</value>
+  </data>
+  <data name="business-presentation-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar presentaciones</value>
+  </data>
+  <data name="business-presentation-remover" xml:space="preserve">
+    <value>Eliminar Presentaciones</value>
+  </data>
+  <data name="business-presentation-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar presentaciones</value>
+  </data>
+  <data name="business-presentation-viewer" xml:space="preserve">
+    <value>Visualizar Presentaciones</value>
+  </data>
+  <data name="business-presentation-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar presentaciones</value>
+  </data>
+  <data name="business-productionteam-creator" xml:space="preserve">
+    <value>Crear Equipos de Realización</value>
+  </data>
+  <data name="business-productionteam-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear equipos de realización</value>
+  </data>
+  <data name="business-productionteam-editor" xml:space="preserve">
+    <value>Modificar Equipos de Realización</value>
+  </data>
+  <data name="business-productionteam-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar equipos de realización</value>
+  </data>
+  <data name="business-productionteam-remover" xml:space="preserve">
+    <value>Elimincar Equipos de Realización</value>
+  </data>
+  <data name="business-productionteam-remover-description" xml:space="preserve">
+    <value>Usuarios que puede eliminar equipos de realización</value>
+  </data>
+  <data name="business-productionteam-viewer" xml:space="preserve">
+    <value>Visualizar Equipos de Realización</value>
+  </data>
+  <data name="business-productionteam-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar equipos de realización</value>
+  </data>
+  <data name="business-show-creator" xml:space="preserve">
+    <value>Crear Programas</value>
+  </data>
+  <data name="business-show-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear programas</value>
+  </data>
+  <data name="business-show-editor" xml:space="preserve">
+    <value>Modificar Programas</value>
+  </data>
+  <data name="business-show-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar programas</value>
+  </data>
+  <data name="business-show-remover" xml:space="preserve">
+    <value>Eliminar Programas</value>
+  </data>
+  <data name="business-show-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar programas</value>
+  </data>
+  <data name="business-show-viewer" xml:space="preserve">
+    <value>Visualizar Programas</value>
+  </data>
+  <data name="business-show-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar programas</value>
+  </data>
+  <data name="licensing-manager" xml:space="preserve">
+    <value>Licenciar</value>
+  </data>
+  <data name="licensing-manager-description" xml:space="preserve">
+    <value>Usuarios que puede gestionar el licenciamiento</value>
+  </data>
+  <data name="securitylocal-group-creator" xml:space="preserve">
+    <value>Crear Grupos de Usuarios</value>
+  </data>
+  <data name="securitylocal-group-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear grupos de usuarios</value>
+  </data>
+  <data name="securitylocal-group-editor" xml:space="preserve">
+    <value>Modificar Grupos de Usuarios</value>
+  </data>
+  <data name="securitylocal-group-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar grupos de usuarios</value>
+  </data>
+  <data name="securitylocal-group-remover" xml:space="preserve">
+    <value>Eliminar Grupos de Usuarios</value>
+  </data>
+  <data name="securitylocal-group-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar grupos de usuarios</value>
+  </data>
+  <data name="securitylocal-group-viewer" xml:space="preserve">
+    <value>Visualizar Grupos de Usuarios</value>
+  </data>
+  <data name="securitylocal-group-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar grupos de usuarios</value>
+  </data>
+  <data name="securitylocal-user-creator" xml:space="preserve">
+    <value>Crear Usuarios</value>
+  </data>
+  <data name="securitylocal-user-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear usuarios</value>
+  </data>
+  <data name="securitylocal-user-editor" xml:space="preserve">
+    <value>Modificar Usuarios</value>
+  </data>
+  <data name="securitylocal-user-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar usuarios</value>
+  </data>
+  <data name="securitylocal-user-remover" xml:space="preserve">
+    <value>Eliminar Usuarios</value>
+  </data>
+  <data name="securitylocal-user-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar usuarios</value>
+  </data>
+  <data name="securitylocal-user-viewer" xml:space="preserve">
+    <value>Visualizar Usuarios</value>
+  </data>
+  <data name="securitylocal-user-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar usuarios</value>
+  </data>
+  <data name="shell-manager" xml:space="preserve">
+    <value>Administrar</value>
+  </data>
+  <data name="shell-manager-description" xml:space="preserve">
+    <value>Usuarios con acceso a la administración</value>
+  </data>
+  <data name="social-blog-creator" xml:space="preserve">
+    <value>Crear Blogs</value>
+  </data>
+  <data name="social-blog-creator-description" xml:space="preserve">
+    <value>Usuarios que pueden crear blogs</value>
+  </data>
+  <data name="social-blog-editor" xml:space="preserve">
+    <value>Modificar Blogs</value>
+  </data>
+  <data name="social-blog-editor-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar blogs</value>
+  </data>
+  <data name="social-blog-remover" xml:space="preserve">
+    <value>Eliminar Blogs</value>
+  </data>
+  <data name="social-blog-remover-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar blogs</value>
+  </data>
+  <data name="social-blog-viewer" xml:space="preserve">
+    <value>Visualizar Blogs</value>
+  </data>
+  <data name="social-blog-viewer-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar blogs</value>
+  </data>
+  <data name="CharacterGeneration" xml:space="preserve">
+    <value>Generación de Caracteres</value>
+  </data>
+  <data name="Conduction" xml:space="preserve">
+    <value>Conducción</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="DirectionAssistant" xml:space="preserve">
+    <value>Asistentes de Dirección</value>
+  </data>
+  <data name="Drive" xml:space="preserve">
+    <value>Choferes</value>
+  </data>
+  <data name="HandyMan" xml:space="preserve">
+    <value>Montadores</value>
+  </data>
+  <data name="ImageRealization" xml:space="preserve">
+    <value>Realización de Imagen</value>
+  </data>
+  <data name="ITSpecialist" xml:space="preserve">
+    <value>Informáticos</value>
+  </data>
+  <data name="LightManagement" xml:space="preserve">
+    <value>Luces</value>
+  </data>
+  <data name="LightManamentAssistant" xml:space="preserve">
+    <value>Auxiliares de Luces</value>
+  </data>
+  <data name="Photography" xml:space="preserve">
+    <value>Cámara</value>
+  </data>
+  <data name="Production" xml:space="preserve">
+    <value>Producción</value>
+  </data>
+  <data name="Screenplay" xml:space="preserve">
+    <value>Guión</value>
+  </data>
+  <data name="SocialComunication" xml:space="preserve">
+    <value>Periodistas</value>
+  </data>
+  <data name="SociaMedia" xml:space="preserve">
+    <value>Pespecialistas de los Medios</value>
+  </data>
+  <data name="SoundManagement" xml:space="preserve">
+    <value>Sonido</value>
+  </data>
+  <data name="SoundManagementAssistant" xml:space="preserve">
+    <value>Auxiliares de Sonido</value>
+  </data>
+  <data name="TechSpecialist" xml:space="preserve">
+    <value>Técnicos</value>
+  </data>
+  <data name="TransmitionEdition" xml:space="preserve">
+    <value>Edición de Transmisión</value>
+  </data>
+  <data name="VideoLibraryManagement" xml:space="preserve">
+    <value>Videoteca</value>
   </data>
 </root>

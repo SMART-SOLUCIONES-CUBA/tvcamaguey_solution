@@ -22,6 +22,8 @@
     };
 
     Layout = "_BackendLayout";
+
+    Model.SelectableRoles = Model.SelectableRoles.Skip(1).Take(9).Concat(Model.SelectableRoles.Skip(10).OrderBy(item => item.Label)).ToList();
 }
 
 @using (Html.BeginForm("create", "groups", new { Area = "security" }, FormMethod.Post, true, null))
@@ -47,11 +49,15 @@
             </div>
 
             @if (Model.SelectableRoles != null && Model.SelectableRoles.Count() > 0)
-                {
-                    int count = Model.SelectableRoles.Count();
+            {
+                int count = Model.SelectableRoles.Count();
 
-                    for (int i = 0; i < count; i += 2)
-                    {
+                <div class="row">
+                    @Html.EditorFor(subModel => subModel.SelectableRoles[0], "SelectionDescriptedIntIDItemInputViewModel")
+                </div>
+
+                @for (int i = 1; i < count; i += 2)
+                {
                     <div class="row">
                         @Html.EditorFor(subModel => subModel.SelectableRoles[i], "SelectionDescriptedIntIDItemInputViewModel")
 

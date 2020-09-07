@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>dotnet-Cloud.Internet.Mailer-AF84085C-2378-4650-927F-58FE30620A5E</UserSecretsId>
+    <RootNamespace>SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Mailer</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="logs\**" />
+    <Content Remove="logs\**" />
+    <EmbeddedResource Remove="logs\**" />
+    <None Remove="logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App">
+      <PrivateAssets Condition="'%(PackageReference.Version)' == ''">all</PrivateAssets>
+      <Publish Condition="'%(PackageReference.Version)' == ''">true</Publish>
+    </PackageReference>
+    <PackageReference Include="SAPRESSC.Core.Api.Connect" Version="2.0.2-apha" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.7.0" />
+    <PackageReference Include="MailKit" Version="2.8.0" />
+    <PackageReference Include="SAPRESSC.Core.Api.Connect" Version="2.0.2-apha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cloud.Internet.Mailer.Api.Common\Cloud.Internet.Mailer.Api.Common.csproj" />
+  </ItemGroup>
+</Project>

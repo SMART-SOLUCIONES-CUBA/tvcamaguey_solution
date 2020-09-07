@@ -915,6 +915,26 @@ namespace SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Migrations
                     b.ToTable("states","tvcamagueycloudinternet_sapressc_middleware_region");
                 });
 
+            modelBuilder.Entity("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Mailer.Persistence.Entities.UserVerificationMailSendOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnName("token");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnName("userid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_userverificationmailsendorders");
+
+                    b.ToTable("userverificationmailsendorders");
+                });
+
             modelBuilder.Entity("SmartSolucionesCuba.TVCamaguey.Cloud.Internet.Persistence.Entities.Category", b =>
                 {
                     b.Property<string>("Id")

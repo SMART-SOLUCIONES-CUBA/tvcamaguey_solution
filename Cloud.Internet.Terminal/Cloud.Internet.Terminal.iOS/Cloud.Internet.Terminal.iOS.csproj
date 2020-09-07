@@ -318,18 +318,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Providers\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Views\" />
-    <Folder Include="Views\Renderer\" />
-    <Folder Include="Effects\" />
-    <Folder Include="Recognizers\" />
     <Folder Include="Assets.xcassets\AppLogo.imageset\" />
+    <Folder Include="Assets.xcassets\AppLogoSmall.imageset\" />
+    <Folder Include="Assets.xcassets\OwnerLogo.imageset\" />
     <Folder Include="Assets.xcassets\OwnerSignature.imageset\" />
     <Folder Include="Assets.xcassets\VendorLogo.imageset\" />
     <Folder Include="Assets.xcassets\VendorTail.imageset\" />
-    <Folder Include="Assets.xcassets\AppLogoSmall.imageset\" />
-    <Folder Include="Assets.xcassets\OwnerLogo.imageset\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

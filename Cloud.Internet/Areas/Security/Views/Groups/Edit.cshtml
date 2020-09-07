@@ -8,7 +8,7 @@
         new BreadcrumbViewModel
         {
             Caption = "<span class=\"fas fa-cogs\" style=\"margin-right: 4px;\"></span>" + GlobalViewLocalizationHelper.Localize("Dashboard", ViewLocalizer),
-            Url = "/"
+            Url = Url.Action("index", "dashboard", new { area = string.Empty, key = string.Empty })
         },
         new BreadcrumbViewModel
         {
@@ -22,6 +22,8 @@
     };
 
     Layout = "_BackendLayout";
+
+    Model.SelectableRoles = Model.SelectableRoles.Skip(1).Take(9).Concat(Model.SelectableRoles.Skip(10).OrderBy(item => item.Label)).ToList();
 }
 
 @using (Html.BeginForm("edit", "groups", new { Area = "security", key = string.Empty }, FormMethod.Post, true, null))
@@ -52,7 +54,11 @@
             {
                 int count = Model.SelectableRoles.Count();
 
-                for (int i = 0; i < count; i += 2)
+                <div class="row">
+                    @Html.EditorFor(subModel => subModel.SelectableRoles[0], "SelectionDescriptedIntIDItemInputViewModel")
+                </div>
+
+                @for (int i = 1; i < count; i += 2)
                 {
                     <div class="row">
                         @Html.EditorFor(subModel => subModel.SelectableRoles[i], "SelectionDescriptedIntIDItemInputViewModel")
